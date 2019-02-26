@@ -45,7 +45,6 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
                 nPoints += 3;
             }
         }
-
     }
 
     outfile << std::to_string(nPoints) + "\n" + os.str();
