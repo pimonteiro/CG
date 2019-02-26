@@ -32,13 +32,13 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
             double alpha {j * deltaAlpha};
             double nextAlpha {alpha + deltaAlpha};
 
-            if(i<stacks-1) {
+            if(i < stacks-1) {
                 os << trans(beta, alpha, radius);
                 os << trans(nextBeta, alpha, radius);
                 os << trans(nextBeta, nextAlpha, radius);
                 nPoints += 3;
             }
-            if(i>0) {
+            if(i > 0) {
                 os << trans(beta, alpha, radius);
                 os << trans(nextBeta, nextAlpha, radius);
                 os << trans(beta, nextAlpha, radius);
