@@ -4,6 +4,9 @@
 #include <sstream>
 #include <cmath>
 
+
+std::string trans(double, double, double);
+
 void sphere(float radius, int slices, int stacks, const std::string &file) {
     if(radius <= 0.0f || slices <= 0 || stacks <= 0) {
         fputs("All parameters must be positive numbers\n", stderr);
@@ -30,15 +33,15 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
             double nextAlpha {alpha + deltaAlpha};
 
             if(i<stacks-1) {
-                os << radius * sinf(beta) * sinf(alpha) << " " << radius * cosf(beta) << " " << radius * sinf(beta) * cosf(alpha) << '\n';
-                os << radius * sinf(nextBeta) * sinf(alpha) << " " << radius * cosf(nextBeta) << " " << radius * sinf(nextBeta) * cosf(alpha) << '\n';
-                os << radius * sinf(nextBeta) * sinf(nextAlpha) << " " << radius * cosf(nextBeta) << " " << radius * sinf(nextBeta) * cosf(nextAlpha) << '\n';
+                os << trans(beta, alpha, radius);
+                os << trans(nextBeta, alpha, radius);
+                os << trans(nextBeta, nextAlpha, radius);
                 nPoints += 3;
             }
             if(i>0) {
-                os << radius * sinf(beta) * sinf(alpha) << " " << radius * cosf(beta) << " " << radius * sinf(beta) * cosf(alpha) << '\n';
-                os << radius * sinf(nextBeta) * sinf(nextAlpha) << " " << radius * cosf(nextBeta) << " "<< radius * sinf(nextBeta) * cosf(nextAlpha) << '\n';
-                os << radius * sinf(beta) * sinf(nextAlpha) << " " << radius * cosf(beta) << " " << radius * sinf(beta) * cosf(nextAlpha) << '\n';
+                os << trans(beta, alpha, radius);
+                os << trans(nextBeta, nextAlpha, radius);
+                os << trans(beta, nextAlpha, radius);
                 nPoints += 3;
             }
         }
@@ -47,4 +50,10 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
 
     outfile << std::to_string(nPoints) + "\n" + os.str();
     outfile.close();
+}
+
+std::string trans(double a, double b, double c) {
+    std::ostringstream os;
+    os << c * sinf(a) * sinf(b) << " " << c * cosf(a) << " " << c * sinf(a) * cosf(b) << '\n';
+    return os.str();
 }
