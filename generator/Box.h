@@ -1,7 +1,3 @@
-//
-// Created by pimonteiro on 25-02-2019.
-//
-
 #ifndef CLASS2_BOX_H
 #define CLASS2_BOX_H
 #include <fstream>
