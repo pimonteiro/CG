@@ -4,24 +4,38 @@
 
 
 // Display usage of program
-// generator box 5 5 5 1 box.3d
 void helpMessage(){
-    std::cout << "1) generator plane <x-dim> <z-dim>" << std::endl;
+    std::cout << "1) generator plane <x-dim> <z-dim> <filename>" << std::endl;
     std::cout << "2) generator box <x-dim> <y-dim> <z-dim> <slices (optional)> <filename>" << std::endl;
     std::cout << "3) generator sphere <radius> <slices> <stacks> <filename>" << std::endl;
     std::cout << "4) generator cone <bottom radius> <height> <slices> <stacks> <filename>" << std::endl;
 }
 
 void coneHandling(int argc, char* pString[]) {
-
+    if(argc < 7){
+        std::cerr << "Insufficient parameters.\nNeeded: bottom radius, height, number of slices, number of stackes, file to write" << std::endl;
+    }
+    else {
+        cone();
+    }
 }
 
 void sphereHandling(int argc, char* pString[]) {
-
+    if(argc < 6) {
+        std::cerr << "Insufficient parameters.\nNeeded: radius, number of slices, number of stacks, file to write" << std::endl;
+    }
+    else {
+        sphere();
+    }
 }
 
 void planeHandling(int argc, char* pString[]) {
-
+    if(argc < 5 ) {
+        std::cerr << "Insufficient parameters.\nNeeded: x-dim, z-dim, file to write" << std::endl;
+    }
+    else {
+        plane(pString[2],pString[3]);
+    }
 }
 
 void boxHandling(int argc, char* pString[]) {
