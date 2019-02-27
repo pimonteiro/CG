@@ -1,8 +1,8 @@
-#ifndef _PLANE_H__
-#define _PLANE_H__
+#ifndef __PLANE_H__
+#define __PLANE_H__
 
 #include <string>
 
-void plane(float, const std::string);
+void plane(float, const std::string&);
 
 #endif
