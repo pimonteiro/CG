@@ -7,7 +7,6 @@
 
 
 // Display usage of program
-// generator box 5 5 5 1 box.3d
 void helpMessage(){
     std::cout << "1) generator plane <x-dim> <filename>" << std::endl;
     std::cout << "2) generator box <x-dim> <y-dim> <z-dim> <slices (optional)> <filename>" << std::endl;
@@ -51,7 +50,6 @@ void planeHandling(int argc, char* pString[]) {
 
         plane(x,pString[3]);
     }
-
 }
 
 void boxHandling(int argc, char* pString[]) {
