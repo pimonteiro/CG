@@ -1,13 +1,13 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-#include "Box.h"
+#include "box.h"
 
 void planeXoZ(float,float,float,int,int,std::ofstream&);
 void planeXoY(float,float,float,int,int,std::ofstream&);
 void planeZoY(float,float,float,int,int,std::ofstream&);
 
-void Box::box(float x, float y, float z, int div, const std::string &filename) {
+void box(float x, float y, float z, int div, const std::string &filename) {
     std::ofstream f;
 
     f.open(filename);
@@ -22,7 +22,7 @@ void Box::box(float x, float y, float z, int div, const std::string &filename) {
         planeZoY(x,y,z,div,1,f);
         planeZoY(x,y,z,div,0,f);
     } else {
-        std::cout << "I failed to open.\n";
+        std::cerr << "I failed to open.\n";
     }
     f.close();
 }
@@ -41,7 +41,6 @@ void planeXoZ(float x, float y, float z, int div, int side_view,std::ofstream &f
                 f << n_x << " " << alt << " " << n_z << "\n";
                 f << n_x - shift << " " << alt << " " << n_z - shift << "\n";
                 f << n_x - shift << " " << alt << " " << n_z << "\n";
-
                 f << n_x - shift << " " << alt << " " << n_z - shift << "\n";
                 f << n_x << " " << alt << " " << n_z << "\n";
                 f << n_x << " " << alt << " " << n_z - shift << "\n";
@@ -56,7 +55,6 @@ void planeXoZ(float x, float y, float z, int div, int side_view,std::ofstream &f
                 f << n_x << " " << -alt << " " << n_z << "\n";
                 f << n_x - shift << " " << -alt << " " << n_z << "\n";
                 f << n_x - shift << " " << -alt << " " << n_z - shift << "\n";
-
                 f << n_x - shift << " " << -alt << " " << n_z - shift << "\n";
                 f << n_x << " " << -alt << " " << n_z - shift << "\n";
                 f << n_x << " " << -alt << " " << n_z << "\n";
@@ -83,7 +81,6 @@ void planeXoY(float x, float y, float z, int div, int side_view, std::ofstream &
                 f << n_x << " " << n_y << " " << lado << "\n";
                 f << n_x - shift << " " << n_y << " " << lado << "\n";
                 f << n_x << " " << n_y - shift << " " << lado << "\n";
-
                 f << n_x - shift << " " << n_y << " " << lado << "\n";
                 f << n_x - shift << " " << n_y - shift << " " << lado << "\n";
                 f << n_x << " " << n_y - shift << " " << lado << "\n";
@@ -98,7 +95,6 @@ void planeXoY(float x, float y, float z, int div, int side_view, std::ofstream &
                 f << n_x << " " << n_y << " " << -lado << "\n";
                 f << n_x << " " << n_y - shift << " " << -lado << "\n";
                 f << n_x - shift << " " << n_y << " " << -lado << "\n";
-
                 f << n_x - shift << " " << n_y << " " << -lado << "\n";
                 f << n_x << " " << n_y - shift << " " << -lado << "\n";
                 f << n_x - shift << " " << n_y - shift << " " << -lado << "\n";
@@ -125,7 +121,6 @@ void planeZoY(float x, float y, float z, int div, int side_view, std::ofstream &
                 f << lado << " " << n_y << " " << n_z - shift << "\n";
                 f << lado << " " << n_y << " " << n_z << "\n";
                 f << lado << " " << n_y - shift << " " << n_z << "\n";
-
                 f << lado << " " << n_y << " " << n_z - shift << "\n";
                 f << lado << " " << n_y - shift << " " << n_z << "\n";
                 f << lado << " " << n_y - shift << " " << n_z - shift << "\n";
@@ -140,8 +135,6 @@ void planeZoY(float x, float y, float z, int div, int side_view, std::ofstream &
                 f << lado << " " << n_y << " " << n_z - shift << "\n";
                 f << lado << " " << n_y - shift << " " << n_z << "\n";
                 f << lado << " " << n_y << " " << n_z << "\n";
-
-
                 f << lado << " " << n_y << " " << n_z - shift << "\n";
                 f << lado << " " << n_y - shift << " " << n_z - shift << "\n";
                 f << lado << " " << n_y - shift << " " << n_z << "\n";
