@@ -38,9 +38,9 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
         *nPoints += 6;
 
         if (!yB) {
-            writePoint(0,0,0); // bottom center
-            writePoint(x2b,0,z2b); // 4
-            writePoint(x1b,0,z1b); // 1
+            os << writePoint(0,0,0); // bottom center
+            os << writePoint(x2b,0,z2b); // 4
+            os << writePoint(x1b,0,z1b); // 1
             *nPoints += 3;
         }
 
