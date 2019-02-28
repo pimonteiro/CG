@@ -27,13 +27,13 @@ void box(float x, float y, float z, int div, const std::string &filename) {
     f.close();
 }
 
-void planeXoZ(float x, float y, float z, int div, int side_view,std::ofstream &f) {
-    float shift = x/div;
+void planeXoZ(float x, float y, float z, int div, int side_view, std::ofstream &f) {
+    float shift {x/div};
 
-    float n_x = x/2;
-    float n_z = z/2;
+    float n_x {x/2};
+    float n_z {z/2};
 
-    float alt = y/2;
+    float alt {y/2};
 
     if(side_view == 1) // Top side visible
         for(int i = 0; i < div; i++) {
@@ -68,12 +68,12 @@ void planeXoZ(float x, float y, float z, int div, int side_view,std::ofstream &f
 }
 
 void planeXoY(float x, float y, float z, int div, int side_view, std::ofstream &f) {
-    float shift = x/div;
+    float shift {x/div};
 
-    float n_x = x/2;
-    float lado = z/2;
+    float n_x {x/2};
+    float lado {z/2};
 
-    float n_y = y/2;
+    float n_y {y/2};
 
     if(side_view == 1) // Front side visible
         for(int i = 0; i < div; i++) {
@@ -108,12 +108,12 @@ void planeXoY(float x, float y, float z, int div, int side_view, std::ofstream &
 }
 
 void planeZoY(float x, float y, float z, int div, int side_view, std::ofstream &f) {
-    float shift = x/div;
+    float shift {x/div};
 
-    float lado = x/2;
-    float n_z = z/2;
+    float lado {x/2};
+    float n_z {z/2};
 
-    float n_y = y/2;
+    float n_y {y/2};
 
     if(side_view == 1) // Left side visible
         for(int i = 0; i < div; i++) {
