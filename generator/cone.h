@@ -4,6 +4,6 @@
 #include <string>
 
 void cone(float, float, int, int, const std::string&);
-std::string frustum(float, float, int, float, float, float, int*);
+std::string frustum(float, float, int, float, float, float);
 
 #endif

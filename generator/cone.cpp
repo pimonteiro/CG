@@ -4,10 +4,11 @@
 #include <sstream>
 #include <cmath>
 
+int nPoints {0};
 
 std::string writePoint(double, double, double);
 
-std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int* nPoints) {
+std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB) {
 
     std::ostringstream os;
 
@@ -35,13 +36,13 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
         os << writePoint(x2b,yB,z2b); // 4
         os << writePoint(x2t,yT,z2t); // 2
 
-        *nPoints += 6;
+        nPoints += 6;
 
         if (!yB) {
             os << writePoint(0,0,0); // bottom center
             os << writePoint(x2b,0,z2b); // 4
             os << writePoint(x1b,0,z1b); // 1
-            *nPoints += 3;
+            nPoints += 3;
         }
 
     }
@@ -70,17 +71,16 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
     double yT {height/stacks};
     double radiusTop {radius - radius/stacks};
     double radiusBottom {radius};
-    int *nPoints {0};
 
     for(int j = stacks; j >= 0; j--) {
         float radiusTop {j* radius/stacks};
-        os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, nPoints);
+        os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB);
         radiusBottom = radiusTop;
         yB = yT;
         yT += dHeight;
     }
 
-    outfile << std::to_string(*nPoints) + "\n" + os.str();
+    outfile << std::to_string(nPoints) + "\n" + os.str();
     outfile.close();
 
 }
