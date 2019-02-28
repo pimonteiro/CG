@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "plane.h"
 
 void plane(float size, const std::string &file) {
     std :: ofstream myfile;
