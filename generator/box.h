@@ -1,3 +1,8 @@
+#ifndef __BOX_H__
+#define __BOX_H__
+
 #include <fstream>
 
-void box(float x, float y, float z, int div, const std::string &filename);
+void box(float,float,float,int,const std::string&);
+
+#endif
