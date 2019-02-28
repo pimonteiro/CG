@@ -36,8 +36,8 @@ void planeXoZ(float x, float y, float z, int div, int side_view, std::ofstream &
     float alt {y/2};
 
     if(side_view == 1) // Top side visible
-        for(int i = 0; i < div; i++) {
-            for(int j = 0; j < div; j++) {
+        for(int i {0}; i < div; i++) {
+            for(int j {0}; j < div; j++) {
                 f << n_x << " " << alt << " " << n_z << "\n";
                 f << n_x - shift << " " << alt << " " << n_z - shift << "\n";
                 f << n_x - shift << " " << alt << " " << n_z << "\n";
@@ -50,8 +50,8 @@ void planeXoZ(float x, float y, float z, int div, int side_view, std::ofstream &
             n_x -= shift;
             n_z = z/2;
         } else { // Under side visible
-        for(int i = 0; i < div; i++) {
-            for(int j = 0; j < div; j++) {
+        for(int i {0}; i < div; i++) {
+            for(int j {0}; j < div; j++) {
                 f << n_x << " " << -alt << " " << n_z << "\n";
                 f << n_x - shift << " " << -alt << " " << n_z << "\n";
                 f << n_x - shift << " " << -alt << " " << n_z - shift << "\n";
@@ -76,8 +76,8 @@ void planeXoY(float x, float y, float z, int div, int side_view, std::ofstream &
     float n_y {y/2};
 
     if(side_view == 1) // Front side visible
-        for(int i = 0; i < div; i++) {
-            for(int j = 0; j < div; j++) {
+        for(int i {0}; i < div; i++) {
+            for(int j {0}; j < div; j++) {
                 f << n_x << " " << n_y << " " << lado << "\n";
                 f << n_x - shift << " " << n_y << " " << lado << "\n";
                 f << n_x << " " << n_y - shift << " " << lado << "\n";
@@ -90,8 +90,8 @@ void planeXoY(float x, float y, float z, int div, int side_view, std::ofstream &
             n_x -= shift;
             n_y = y/2;
         } else { // Back side visible
-        for(int i = 0; i < div; i++) {
-            for(int j = 0; j < div; j++) {
+        for(int i {0}; i < div; i++) {
+            for(int j {0}; j < div; j++) {
                 f << n_x << " " << n_y << " " << -lado << "\n";
                 f << n_x << " " << n_y - shift << " " << -lado << "\n";
                 f << n_x - shift << " " << n_y << " " << -lado << "\n";
@@ -116,8 +116,8 @@ void planeZoY(float x, float y, float z, int div, int side_view, std::ofstream &
     float n_y {y/2};
 
     if(side_view == 1) // Left side visible
-        for(int i = 0; i < div; i++) {
-            for(int j = 0; j < div; j++) {
+        for(int i {0}; i < div; i++) {
+            for(int j {0}; j < div; j++) {
                 f << lado << " " << n_y << " " << n_z - shift << "\n";
                 f << lado << " " << n_y << " " << n_z << "\n";
                 f << lado << " " << n_y - shift << " " << n_z << "\n";
@@ -130,8 +130,8 @@ void planeZoY(float x, float y, float z, int div, int side_view, std::ofstream &
             n_z -= shift;
             n_y = y/2;
         } else { // Right side visible
-        for(int i = 0; i < div; i++) {
-            for(int j = 0; j < div; j++) {
+        for(int i {0}; i < div; i++) {
+            for(int j {0}; j < div; j++) {
                 f << lado << " " << n_y << " " << n_z - shift << "\n";
                 f << lado << " " << n_y - shift << " " << n_z << "\n";
                 f << lado << " " << n_y << " " << n_z << "\n";

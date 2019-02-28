@@ -24,11 +24,11 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
     double deltaAlpha {2.0f * M_PI / slices};
     double deltaBeta {M_PI / stacks};
 
-    for(int i = 0; i < stacks; i++) {
+    for(int i {0}; i < stacks; i++) {
         double beta {i * deltaBeta};
         double nextBeta {beta + deltaBeta};
 
-        for(int j = 0; j < slices; j++) {
+        for(int j {0}; j < slices; j++) {
             double alpha {j * deltaAlpha};
             double nextAlpha {alpha + deltaAlpha};
 
