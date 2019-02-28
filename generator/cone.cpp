@@ -89,9 +89,3 @@ std::string writePoint(double a, double b, double c) {
     os << a << " " << b << " " << c << '\n';
     return os.str();
 }
-
-int main(int argc, char const *argv[])
-{
-    cone(2, 3, 10, 3, "cone.3d");
-    return 0;
-}
