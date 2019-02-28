@@ -1,11 +1,9 @@
 #include "cone.h"
+#include "outputAux.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <cmath>
-
-
-std::string writePoint(double, double, double);
 
 std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int* nPoints) {
 
@@ -57,12 +55,6 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
     }
 
     std::ostringstream os;
-    std::ofstream outfile;
-
-    outfile.open(file);
-    if(!outfile.is_open()) {
-        perror("ofstream.open");
-    }
 
     double alpha {2*M_PI/slices};
     double dHeight {height/stacks};
@@ -80,13 +72,7 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
         yT += dHeight;
     }
 
-    outfile << std::to_string(nPoints) + "\n" + os.str();
-    outfile.close();
+    dumpFile(nPoints, os, file);
+    
 
-}
-
-std::string writePoint(double a, double b, double c) {
-    std::ostringstream os;
-    os << a << " " << b << " " << c << '\n';
-    return os.str();
 }
