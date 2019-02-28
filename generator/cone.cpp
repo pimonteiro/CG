@@ -11,7 +11,7 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
 
     std::ostringstream os;
 
-    for(int i = 0; i < slices; i++) {
+    for(int i {0}; i < slices; i++) {
 
         double x1b {radiusBottom * sin(i*alpha)};
         double z1b {radiusBottom * cos(i*alpha)};
@@ -50,10 +50,10 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
 
 }
 
-void cone(float radius, float height, int slices, int stacks, const std::string&file) {
+void cone(float radius, float height, int slices, int stacks, const std::string& file) {
 
     if(radius <= 0.0f || slices <= 0 || stacks <= 0) {
-        fputs("All parameters must be positive numbers\n", stderr);
+        std::cerr << "All parameters must be positive numbers\n";
     }
 
     std::ostringstream os;
@@ -70,9 +70,10 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
     double yT {height/stacks};
     double radiusBottom {radius};
     int nPoints {0};
+    float radiusTop;
 
-    for(int j = stacks; j >= 0; j--) {
-        float radiusTop {j* radius/stacks};
+    for(int j {stacks}; j >= 0; j--) {
+        radiusTop = j* radius/stacks;
         os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, &nPoints);
         radiusBottom = radiusTop;
         yB = yT;
