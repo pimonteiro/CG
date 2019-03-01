@@ -6,6 +6,7 @@
 #include "sphere.h"
 
 
+
 // Display usage of program
 void helpMessage(){
     std::cout << "1) generator plane <x-dim> <filename>" << std::endl;
@@ -93,7 +94,7 @@ int main(int argc, char* argv[]) {
                 coneHandling(argc,argv);
             }
             else {
-                std::cerr << "Invalid parameters. Check with --help for usage examples." << std::endl;
+                std::cerr << "Invalid option. Check with --help for usage examples." << std::endl;
             }
         }
     }
