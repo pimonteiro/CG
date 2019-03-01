@@ -4,23 +4,22 @@
 #include <GL/glut.h>
 #endif
 
-#define _USE_MATH_DEFINES
 #include <math.h>
 #include <iostream>
 #include <vector>
-#include "Point.h"
+#include "point.h"
 
 
 //Global Variables
-std::vector<Point> points;
+std::vector<point> points;
 
 // Position of the camera around the objects
-float camaraAlpha = 0;
-float camaraBeta = 0;
-int distCam = 5;
+float camaraAlpha {0};
+float camaraBeta {0};
+int distCam {5};
 
 
-int readPoints(int argc, char* argv[]) {
+int readpoints(int argc, char* argv[]) {
     if(argc < 2) {
         std::cerr << "Usage: engine <dataset.xml>" << std::endl;
         return 0;
@@ -41,7 +40,7 @@ void changeSize(int w, int h) {
 		h = 1;
 
 	// compute window's aspect ratio 
-	float ratio = w * 1.0 / h;
+	float ratio { w * 1.0 / h };
 
 	// Set the projection matrix as current
 	glMatrixMode(GL_PROJECTION);
@@ -68,9 +67,9 @@ void renderScene(void) {
 	// set the camera
 	glLoadIdentity();
 
-    float px = distCam*cos(camaraBeta)*cos(camaraAlpha);
-    float py = distCam*sin(camaraBeta);
-    float pz = distCam*cos(camaraBeta)*sin(camaraAlpha);
+    float px { distCam*cos(camaraBeta)*cos(camaraAlpha) };
+    float py { distCam*sin(camaraBeta) };
+    float pz { distCam*cos(camaraBeta)*sin(camaraAlpha) };
 
     // camera setup
     gluLookAt(px,py,pz,
@@ -81,7 +80,7 @@ void renderScene(void) {
     glBegin(GL_TRIANGLES);
     for(std::size_t i=0; i<points.size(); ++i){
         //TODO add color to objects
-        Point p = points.at(i);
+        point p = points.at(i);
         glVertex3f(p.x,p.y,p.z);
     }
     glEnd();
@@ -90,11 +89,6 @@ void renderScene(void) {
     // End of frame
 	glutSwapBuffers();
 }
-
-
-void processKeys(unsigned char c, int xx, int yy) {
-}
-
 
 void processSpecialKeys(int key, int xx, int yy) {
     if(key == GLUT_KEY_RIGHT){
@@ -118,7 +112,7 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 int main(int argc, char **argv) {
     // check if xml with figures is given
-    if(!readPoints(argc,argv)){
+    if(!readpoints(argc,argv)){
         return 0;
     }
 
@@ -134,7 +128,6 @@ int main(int argc, char **argv) {
 	glutReshapeFunc(changeSize);
 	
     // Callback registration for keyboard processing
-	glutKeyboardFunc(processKeys);
 	glutSpecialFunc(processSpecialKeys);
 
     // OpenGL settings
