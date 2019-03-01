@@ -1,6 +1,6 @@
 #include "sphere.h"
+#include "outputAux.h"
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <cmath>
 
@@ -13,12 +13,6 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
     }
 
     std::ostringstream os;
-    std::ofstream outfile;
-
-    outfile.open(file);
-    if(!outfile.is_open()) {
-        perror("ofstream.open");
-    }
 
     int nPoints {0};
     double deltaAlpha {2.0f * M_PI / slices};
@@ -47,12 +41,10 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
         }
     }
 
-    outfile << std::to_string(nPoints) + "\n" + os.str();
-    outfile.close();
+    dumpFile(nPoints, os, file);
+
 }
 
 std::string trans(double a, double b, double c) {
-    std::ostringstream os;
-    os << c * sinf(a) * sinf(b) << " " << c * cosf(a) << " " << c * sinf(a) * cosf(b) << '\n';
-    return os.str();
+    return writePoint(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
 }

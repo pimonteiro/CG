@@ -1,13 +1,10 @@
 #include "cone.h"
+#include "outputAux.h"
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <cmath>
 
-
-std::string writePoint(double, double, double);
-
-std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int* nPoints) {
+std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int* nPoints, int isFirst) {
 
     std::ostringstream os;
 
@@ -37,7 +34,7 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
 
         *nPoints += 6;
 
-        if (!yB) {
+        if (isFirst) {
             os << writePoint(0,0,0); // bottom center
             os << writePoint(x2b,0,z2b); // 4
             os << writePoint(x1b,0,z1b); // 1
@@ -57,12 +54,6 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
     }
 
     std::ostringstream os;
-    std::ofstream outfile;
-
-    outfile.open(file);
-    if(!outfile.is_open()) {
-        perror("ofstream.open");
-    }
 
     double alpha {2*M_PI/slices};
     double dHeight {height/stacks};
@@ -71,22 +62,17 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
     double radiusBottom {radius};
     int nPoints {0};
     float radiusTop;
+    int isFirst;
 
     for(int j {stacks}; j >= 0; j--) {
         radiusTop = j* radius/stacks;
-        os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, &nPoints);
+        isFirst = !(stacks - j);
+        os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, &nPoints, isFirst);
         radiusBottom = radiusTop;
         yB = yT;
         yT += dHeight;
     }
 
-    outfile << std::to_string(nPoints) + "\n" + os.str();
-    outfile.close();
-
-}
-
-std::string writePoint(double a, double b, double c) {
-    std::ostringstream os;
-    os << a << " " << b << " " << c << '\n';
-    return os.str();
+    dumpFile(nPoints, os, file);
+    
 }
