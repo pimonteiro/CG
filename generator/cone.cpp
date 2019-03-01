@@ -75,5 +75,5 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
     }
 
     dumpFile(nPoints, os, file);
-
+    
 }
