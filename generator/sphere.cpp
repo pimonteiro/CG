@@ -1,7 +1,6 @@
 #include "sphere.h"
 #include "outputAux.h"
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <cmath>
 
