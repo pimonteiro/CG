@@ -8,13 +8,8 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
+#include "Point.h"
 
-
-typedef struct point{
-    float x;
-    float y;
-    float z;
-} Point;
 
 //Global Variables
 std::vector<Point> points;
@@ -23,6 +18,7 @@ std::vector<Point> points;
 float camaraAlpha = 0;
 float camaraBeta = 0;
 int distCam = 5;
+
 
 int readPoints(int argc, char* argv[]) {
     if(argc < 2) {
@@ -49,6 +45,7 @@ void changeSize(int w, int h) {
 
 	// Set the projection matrix as current
 	glMatrixMode(GL_PROJECTION);
+
 	// Load Identity Matrix
 	glLoadIdentity();
 	
@@ -75,10 +72,10 @@ void renderScene(void) {
     float py = distCam*sin(camaraBeta);
     float pz = distCam*cos(camaraBeta)*sin(camaraAlpha);
 
+    // camera setup
     gluLookAt(px,py,pz,
               0.0,0.0,0.0,
               0.0f,1.0f,0.0f);
-
 
 	//Loop to draw vertex
     glBegin(GL_TRIANGLES);
@@ -100,8 +97,6 @@ void processKeys(unsigned char c, int xx, int yy) {
 
 
 void processSpecialKeys(int key, int xx, int yy) {
-
-// put code to process special keys in here
     if(key == GLUT_KEY_RIGHT){
         camaraAlpha += M_PI/50;
         glutPostRedisplay();
@@ -122,31 +117,31 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 
 int main(int argc, char **argv) {
+    // check if xml with figures is given
     if(!readPoints(argc,argv)){
         return 0;
     }
 
-
-// init GLUT and the window
+    // init GLUT and the window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(800,800);
 	glutCreateWindow("CG@DI-UM");
 		
-// Required callback registry 
+    // Required callback registry 
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
 	
-// Callback registration for keyboard processing
+    // Callback registration for keyboard processing
 	glutKeyboardFunc(processKeys);
 	glutSpecialFunc(processSpecialKeys);
 
-//  OpenGL settings
+    // OpenGL settings
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	
-// enter GLUT's main cycle
+    // enter GLUT's main cycle
 	glutMainLoop();
 	
 	return 1;
