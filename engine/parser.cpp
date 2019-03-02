@@ -1,4 +1,6 @@
 #include "parser.h"
+#include "model.h"
+#include "tinyxml2.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
