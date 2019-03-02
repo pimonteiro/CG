@@ -106,6 +106,7 @@ int main(int argc, char **argv) {
         Parser().ReadXML(scene, argv[1]);
     } else {
         std::cerr << "Usage: ./engine <file>.xml" << std::endl;
+        return 1;
     }
 
     initCostumGL(argc,argv);
