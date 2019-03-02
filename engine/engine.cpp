@@ -4,14 +4,12 @@
 #include <GL/glut.h>
 #endif
 
-#include <math.h>
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include "point.h"
 
 
 //Global Variables
-std::vector<point> points;
 
 // Position of the camera around the objects
 float camaraAlpha {0};
@@ -76,15 +74,7 @@ void renderScene(void) {
               0.0,0.0,0.0,
               0.0f,1.0f,0.0f);
 
-	//Loop to draw vertex
-    glBegin(GL_TRIANGLES);
-    for(std::size_t i=0; i<points.size(); ++i){
-        //TODO add color to objects
-        point p = points.at(i);
-        glVertex3f(p.x,p.y,p.z);
-    }
-    glEnd();
-
+	// Draw models
 
     // End of frame
 	glutSwapBuffers();
