@@ -1,21 +1,22 @@
 #ifndef __POINT_H__
 #define __POINT_H__
+
 #include <string>
 
 class Point {
   private:
-    double x,y,z;
+    float x,y,z;
   public:
     Point();
-    Point(double, double, double);
+    Point(float, float, float);
     std::string toString();
-    double X() {
+    float X() {
         return x;
     }
-    double Y() {
+    float Y() {
         return y;
     }
-    double Z() {
+    float Z() {
         return z;
     }
 };
