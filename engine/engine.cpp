@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
     } else {
         std::cerr << "Usage: ./engine <file>.xml" << std::endl;
     }
-    //scene->addModel(model);
+
     initCostumGL(argc,argv);
     glutMainLoop();
     return 1;
