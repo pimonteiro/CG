@@ -5,9 +5,9 @@
 #include "model.h"
 #include <vector>
 
-class  Scene{
-    std::vector<Model*> model_vector;
-    public:
+class  Scene {
+    std::vector<Model*> modelsV;
+  public:
     Scene();
     void addModel(Model*);
     std::vector<Model*> scene();

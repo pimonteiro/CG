@@ -1,20 +1,22 @@
 #include "scene.h"
+#include "model.h"
+#include <vector>
+
 
 Scene::Scene() {
 }
 
 void Scene::addModel(Model* model) {
-    model_vector.push_back(model);
+    modelsV.push_back(model);
 }
 
-vector<Model*> Scene::scene() {
-    return this->model_vector;
+std::vector<Model*> Scene::scene() {
+    return this->modelsV;
 }
 
 void Scene::draw() {
-    vector <Model*>::iterator it;
-
-    for(it = this->model_vector.begin(); it != this->model_vector.end(); it++) {
+    std::vector <Model*>::iterator it;
+    for(it = this->modelsV.begin(); it != this->modelsV.end(); it++) {
         (*it)->draw();
     }
 }
