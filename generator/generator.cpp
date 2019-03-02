@@ -17,13 +17,13 @@ void helpMessage(){
 
 void coneHandling(int argc, char* pString[]) {
     if(argc < 7){
-        std::cerr << "Insufficient parameters.\nNeeded: bottom radius, height, number of slices, number of stackes, file to write" << std::endl;
+        std::cerr << "Insufficient parameters.\nNeeded: bottom radius, height, number of slices, number of stacks, file to write" << std::endl;
     }
     else {
-        float radius = std::stof(pString[2]);
-        float h = std::stof(pString[3]);
-        int sl = std::stoi(pString[4]);
-        int stacks = std::stoi(pString[5]);
+        float radius { std::stof(pString[2]) };
+        float h { std::stof(pString[3]) };
+        int sl { std::stoi(pString[4]) };
+        int stacks { std::stoi(pString[5]) };
 
         cone(radius,h,sl,stacks,pString[6]);
     }
@@ -34,9 +34,9 @@ void sphereHandling(int argc, char* pString[]) {
         std::cerr << "Insufficient parameters.\nNeeded: radius, number of slices, number of stacks, file to write" << std::endl;
     }
     else {
-        float radius = std::stof(pString[2]);
-        int sl = std::stoi(pString[3]);
-        int stacks = std::stoi(pString[4]);
+        float radius { std::stof(pString[2]) };
+        int sl { std::stoi(pString[3]) };
+        int stacks { std::stoi(pString[4]) };
 
         sphere(radius,sl,stacks,pString[5]);
     }
@@ -47,7 +47,7 @@ void planeHandling(int argc, char* pString[]) {
         std::cerr << "Insufficient parameters.\nNeeded: x-dim, file to write" << std::endl;
     }
     else {
-        float x = std::stof(pString[2]);
+        float x { std::stof(pString[2]) };
 
         plane(x,pString[3]);
     }
@@ -60,13 +60,13 @@ void boxHandling(int argc, char* pString[]) {
     else {
         int div;
         if(argc == 6)
-            div = 1;
+            div { 1 };
         else
-            div = std::stoi(pString[5]);
+            div { std::stoi(pString[5]) };
 
-        float xDim = std::stof(pString[2]);
-        float yDim = std::stof(pString[3]);
-        float zDim = std::stof(pString[4]);
+        float xDim { std::stof(pString[2]) };
+        float yDim { std::stof(pString[3]) };
+        float zDim { std::stof(pString[4]) };
         box(xDim,yDim,zDim,div,pString[6]);
     }
 }
