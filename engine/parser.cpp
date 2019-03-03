@@ -1,4 +1,6 @@
 #include "parser.h"
+#include "model.h"
+#include "tinyxml2.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -48,9 +50,9 @@ void Parser::ReadXML(Scene* scene, char* xml) {
                             v.push_back(word);
                         }
                         int it {0};
-                        double x;
-                        double y;
-                        double z;
+                        float x;
+                        float y;
+                        float z;
                         for(vector<string>::const_iterator i {v.begin()}; i != v.end(); ++i) {
                             if(it==0) x=stof(*i);
                             if(it==1) y=stof(*i);
