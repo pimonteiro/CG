@@ -52,7 +52,6 @@ void planeHandling(int argc, char* pString[]) {
     }
 }
 
-
 void boxHandling(int argc, char* pString[]) {
     if(argc < 6) { //Must have 6 minimum parameters (1 optional)
         std::cerr << "Insufficient parameters.\nNeeded: x-dim, y-dim, z-dim, number of divisions, file to write" << std::endl;
@@ -91,10 +90,10 @@ int main(int argc, char* argv[]) {
                 sphereHandling(argc,argv);
             }
             else if(strcmp("cone",argv[1]) == 0) {
-               coneHandling(argc,argv);
+                coneHandling(argc,argv);
             }
             else {
-                std::cerr << "Invalid parameters. Check with --help for usage examples." << std::endl;
+                std::cerr << "Invalid option. Check with --help for usage examples." << std::endl;
             }
         }
     }
