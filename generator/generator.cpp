@@ -24,7 +24,7 @@ void coneHandling(int argc, char* pString[]) {
         int sl = std::stoi(pString[4]);
         int stacks = std::stoi(pString[5]);
 
-        cone(radius,h,sl,stacks,pString[6]);
+        cone(radius,h,sl,stacks,pString[6]);    
     }
 }
 
