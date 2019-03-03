@@ -1,5 +1,5 @@
-#include "model.h"
-#include "point.h"
+#include "headers/model.h"
+#include "headers/point.h"
 #include <iostream>
 
 #ifdef __APPLE__

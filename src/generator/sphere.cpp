@@ -1,5 +1,5 @@
-#include "sphere.h"
-#include "outputAux.h"
+#include "headers/sphere.h"
+#include "headers/outputAux.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>

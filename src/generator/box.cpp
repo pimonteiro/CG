@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-#include "box.h"
+#include "headers/box.h"
 
 void planeXoZ(float,float,float,int,int,std::ofstream&);
 void planeXoY(float,float,float,int,int,std::ofstream&);

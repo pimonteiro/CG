@@ -20,7 +20,7 @@ if(NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif(NOT OPENGL_FOUND)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../bin")
 add_executable(engine engine.cpp model.cpp tinyxml2.cpp parser.cpp scene.cpp point.cpp)
 set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
 target_link_libraries(engine ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )

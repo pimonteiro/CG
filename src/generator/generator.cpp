@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstring>
-#include "box.h"
-#include "cone.h"
-#include "plane.h"
-#include "sphere.h"
+#include "headers/box.h"
+#include "headers/cone.h"
+#include "headers/plane.h"
+#include "headers/sphere.h"
 
 
 // Display usage of program
@@ -59,9 +59,9 @@ void boxHandling(int argc, char* pString[]) {
     else {
         int div;
         if(argc == 6)
-            div { 1 };
+            div = { 1 };
         else
-            div { std::stoi(pString[5]) };
+            div = { std::stoi(pString[5]) };
 
         float xDim { std::stof(pString[2]) };
         float yDim { std::stof(pString[3]) };

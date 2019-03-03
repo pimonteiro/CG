@@ -1,5 +1,5 @@
-#include "cone.h"
-#include "outputAux.h"
+#include "headers/cone.h"
+#include "headers/outputAux.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>

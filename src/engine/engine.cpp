@@ -8,8 +8,8 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include "scene.h"
-#include "parser.h"
+#include "headers/scene.h"
+#include "headers/parser.h"
 
 Scene* scene;
 float camaraAlpha {0};

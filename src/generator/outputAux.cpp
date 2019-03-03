@@ -1,4 +1,4 @@
-#include "outputAux.h"
+#include "headers/outputAux.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
