@@ -1,8 +1,8 @@
 #ifndef __BOX_H__
 #define __BOX_H__
 
-#include <fstream>
+#include <string>
 
-void box(float,float,float,int,const std::string&);
+std::string box(float,float,float,int);
 
 #endif

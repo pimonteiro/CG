@@ -7,7 +7,7 @@
 
 std::string trans(double, double, double);
 
-void sphere(float radius, int slices, int stacks, const std::string &file) {
+std::string sphere(float radius, int slices, int stacks) {
     if(radius <= 0.0f || slices <= 0 || stacks <= 0) {
         fputs("All parameters must be positive numbers\n", stderr);
     }
@@ -40,9 +40,9 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
             }
         }
     }
-
-    dumpFile(nPoints, os, file);
-
+    std::ostringstream r;
+    r << nPoints << '\n' << os.str();
+    return r.str();
 }
 
 std::string trans(double a, double b, double c) {

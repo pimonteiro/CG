@@ -1,18 +1,16 @@
-#include <iostream>
-#include <fstream>
+#include <sstream>
 #include "headers/plane.h"
 
-void plane(float size, const std::string &file) {
-    std :: ofstream myfile;
-    myfile.open(file);
+std::string plane(float size) {
+    std::ostringstream os;
 
-    myfile << "6\n";
-    myfile <<  size/2 << " 0 " <<  size/2 << "\n"; //A
-    myfile <<  size/2 << " 0 " << -size/2 << "\n"; //B
-    myfile << -size/2 << " 0 " <<  size/2 << "\n"; //D
-    myfile <<  size/2 << " 0 " << -size/2 << "\n"; //B
-    myfile << -size/2 << " 0 " << -size/2 << "\n"; //C
-    myfile << -size/2 << " 0 " <<  size/2 << "\n"; //D
+    os << "6\n";
+    os <<  size/2 << " 0 " <<  size/2 << "\n"; //A
+    os <<  size/2 << " 0 " << -size/2 << "\n"; //B
+    os << -size/2 << " 0 " <<  size/2 << "\n"; //D
+    os <<  size/2 << " 0 " << -size/2 << "\n"; //B
+    os << -size/2 << " 0 " << -size/2 << "\n"; //C
+    os << -size/2 << " 0 " <<  size/2 << "\n"; //D
 
-    myfile.close();
+   return os.str();
 }

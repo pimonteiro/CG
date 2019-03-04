@@ -12,9 +12,9 @@
 #include "headers/parser.h"
 
 Scene* scene;
-float camaraAlpha {0};
-float camaraBeta {0};
-int distCam {25};
+float camaraAlpha {0.7};
+float camaraBeta {0.5};
+int distCam {20};
 
 void changeSize(int w, int h) {
 
@@ -55,6 +55,19 @@ void renderScene() {
     gluLookAt(px,py,pz,
             0.0,0.0,0.0,
             0.0f,1.0f,0.0f);
+    // set axis
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glBegin(GL_LINES);
+    glColor3f(0, 0, 1);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(10.0f, 0.0f, 0.0f);
+    glColor3f(0, 1, 0);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 10.0f, 0.0f);
+    glColor3f(1, 0, 0);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 10.0f);
+    glEnd();
 
     scene->draw();
 

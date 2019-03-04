@@ -47,8 +47,7 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
 
 }
 
-void cone(float radius, float height, int slices, int stacks, const std::string& file) {
-
+std::string cone(float radius, float height, int slices, int stacks) {
     if(radius <= 0.0f || slices <= 0 || stacks <= 0) {
         std::cerr << "All parameters must be positive numbers\n";
     }
@@ -73,5 +72,7 @@ void cone(float radius, float height, int slices, int stacks, const std::string&
         yT += dHeight;
     }
 
-    dumpFile(nPoints, os, file);
+    std::ostringstream r;
+    r << nPoints << '\n' << os.str();
+    return r.str();
 }

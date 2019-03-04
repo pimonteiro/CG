@@ -3,6 +3,6 @@
 
 #include <string>
 
-void plane(float, const std::string&);
+std::string plane(float);
 
 #endif

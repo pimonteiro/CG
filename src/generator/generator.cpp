@@ -1,100 +1,111 @@
 #include <iostream>
 #include <cstring>
+#include <sstream>
 #include "headers/box.h"
 #include "headers/cone.h"
 #include "headers/plane.h"
 #include "headers/sphere.h"
+#include "headers/outputAux.h"
+
+using namespace std;
 
 
 // Display usage of program
 void helpMessage(){
-    std::cout << "1) generator plane <x-dim> <filename>" << std::endl;
-    std::cout << "2) generator box <x-dim> <y-dim> <z-dim> <slices (optional)> <filename>" << std::endl;
-    std::cout << "3) generator sphere <radius> <slices> <stacks> <filename>" << std::endl;
-    std::cout << "4) generator cone <bottom radius> <height> <slices> <stacks> <filename>" << std::endl;
+    cout << "[*] ./generator plane <dim> <filename>" << endl;
+    cout << "[*] ./generator box <x-dim> <y-dim> <z-dim> <slices (optional)> <filename>" << endl;
+    cout << "[*] ./generator sphere <radius> <slices> <stacks> <filename>" << endl;
+    cout << "[*] ./generator cone <bottom radius> <height> <slices> <stacks> <filename>" << endl;
 }
 
-void coneHandling(int argc, char* pString[]) {
-    if(argc < 7){
-        std::cerr << "Insufficient parameters.\nNeeded: bottom radius, height, number of slices, number of stacks, file to write" << std::endl;
+string drawCone(int argc, char* pString[]) {
+    if(argc != 7) {
+        cerr << "Insufficient parameters." << endl;
+        helpMessage();
+        exit(1);
     }
     else {
-        float radius { std::stof(pString[2]) };
-        float h { std::stof(pString[3]) };
-        int sl { std::stoi(pString[4]) };
-        int stacks { std::stoi(pString[5]) };
+        float radius { stof(pString[2]) };
+        float height { stof(pString[3]) };
+        int slices { stoi(pString[4]) };
+        int stacks { stoi(pString[5]) };
 
-        cone(radius,h,sl,stacks,pString[6]);    
+        return cone(radius, height, slices, stacks);
     }
 }
 
-void sphereHandling(int argc, char* pString[]) {
-    if(argc < 6) {
-        std::cerr << "Insufficient parameters.\nNeeded: radius, number of slices, number of stacks, file to write" << std::endl;
+string drawSphere(int argc, char* pString[]) {
+    if(argc != 6) {
+        cerr << "Insufficient parameters." << endl;
+        helpMessage();
+        exit(1);
     }
     else {
-        float radius { std::stof(pString[2]) };
-        int sl { std::stoi(pString[3]) };
-        int stacks { std::stoi(pString[4]) };
+        float radius { stof(pString[2]) };
+        int slices { stoi(pString[3]) };
+        int stacks { stoi(pString[4]) };
 
-        sphere(radius,sl,stacks,pString[5]);
+        return sphere(radius, slices, stacks);
     }
 }
 
-void planeHandling(int argc, char* pString[]) {
-    if(argc < 5 ) {
-        std::cerr << "Insufficient parameters.\nNeeded: x-dim, file to write" << std::endl;
+string drawPlane(int argc, char* pString[]) {
+    if(argc != 4 ) {
+        cerr << "Insufficient parameters." << endl;
+        helpMessage();
+        exit(1);
     }
     else {
-        float x { std::stof(pString[2]) };
+        float x { stof(pString[2]) };
 
-        plane(x,pString[3]);
+        return plane(x);
     }
 }
 
-void boxHandling(int argc, char* pString[]) {
-    if(argc < 6) { //Must have 6 minimum parameters (1 optional)
-        std::cerr << "Insufficient parameters.\nNeeded: x-dim, y-dim, z-dim, number of divisions, file to write" << std::endl;
+string drawBox(int argc, char* pString[]) {
+    if(!(argc == 6 || argc == 7)) { //Must have 6 minimum parameters (1 optional)
+        cerr << "Insufficient parameters." << endl;
+        helpMessage();
+        exit(1);
     }
     else {
         int div;
         if(argc == 6)
             div = { 1 };
         else
-            div = { std::stoi(pString[5]) };
+            div = { stoi(pString[5]) };
 
-        float xDim { std::stof(pString[2]) };
-        float yDim { std::stof(pString[3]) };
-        float zDim { std::stof(pString[4]) };
-        box(xDim,yDim,zDim,div,pString[6]);
+        float xDim { stof(pString[2]) };
+        float yDim { stof(pString[3]) };
+        float zDim { stof(pString[4]) };
+        return box(xDim,yDim,zDim,div);
     }
 }
 
 int main(int argc, char* argv[]) {
-
     if(argc < 2) {
-        std::cerr << "Use --help for more information of how to use." << std::endl;
-    }
-    else {
-        if(strcmp("--help", argv[1]) == 0) {
+        cerr << "Run with --help for more information." << endl;
+    } else {
+        if(!strcmp("--help", argv[1])) {
             helpMessage();
-        }
-        else {
-            if(strcmp("box",argv[1]) == 0) {
-                boxHandling(argc,argv);
+        } else {
+            ostringstream os;
+            if(!strcmp("box",argv[1])) {
+                os << drawBox(argc, argv);
             }
-            else if(strcmp("plane",argv[1]) == 0) {
-                planeHandling(argc,argv);
+            else if(!strcmp("plane",argv[1])) {
+                os << drawPlane(argc, argv);
             }
-            else if(strcmp("sphere",argv[1]) == 0) {
-                sphereHandling(argc,argv);
+            else if(!strcmp("sphere",argv[1])) {
+                os << drawSphere(argc, argv);
             }
-            else if(strcmp("cone",argv[1]) == 0) {
-                coneHandling(argc,argv);
+            else if(!strcmp("cone",argv[1])) {
+                os << drawCone(argc,argv);
             }
             else {
-                std::cerr << "Invalid option. Check with --help for usage examples." << std::endl;
+                cerr << "Invalid option. Run with --help for more information." << endl;
             }
+            dumpFile(os, argv[argc-1]);
         }
     }
     return 0;

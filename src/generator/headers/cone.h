@@ -3,6 +3,6 @@
 
 #include <string>
 
-void cone(float, float, int, int, const std::string&);
+std::string cone(float, float, int, int);
 
 #endif

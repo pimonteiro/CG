@@ -4,6 +4,6 @@
 #include <string>
 
 std::string writePoint(double , double , double);
-void dumpFile(int, const std::ostringstream&, const std::string&);
+void dumpFile(const std::ostringstream&, const std::string&);
 
 #endif

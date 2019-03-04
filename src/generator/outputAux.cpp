@@ -9,7 +9,7 @@ std::string writePoint(double a, double b, double c) {
     return os.str();
 }
 
-void dumpFile(int nPoints, const std::ostringstream& os, const std::string& file) {
+void dumpFile(const std::ostringstream& os, const std::string& file) {
 
     std::ofstream outfile;
 
@@ -18,6 +18,6 @@ void dumpFile(int nPoints, const std::ostringstream& os, const std::string& file
         perror("ofstream.open");
     }
 
-    outfile << std::to_string(nPoints) + "\n" + os.str();
+    outfile << os.str();
     outfile.close();
 }
