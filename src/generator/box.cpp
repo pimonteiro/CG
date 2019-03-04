@@ -1,150 +1,54 @@
-#include <cstdio>
 #include <sstream>
-#include <iostream>
 #include "headers/box.h"
+#include "headers/plane.h"
+#include <regex>
 
-std::string planeXoZ(float,float,float,int,int);
-std::string planeXoY(float,float,float,int,int);
-std::string planeZoY(float,float,float,int,int);
 
-std::string box(float x, float y, float z, int div) {
-    std::ostringstream f;
+std::string sumNPoints(const std::string&);
 
-    int n_v = x+y+z; //TEMP solution for total number of vertex
-    f << n_v << "\n";
+std::string box(float xP, float yP, float zP, int div) {
+    double dz  {zP/(2*div)};
+    double zO  {-zP/2+dz};
+    double dx  {xP/(2*div)};
+    double xO, auxO;
 
-    f << planeXoZ(x,y,z,div,1);
-    f << planeXoZ(x,y,z,div,0);
-    f << planeXoY(x,y,z,div,1);
-    f << planeXoY(x,y,z,div,0);
-    f << planeZoY(x,y,z,div,1);
-    f << planeZoY(x,y,z,div,0);
+    std::ostringstream os;
 
-    return f.str();
+    for(int j {0}; j<div; j++) {
+        xO = -xP/2+dx;
+        auxO = -zP/2+dz;
+        for (int i {0}; i<div; i++) {
+            os << plane(xO, zP/2,zO, 2*dx, 2*dz, 0, 1);  // cima
+            os << plane(xO, -zP/2,zO, 2*dx, 2*dz, 0, 0);  // baixo
+            os << plane(xO, zO,zP/2, 2*dx, 2*dz, 1, 1); // frente
+            os << plane(xO, zO,-zP/2, 2*dx, 2*dz, 1, 0); // trás
+            os << plane(xP/2, zO,auxO, 2*dz, 2*dz, 2, 1);  // direita
+            os << plane(-xP/2, zO,auxO, 2*dz, 2*dz, 2, 0);  // esquerda
+
+            xO+=2*dx;
+            auxO+=2*dz;
+        }
+        zO += 2*dz;
+    }
+    return sumNPoints(os.str());
 }
 
-std::string planeXoZ(float x, float y, float z, int div, int side_view) {
-    std::ostringstream f;
-    float shift {x/div};
+std::string sumNPoints(const std::string& s) {
+    std::istringstream s0(s);
+    std::ostringstream os, r;
 
-    float n_x {x/2};
-    float n_z {z/2};
+    int counter{0};
+    std::string oneLine;
+    std::regex p("[0-9]+(\\r\\n|\\r|\\n)?");
 
-    float alt {y/2};
-
-    if(side_view == 1) // Top side visible
-        for(int i {0}; i < div; i++) {
-            for(int j {0}; j < div; j++) {
-                f << n_x << " " << alt << " " << n_z << "\n";
-                f << n_x - shift << " " << alt << " " << n_z - shift << "\n";
-                f << n_x - shift << " " << alt << " " << n_z << "\n";
-                f << n_x - shift << " " << alt << " " << n_z - shift << "\n";
-                f << n_x << " " << alt << " " << n_z << "\n";
-                f << n_x << " " << alt << " " << n_z - shift << "\n";
-
-                n_z -= shift;
-            }
-            n_x -= shift;
-            n_z = z/2;
-        } else { // Under side visible
-            for(int i {0}; i < div; i++) {
-                for(int j {0}; j < div; j++) {
-                    f << n_x << " " << -alt << " " << n_z << "\n";
-                    f << n_x - shift << " " << -alt << " " << n_z << "\n";
-                    f << n_x - shift << " " << -alt << " " << n_z - shift << "\n";
-                    f << n_x - shift << " " << -alt << " " << n_z - shift << "\n";
-                    f << n_x << " " << -alt << " " << n_z - shift << "\n";
-                    f << n_x << " " << -alt << " " << n_z << "\n";
-
-                    n_z -= shift;
-                }
-                n_x -= shift;
-                n_z = z/2;
-            }
+    while (getline(s0, oneLine)) {
+        if (regex_match(oneLine, p)) {
+            counter += stoi(oneLine);
+        } else {
+            os << oneLine << '\n';
         }
-    return f.str();
-}
+    }
 
-std::string planeXoY(float x, float y, float z, int div, int side_view) {
-    std::ostringstream f;
-    float shift {x/div};
-
-    float n_x {x/2};
-    float lado {z/2};
-
-    float n_y {y/2};
-
-    if(side_view == 1) // Front side visible
-        for(int i {0}; i < div; i++) {
-            for(int j {0}; j < div; j++) {
-                f << n_x << " " << n_y << " " << lado << "\n";
-                f << n_x - shift << " " << n_y << " " << lado << "\n";
-                f << n_x << " " << n_y - shift << " " << lado << "\n";
-                f << n_x - shift << " " << n_y << " " << lado << "\n";
-                f << n_x - shift << " " << n_y - shift << " " << lado << "\n";
-                f << n_x << " " << n_y - shift << " " << lado << "\n";
-
-                n_y -= shift;
-            }
-            n_x -= shift;
-            n_y = y/2;
-        } else { // Back side visible
-            for(int i {0}; i < div; i++) {
-                for(int j {0}; j < div; j++) {
-                    f << n_x << " " << n_y << " " << -lado << "\n";
-                    f << n_x << " " << n_y - shift << " " << -lado << "\n";
-                    f << n_x - shift << " " << n_y << " " << -lado << "\n";
-                    f << n_x - shift << " " << n_y << " " << -lado << "\n";
-                    f << n_x << " " << n_y - shift << " " << -lado << "\n";
-                    f << n_x - shift << " " << n_y - shift << " " << -lado << "\n";
-
-                    n_y -= shift;
-                }
-                n_x -= shift;
-                n_y = y/2;
-            }
-        }
-    return f.str();
-}
-
-std::string planeZoY(float x, float y, float z, int div, int side_view) {
-    std::ostringstream f;
-    float shift {x/div};
-
-    float lado {x/2};
-    float n_z {z/2};
-
-    float n_y {y/2};
-
-    if(side_view == 1) // Left side visible
-        for(int i {0}; i < div; i++) {
-            for(int j {0}; j < div; j++) {
-                f << lado << " " << n_y << " " << n_z - shift << "\n";
-                f << lado << " " << n_y << " " << n_z << "\n";
-                f << lado << " " << n_y - shift << " " << n_z << "\n";
-                f << lado << " " << n_y << " " << n_z - shift << "\n";
-                f << lado << " " << n_y - shift << " " << n_z << "\n";
-                f << lado << " " << n_y - shift << " " << n_z - shift << "\n";
-
-                n_y -= shift;
-            }
-            n_z -= shift;
-            n_y = y/2;
-        } else { // Right side visible
-            for(int i {0}; i < div; i++) {
-                for(int j {0}; j < div; j++) {
-                    f << lado << " " << n_y << " " << n_z - shift << "\n";
-                    f << lado << " " << n_y - shift << " " << n_z << "\n";
-                    f << lado << " " << n_y << " " << n_z << "\n";
-                    f << lado << " " << n_y << " " << n_z - shift << "\n";
-                    f << lado << " " << n_y - shift << " " << n_z - shift << "\n";
-                    f << lado << " " << n_y - shift << " " << n_z << "\n";
-
-                    n_y -= shift;
-                }
-                n_z -= shift;
-                n_y = y/2;
-            }
-        }
-    return f.str();
+    r << counter << '\n' << os.str();
+    return r.str();
 }

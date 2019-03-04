@@ -3,6 +3,5 @@
 
 #include <string>
 
-std::string plane(float);
-
+std::string plane(double, double, double, double, double, int, int);
 #endif

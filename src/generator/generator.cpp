@@ -58,7 +58,7 @@ string drawPlane(int argc, char* pString[]) {
     else {
         float x { stof(pString[2]) };
 
-        return plane(x);
+        return plane(0, 0, 0, x, x, 0, 1);
     }
 }
 
