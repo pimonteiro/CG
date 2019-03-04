@@ -2,16 +2,16 @@
 #include "headers/plane.h"
 #include "headers/outputAux.h"
 
-std::string plane(double xO, double yO, double zO, double xP, double zP, int type, int place) {
+std::string plane(float xO, float yO, float zO, float xP, float zP, int type, int place) {
     std::ostringstream os;
 
     os << "6\n";
 
-    double x, y, z;
+    float x, y, z;
     x = xP/2;
     y = 0;
     z = zP/2;
-    double flag {1};
+    float flag {1};
 
     if (type == 1) {
         y = -z;

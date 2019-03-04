@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-std::string writePoint(double a, double b, double c) {
+std::string writePoint(float a, float b, float c) {
     std::ostringstream os;
     os << a << " " << b << " " << c << '\n';
     return os.str();
