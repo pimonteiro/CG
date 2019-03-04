@@ -84,20 +84,21 @@ void renderScene() {
 void processSpecialKeys(int key, int xx, int yy) {
     if(key == GLUT_KEY_RIGHT){
         camaraAlpha += M_PI/50;
-        glutPostRedisplay();
     }
     if(key == GLUT_KEY_LEFT){
         camaraAlpha -= M_PI/50;
-        glutPostRedisplay();
     }
     if(key == GLUT_KEY_UP){
         camaraBeta += M_PI/50;
-        glutPostRedisplay();
+        if(camaraBeta > 1.5f)
+            camaraBeta = 1.5f;
     }
     if(key == GLUT_KEY_DOWN){
         camaraBeta -= M_PI/50;
-        glutPostRedisplay();
+        if(camaraBeta < -1.5f)
+            camaraBeta = -1.5f;
     }
+    glutPostRedisplay();
 }
 
 void processKeys(unsigned char key, int x, int y) {
