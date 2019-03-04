@@ -63,8 +63,8 @@ std::string cone(float radius, float height, int slices, int stacks) {
     float radiusTop;
     int isFirst;
 
-    for(int j {stacks}; j >= 0; j--) {
-        radiusTop = j* radius/stacks;
+    for(int j {stacks}; j > 0; j--) {
+        radiusTop = (j-1)* radius/stacks;
         isFirst = !(stacks - j);
         os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, &nPoints, isFirst);
         radiusBottom = radiusTop;
