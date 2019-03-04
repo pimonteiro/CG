@@ -32,7 +32,6 @@ void Model::draw() {
     glBegin(GL_TRIANGLES);
     glColor3f((*itC)->X(), (*itC)->Y(), (*itC)->Z());
     for(itP = this->pointsV.begin(); itP != this->pointsV.end(); itP++) {
-        //glColor3f((*itC)->X(), (*itC)->Y(), (*itC)->Z());
         glVertex3f((*itP)->X(), (*itP)->Y(), (*itP)->Z());
         changeColor++;
         if(changeColor==3){
