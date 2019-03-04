@@ -12,11 +12,11 @@
 #include "headers/parser.h"
 
 Scene* scene;
-int mode {0};
 int axis {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
-int distCam {20};
+float distCam {20};
+GLenum mode;
 
 void changeSize(int w, int h) {
 
@@ -73,8 +73,8 @@ void renderScene() {
         glEnd();
     }
 
-    if(mode == 0) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    if(mode == 1) glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+    GLenum modes[] = {GL_LINE, GL_POINT};
+    glPolygonMode(GL_FRONT, modes[mode]);
     scene->draw();
 
 
@@ -104,11 +104,14 @@ void processKeys(unsigned char key, int x, int y) {
     if(key == 'a' || key == 'A') {
         axis = !axis;
     }
-    if(key == '1') {
-        mode = 0;
+    if(key == 'c' || key == 'C') {
+        mode = (mode + 1) % 2;
     }
-    if(key == '2') {
-        mode = 1;
+    if(key == 'm' || key == 'M') {
+        distCam -= 0.2f;
+    }
+    if(key == 'l' || key == 'L') {
+        distCam += 0.2f;
     }
     glutPostRedisplay();
 }
