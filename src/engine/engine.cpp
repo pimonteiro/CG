@@ -73,7 +73,7 @@ void renderScene() {
         glEnd();
     }
 
-    GLenum modes[] = {GL_LINE, GL_POINT};
+    GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
     glPolygonMode(GL_FRONT, modes[mode]);
     scene->draw();
 
@@ -105,7 +105,7 @@ void processKeys(unsigned char key, int x, int y) {
         axis = !axis;
     }
     if(key == 'c' || key == 'C') {
-        mode = (mode + 1) % 2;
+        mode = (mode + 1) % 3;
     }
     if(key == 'm' || key == 'M') {
         distCam -= 0.2f;
