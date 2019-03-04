@@ -7,9 +7,11 @@
 
 class  Model {
     std::vector<Point*> pointsV;
+    std::vector<Point*> colorsV;
   public:
     Model();
     void addElement(Point*);
+    void addColor(Point*);
     std::vector<Point*> model();
     void draw();
 };

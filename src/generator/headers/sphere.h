@@ -3,6 +3,6 @@
 
 #include <string>
 
-void sphere(float, int, int, const std::string&);
+std::string sphere(float, int, int);
 
 #endif

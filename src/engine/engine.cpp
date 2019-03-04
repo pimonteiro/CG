@@ -8,13 +8,15 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include "scene.h"
-#include "parser.h"
+#include "headers/scene.h"
+#include "headers/parser.h"
 
 Scene* scene;
-float camaraAlpha {0};
-float camaraBeta {0};
-int distCam {25};
+int axis {0};
+float camaraAlpha {0.7};
+float camaraBeta {0.5};
+float distCam {20};
+GLenum mode;
 
 void changeSize(int w, int h) {
 
@@ -55,8 +57,26 @@ void renderScene() {
     gluLookAt(px,py,pz,
             0.0,0.0,0.0,
             0.0f,1.0f,0.0f);
+    // set axis
+    if(axis) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glBegin(GL_LINES);
+        glColor3f(0, 0, 1);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(10.0f, 0.0f, 0.0f);
+        glColor3f(0, 1, 0);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, 10.0f, 0.0f);
+        glColor3f(1, 0, 0);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, 0.0f, 10.0f);
+        glEnd();
+    }
 
+    GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
+    glPolygonMode(GL_FRONT, modes[mode]);
     scene->draw();
+
 
     glutSwapBuffers();
 }
@@ -80,6 +100,22 @@ void processSpecialKeys(int key, int xx, int yy) {
     }
 }
 
+void processKeys(unsigned char key, int x, int y) {
+    if(key == 'a' || key == 'A') {
+        axis = !axis;
+    }
+    if(key == 'c' || key == 'C') {
+        mode = (mode + 1) % 3;
+    }
+    if(key == 'm' || key == 'M') {
+        distCam -= 0.2f;
+    }
+    if(key == 'l' || key == 'L') {
+        distCam += 0.2f;
+    }
+    glutPostRedisplay();
+}
+
 void initCostumGL(int argc, char **argv){
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE);
@@ -93,6 +129,7 @@ void initCostumGL(int argc, char **argv){
     glutReshapeFunc(changeSize);
     glutIdleFunc(renderScene);
     glutSpecialFunc(processSpecialKeys);
+    glutKeyboardFunc(processKeys);
     // OpenGL settings
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);

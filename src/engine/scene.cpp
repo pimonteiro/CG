@@ -1,5 +1,5 @@
-#include "scene.h"
-#include "model.h"
+#include "headers/scene.h"
+#include "headers/model.h"
 #include <vector>
 
 

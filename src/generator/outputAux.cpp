@@ -1,15 +1,15 @@
-#include "outputAux.h"
+#include "headers/outputAux.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-std::string writePoint(double a, double b, double c) {
+std::string writePoint(float a, float b, float c) {
     std::ostringstream os;
     os << a << " " << b << " " << c << '\n';
     return os.str();
 }
 
-void dumpFile(int nPoints, const std::ostringstream& os, const std::string& file) {
+void dumpFile(const std::ostringstream& os, const std::string& file) {
 
     std::ofstream outfile;
 
@@ -18,6 +18,6 @@ void dumpFile(int nPoints, const std::ostringstream& os, const std::string& file
         perror("ofstream.open");
     }
 
-    outfile << std::to_string(nPoints) + "\n" + os.str();
+    outfile << os.str();
     outfile.close();
 }

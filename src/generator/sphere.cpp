@@ -1,13 +1,13 @@
-#include "sphere.h"
-#include "outputAux.h"
+#include "headers/sphere.h"
+#include "headers/outputAux.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>
 
 
-std::string trans(double, double, double);
+std::string trans(float, float, float);
 
-void sphere(float radius, int slices, int stacks, const std::string &file) {
+std::string sphere(float radius, int slices, int stacks) {
     if(radius <= 0.0f || slices <= 0 || stacks <= 0) {
         fputs("All parameters must be positive numbers\n", stderr);
     }
@@ -15,16 +15,16 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
     std::ostringstream os;
 
     int nPoints {0};
-    double deltaAlpha {2.0f * M_PI / slices};
-    double deltaBeta {M_PI / stacks};
+    float deltaAlpha { static_cast<float>(2.0f * M_PI / slices) };
+    float deltaBeta { static_cast<float>(M_PI / stacks) };
 
     for(int i {0}; i < stacks; i++) {
-        double beta {i * deltaBeta};
-        double nextBeta {beta + deltaBeta};
+        float beta {i * deltaBeta};
+        float nextBeta {beta + deltaBeta};
 
         for(int j {0}; j < slices; j++) {
-            double alpha {j * deltaAlpha};
-            double nextAlpha {alpha + deltaAlpha};
+            float alpha {j * deltaAlpha};
+            float nextAlpha {alpha + deltaAlpha};
 
             if(i < stacks-1) {
                 os << trans(beta, alpha, radius);
@@ -40,11 +40,11 @@ void sphere(float radius, int slices, int stacks, const std::string &file) {
             }
         }
     }
-
-    dumpFile(nPoints, os, file);
-
+    std::ostringstream r;
+    r << nPoints << '\n' << os.str();
+    return r.str();
 }
 
-std::string trans(double a, double b, double c) {
+std::string trans(float a, float b, float c) {
     return writePoint(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
 }

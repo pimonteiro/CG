@@ -1,14 +1,24 @@
-#include "parser.h"
-#include "model.h"
-#include "tinyxml2.h"
+#include "headers/parser.h"
+#include "headers/model.h"
+#include "headers/tinyxml2.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <string>
+#include <random>
 
 using namespace tinyxml2;
 using namespace std;
+
+float randomF() {
+    std::random_device seeder;
+    std::mt19937 engine(seeder());
+    std::uniform_real_distribution<float> dist(0, 1);
+    return dist(engine);
+}
+
+
 
 Parser::Parser() {
 }
@@ -60,7 +70,9 @@ void Parser::ReadXML(Scene* scene, char* xml) {
                             it++;
                         }
                         Point* p {new Point(x,y,z)};
+                        Point* c {new Point(randomF(), randomF(), randomF())};
                         model->addElement(p);
+                        model->addColor(c);
                     }
                     scene->addModel(model);
                 }

@@ -1,2 +1,2 @@
 make
-cp generator/genXml.sh bin/
+cp src/generator/helpers/genXml.sh bin/

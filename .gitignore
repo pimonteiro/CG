@@ -136,3 +136,4 @@
 # External projects
 *-prefix/
 # End of https://www.gitignore.io/api/c++,clion+all,cmake
+bin/*
