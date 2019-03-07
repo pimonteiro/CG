@@ -5,7 +5,7 @@
 
 class Translation: public Transformation {
 public:
-	Translation(Point p);
+	Translation(Point);
 	void transform();
 };
 
