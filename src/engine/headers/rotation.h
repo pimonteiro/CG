@@ -9,6 +9,9 @@ private:
 public:
 	Rotation(Point,float);
 	void transform();
+	float getAngle(){
+		return angle;
+	}
 };
 
 #endif
