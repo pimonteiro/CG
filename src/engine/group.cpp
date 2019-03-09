@@ -7,8 +7,8 @@
 Group::Group() {
 }
 
-void Group::addTranformation(Transformation* t) {
-    transforms.push_back(t);
+void Group::addTranformation(int row, Transformation* t) {
+    transforms.at(row).push_back(t);
 }
 
 void Group::addModel(Model* m, int position) {
@@ -19,8 +19,8 @@ void Group::addMatrixElement(int row, int value) {
     matrix.at(row).push_back(value);
 }
 
-Transformation* Group::getTransformation(int position) {
-    return transforms.at(position);
+Transformation* Group::getTransformation(int row, int position) {
+    return transforms.at(row).at(position);
 }
 
 Model* Group::getModel(int row, int position) {
