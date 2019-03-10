@@ -14,7 +14,7 @@ class Group {
     std::vector<std::vector<int>> matrix;
   public:
     Group();
-    void addTranformation(int row, Transformation* t);
+    void addTranformation(Transformation* t, int row);
     void addModel(Model* m, int position);
     void addMatrixElement(int row, int value);
     Transformation* getTransformation(int row,int position);

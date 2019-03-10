@@ -1,13 +1,11 @@
 #include "headers/group.h"
 #include "headers/model.h"
 #include "headers/transformation.h"
-#include <iostream>
-#include <random>
 
 Group::Group() {
 }
 
-void Group::addTranformation(int row, Transformation* t) {
+void Group::addTranformation(Transformation* t, int row) {
     transforms.at(row).push_back(t);
 }
 
