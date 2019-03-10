@@ -26,7 +26,7 @@ Parser::Parser() {
 void Parser::ReadXML(Scene* scene, char* xml) {
     XMLDocument xmlDoc;
 
-    XMLError result = xmlDoc.LoadFile(xml);
+    XMLError result {xmlDoc.LoadFile(xml)};
     if(result != XML_SUCCESS) {
         cerr << "Error:" << result << endl;
         exit(1);
@@ -50,6 +50,7 @@ void Parser::ReadXML(Scene* scene, char* xml) {
                     ifstream infile(s);
                     if(!infile) {
                         cerr << "Cannot open input file.\n";
+                        exit(1);
                     }
                     string line;
                     getline(infile, line);
