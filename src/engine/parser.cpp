@@ -6,24 +6,15 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include <random>
 
 using namespace tinyxml2;
 using namespace std;
-
-float randomF() {
-    std::random_device seeder;
-    std::mt19937 engine(seeder());
-    std::uniform_real_distribution<float> dist(0, 1);
-    return dist(engine);
-}
-
 
 
 Parser::Parser() {
 }
 
-void Parser::ReadXML(Scene* scene, char* xml) {
+void Parser::ReadXML(Scene* scene, const char* xml) {
     XMLDocument xmlDoc;
 
     XMLError result {xmlDoc.LoadFile(xml)};
@@ -53,7 +44,12 @@ void Parser::ReadXML(Scene* scene, char* xml) {
                         exit(1);
                     }
                     string line;
+
+                    // Number of points
                     getline(infile, line);
+
+                    Triangle* triangle {new Triangle};
+                    int endTriangle {0};
                     while (getline(infile, line)) {
                         vector<string> v;
                         istringstream buf(line);
@@ -70,14 +66,22 @@ void Parser::ReadXML(Scene* scene, char* xml) {
                             if(it==2) z=stof(*i);
                             it++;
                         }
-                        Point* p {new Point(x,y,z)};
-                        Point* c {new Point(randomF(), randomF(), randomF())};
-                        model->addElement(p);
-                        model->addColor(c);
+                        if(endTriangle == 0) {
+                            triangle->addX(new Point(x,y,z));
+                        }
+                        if(endTriangle == 1) {
+                            triangle->addY(new Point(x,y,z));
+                        }
+                        if(endTriangle == 2) {
+                            triangle->addZ(new Point(x,y,z));
+                            model->addElement(triangle);
+                            triangle = new Triangle();
+                        }
+                        if(endTriangle != 2) endTriangle++;
+                        else endTriangle = 0;
                     }
                     scene->addModel(model);
                 }
-
             }
         }
     }

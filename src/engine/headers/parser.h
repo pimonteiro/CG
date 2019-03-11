@@ -7,6 +7,6 @@
 class Parser {
   public:
     Parser();
-    void ReadXML(Scene*, char*);
+    void ReadXML(Scene*, const char*);
 };
 #endif
