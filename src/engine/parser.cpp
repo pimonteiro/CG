@@ -14,7 +14,7 @@ using namespace std;
 Parser::Parser() {
 }
 
-void parseModel(Scene* scene, const XMLElement* pElement, string* s){
+void parseFile(Scene* scene, const XMLElement* pElement, string* s) {
     Model* model {new Model()};
     *s = pElement->Attribute("file");
     ifstream infile(*s);
@@ -67,6 +67,15 @@ void parseModel(Scene* scene, const XMLElement* pElement, string* s){
     scene->addModel(model);
 }
 
+void parseDoc(Scene* scene, XMLElement* pElement) {
+    string s;
+    for(; pElement; pElement=pElement->NextSiblingElement()) {
+        if(pElement->Attribute("file")) {
+            parseFile(scene, pElement, &s);
+        }
+    }
+}
+
 void Parser::ReadXML(Scene* scene, const char* xml) {
     XMLDocument xmlDoc;
 
@@ -86,12 +95,7 @@ void Parser::ReadXML(Scene* scene, const char* xml) {
             cout<< "Warning: No models found" << endl;
             exit(0);
         } else {
-            string s;
-            for(; pElement; pElement=pElement->NextSiblingElement()) {
-                if(pElement->Attribute("file")) {
-                    parseModel(scene, pElement, &s);
-                }
-            }
+            parseDoc(scene, pElement);
         }
     }
 }
