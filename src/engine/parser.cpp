@@ -67,9 +67,10 @@ void parseFile(Scene* scene, const XMLElement* pElement, string* s) {
     scene->addModel(model);
 }
 
-void parseDoc(Scene* scene, XMLElement* pElement) {
+void parseDoc(Scene* scene, XMLNode* pNode) {
     string s;
-    for(; pElement; pElement=pElement->NextSiblingElement()) {
+    for(; pNode; pNode=pNode->NextSibling()) {
+        XMLElement* pElement {pNode->ToElement()};
         if(pElement->Attribute("file")) {
             parseFile(scene, pElement, &s);
         }
@@ -90,12 +91,12 @@ void Parser::ReadXML(Scene* scene, const char* xml) {
         cout << "Warning: Malformed XML file" << endl;
         exit(0);
     } else {
-        XMLElement* pElement {pRoot->FirstChildElement("model")};
-        if (pElement == nullptr) {
+        XMLNode* pNode {pRoot->FirstChild()};
+        if (pNode == nullptr) {
             cout<< "Warning: No models found" << endl;
             exit(0);
         } else {
-            parseDoc(scene, pElement);
+            parseDoc(scene, pNode);
         }
     }
 }
