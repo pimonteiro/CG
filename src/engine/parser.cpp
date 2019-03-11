@@ -71,8 +71,22 @@ void parseDoc(Scene* scene, XMLNode* pNode) {
     string s;
     for(; pNode; pNode=pNode->NextSibling()) {
         XMLElement* pElement {pNode->ToElement()};
-        if(pElement->Attribute("file")) {
-            parseFile(scene, pElement, &s);
+        if(!strcmp(pElement->Name(),"model")) {
+            if(pElement->Attribute("file")) {
+                parseFile(scene, pElement, &s);
+            }
+        }
+        if (!strcmp(pElement->Name(),"translate")) {
+            // TODO
+        }
+        if (!strcmp(pElement->Name(),"rotate")) {
+            // TODO
+        }
+        if (!strcmp(pElement->Name(),"scale")) {
+            // TODO
+        }
+        if (!strcmp(pElement->Name(),"group")) {
+            // TODO
         }
     }
 }
