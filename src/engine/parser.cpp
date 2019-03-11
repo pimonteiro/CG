@@ -40,24 +40,29 @@ void parseModel(Scene* scene, const XMLElement* pElement, string* s){
         float y;
         float z;
         for(vector<string>::const_iterator i {v.begin()}; i != v.end(); ++i) {
-            if(it==0) x=stof(*i);
-            if(it==1) y=stof(*i);
-            if(it==2) z=stof(*i);
+            switch(it) {
+                case 0 : x=stof(*i);
+                         break;
+                case 1 : y=stof(*i);
+                         break;
+                case 2 : z=stof(*i);
+                         break;
+                default : break;
+            }
             it++;
         }
-        if(endTriangle == 0) {
-            triangle->addX(new Point(x,y,z));
+        switch(endTriangle) {
+            case 0 : triangle->addX(new Point(x,y,z));
+                     break;
+            case 1 : triangle->addY(new Point(x,y,z));
+                     break;
+            case 2 : triangle->addZ(new Point(x,y,z));
+                     model->addElement(triangle);
+                     triangle = new Triangle();
+                     break;
+            default : break;
         }
-        if(endTriangle == 1) {
-            triangle->addY(new Point(x,y,z));
-        }
-        if(endTriangle == 2) {
-            triangle->addZ(new Point(x,y,z));
-            model->addElement(triangle);
-            triangle = new Triangle();
-        }
-        if(endTriangle != 2) endTriangle++;
-        else endTriangle = 0;
+        endTriangle != 2 ? endTriangle++ : endTriangle = 0;
     }
     scene->addModel(model);
 }
