@@ -3,16 +3,16 @@
 
 #include <string>
 #include <vector>
-#include "point.h"
+#include "triangle.h"
 
-class  Model {
-    std::vector<Point*> pointsV;
-    std::vector<Point*> colorsV;
-  public:
-    Model();
-    void addElement(Point*);
-    void addColor(Point*);
-    std::vector<Point*> model();
-    void draw();
+class Model {
+    private:
+        std::vector<Triangle*> triV;
+    public:
+        Model();
+        void addElement(Triangle*);
+        std::vector<Triangle*> model();
+        void draw();
 };
+
 #endif
