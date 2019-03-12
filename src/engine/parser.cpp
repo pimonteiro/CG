@@ -1,6 +1,9 @@
 #include "headers/parser.h"
 #include "headers/model.h"
 #include "headers/tinyxml2.h"
+#include "headers/scale.h"
+#include "headers/rotation.h"
+#include "headers/translation.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -14,10 +17,10 @@ using namespace std;
 Parser::Parser() {
 }
 
-void parseFile(Scene* scene, const XMLElement* pElement, string* s) {
+void parseFile(Scene* scene, const XMLElement* pElement) {
     Model* model {new Model()};
-    *s = pElement->Attribute("file");
-    ifstream infile(*s);
+    string s {pElement->Attribute("file")};
+    ifstream infile(s);
     if(!infile) {
         cerr << "Cannot open input file.\n";
         exit(1);
@@ -73,17 +76,65 @@ void parseDoc(Scene* scene, XMLNode* pNode) {
         XMLElement* pElement {pNode->ToElement()};
         if(!strcmp(pElement->Name(),"model")) {
             if(pElement->Attribute("file")) {
-                parseFile(scene, pElement, &s);
+                parseFile(scene, pElement);
             }
         }
         if (!strcmp(pElement->Name(),"translate")) {
-            // TODO
+            float x = 0;
+            float y = 0;
+            float z = 0;
+
+            if(pElement->Attribute("X")) {
+                x = stod(pElement->Attribute("X"));
+            }
+            if(pElement->Attribute("Y")) {
+                y = stod(pElement->Attribute("Y"));
+            }
+            if(pElement->Attribute("Z")){
+                z = stod(pElement->Attribute("Z"));
+            }
+
+            Translation* t = new Translation(Point(x,y,z));
+
         }
         if (!strcmp(pElement->Name(),"rotate")) {
-            // TODO
+            float angle {0};
+            float axisx {0};
+            float axisy {0};
+            float axisz {0};
+
+            if(pElement->Attribute("angle")) {
+                angle = stof(pElement->Attribute("angle"));
+            }
+            if(pElement->Attribute("axisX")) {
+                axisx = stod(pElement->Attribute("axisX"));
+            }
+            if(pElement->Attribute("axisY")) {
+                axisy = stod(pElement->Attribute("axisY"));
+            }
+            if(pElement->Attribute("axisZ")){
+                axisz = stod(pElement->Attribute("axisZ"));
+            }
+
+            Rotation* r = new Rotation(Point(axisx, axisy, axisz), angle);
         }
         if (!strcmp(pElement->Name(),"scale")) {
-            // TODO
+            float x = 0;
+            float y = 0;
+            float z = 0;
+
+            if(pElement->Attribute("X")) {
+                x = stof(pElement->Attribute("X"));
+            }
+            if(pElement->Attribute("Y")) {
+                y = stof(pElement->Attribute("Y"));
+            }
+            if(pElement->Attribute("Z")){
+                z = stof(pElement->Attribute("Z"));
+            }
+
+            Scale* s = new Scale(Point(x,y,z));
+
         }
         if (!strcmp(pElement->Name(),"group")) {
             // TODO
