@@ -85,13 +85,13 @@ void parseDoc(Scene* scene, XMLNode* pNode) {
             float z = 0;
 
             if(pElement->Attribute("X")) {
-                x = stod(pElement->Attribute("X"));
+                x = stof(pElement->Attribute("X"));
             }
             if(pElement->Attribute("Y")) {
-                y = stod(pElement->Attribute("Y"));
+                y = stof(pElement->Attribute("Y"));
             }
             if(pElement->Attribute("Z")){
-                z = stod(pElement->Attribute("Z"));
+                z = stof(pElement->Attribute("Z"));
             }
 
             Translation* t = new Translation(Point(x,y,z));
@@ -107,13 +107,13 @@ void parseDoc(Scene* scene, XMLNode* pNode) {
                 angle = stof(pElement->Attribute("angle"));
             }
             if(pElement->Attribute("axisX")) {
-                axisx = stod(pElement->Attribute("axisX"));
+                axisx = stof(pElement->Attribute("axisX"));
             }
             if(pElement->Attribute("axisY")) {
-                axisy = stod(pElement->Attribute("axisY"));
+                axisy = stof(pElement->Attribute("axisY"));
             }
             if(pElement->Attribute("axisZ")){
-                axisz = stod(pElement->Attribute("axisZ"));
+                axisz = stof(pElement->Attribute("axisZ"));
             }
 
             Rotation* r = new Rotation(Point(axisx, axisy, axisz), angle);
