@@ -10,6 +10,6 @@
 Rotation::Rotation(Point p, float ang): Transformation(p), angle(ang) {}
 
 void Rotation::transform(){
-	Point v { V() };
-	glRotatef(angle,v.X(),v.Y(),v.Z());
+    Point v { V() };
+    glRotatef(angle,v.X(),v.Y(),v.Z());
 }

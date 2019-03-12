@@ -4,9 +4,9 @@
 #include "transformation.h"
 
 class Scale: public Transformation {
-public:
-	Scale(Point);
-	void transform();
+    public:
+        Scale(Point);
+        void transform();
 };
 
 

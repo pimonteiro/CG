@@ -5,7 +5,7 @@
 Group::Group() {
 }
 
-void Group::addTranformation(Transformation* t, int row) {
+void Group::addTransformation(Transformation* t, int row) {
     transforms.at(row).push_back(t);
 }
 

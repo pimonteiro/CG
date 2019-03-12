@@ -8,10 +8,10 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include "headers/scene.h"
 #include "headers/parser.h"
+#include "headers/group.h"
 
-Scene* scene;
+Group* scene;
 int axis {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
@@ -75,7 +75,7 @@ void renderScene() {
 
     GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
     glPolygonMode(GL_FRONT, modes[mode]);
-    scene->draw();
+    //TODO scene->draw();
 
 
     glutSwapBuffers();
@@ -140,7 +140,7 @@ void initCostumGL(int argc, char **argv){
 
 int main(int argc, char **argv) {
     if(argc == 2) {
-        scene = new Scene();
+        Group* scene = new Group();
         Parser().ReadXML(scene, argv[1]);
     } else {
         std::cerr << "Usage: ./engine <file>.xml" << std::endl;

@@ -1,5 +1,6 @@
 #include "headers/parser.h"
 #include "headers/model.h"
+#include "headers/group.h"
 #include "headers/tinyxml2.h"
 #include "headers/scale.h"
 #include "headers/rotation.h"
@@ -14,7 +15,7 @@ using namespace tinyxml2;
 using namespace std;
 
 
-void parseDoc(Scene*, XMLNode*);
+void parseDoc(Group*, XMLNode*);
 Model* parseFile(const XMLElement*);
 Translation* parseTranslate(const XMLElement*);
 Scale* parseScale(const XMLElement*);
@@ -24,7 +25,7 @@ Rotation* parseRotate(const XMLElement*);
 Parser::Parser() {
 }
 
-void Parser::ReadXML(Scene* scene, const char* xml) {
+void Parser::ReadXML(Group* group, const char* xml) {
     XMLDocument xmlDoc;
 
     XMLError result {xmlDoc.LoadFile(xml)};
@@ -43,30 +44,33 @@ void Parser::ReadXML(Scene* scene, const char* xml) {
             cout<< "Warning: No models found" << endl;
             exit(0);
         } else {
-            parseDoc(scene, pNode);
+            parseDoc(group, pNode);
         }
     }
 }
 
-void parseDoc(Scene* scene, XMLNode* pNode) {
-    string s;
+void parseDoc(Group* group, XMLNode* pNode) {
+    int row {0};
     for(; pNode; pNode=pNode->NextSibling()) {
         XMLElement* pElement {pNode->ToElement()};
         if(!strcmp(pElement->Name(),"model")) {
             if(pElement->Attribute("file")) {
-                scene->addModel(parseFile(pElement));
+                Model* m = parseFile(pElement);
+                group->addModel(m, row);
             }
         }
         if (!strcmp(pElement->Name(),"translate")) {
             Translation* t = parseTranslate(pElement);
+            group->addTransformation(t, row);
 
         }
         if (!strcmp(pElement->Name(),"rotate")) {
             Rotation* r = parseRotate(pElement);
+            group->addTransformation(r, row);
         }
         if (!strcmp(pElement->Name(),"scale")) {
             Scale* s = parseScale(pElement);
-
+            group->addTransformation(s, row);
         }
         if (!strcmp(pElement->Name(),"group")) {
             // TODO
