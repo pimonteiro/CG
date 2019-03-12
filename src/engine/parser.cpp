@@ -17,7 +17,7 @@ using namespace std;
 Parser::Parser() {
 }
 
-void parseFile(Scene* scene, const XMLElement* pElement) {
+Model* parseFile(const XMLElement* pElement) {
     Model* model {new Model()};
     string s {pElement->Attribute("file")};
     ifstream infile(s);
@@ -67,7 +67,7 @@ void parseFile(Scene* scene, const XMLElement* pElement) {
         }
         endTriangle != 2 ? endTriangle++ : endTriangle = 0;
     }
-    scene->addModel(model);
+    return model;
 }
 
 void parseDoc(Scene* scene, XMLNode* pNode) {
@@ -76,7 +76,7 @@ void parseDoc(Scene* scene, XMLNode* pNode) {
         XMLElement* pElement {pNode->ToElement()};
         if(!strcmp(pElement->Name(),"model")) {
             if(pElement->Attribute("file")) {
-                parseFile(scene, pElement);
+                scene->addModel(parseFile(pElement));
             }
         }
         if (!strcmp(pElement->Name(),"translate")) {
