@@ -14,7 +14,64 @@ using namespace tinyxml2;
 using namespace std;
 
 
+void parseDoc(Scene*, XMLNode*);
+Model* parseFile(const XMLElement*);
+Translation* parseTranslate(const XMLElement*);
+Scale* parseScale(const XMLElement*);
+Rotation* parseRotate(const XMLElement*);
+
+
 Parser::Parser() {
+}
+
+void Parser::ReadXML(Scene* scene, const char* xml) {
+    XMLDocument xmlDoc;
+
+    XMLError result {xmlDoc.LoadFile(xml)};
+    if(result != XML_SUCCESS) {
+        cerr << "Error:" << result << endl;
+        exit(1);
+    }
+
+    XMLNode* pRoot {xmlDoc.FirstChild()};
+    if (pRoot == nullptr) {
+        cout << "Warning: Malformed XML file" << endl;
+        exit(0);
+    } else {
+        XMLNode* pNode {pRoot->FirstChild()};
+        if (pNode == nullptr) {
+            cout<< "Warning: No models found" << endl;
+            exit(0);
+        } else {
+            parseDoc(scene, pNode);
+        }
+    }
+}
+
+void parseDoc(Scene* scene, XMLNode* pNode) {
+    string s;
+    for(; pNode; pNode=pNode->NextSibling()) {
+        XMLElement* pElement {pNode->ToElement()};
+        if(!strcmp(pElement->Name(),"model")) {
+            if(pElement->Attribute("file")) {
+                scene->addModel(parseFile(pElement));
+            }
+        }
+        if (!strcmp(pElement->Name(),"translate")) {
+            Translation* t = parseTranslate(pElement);
+
+        }
+        if (!strcmp(pElement->Name(),"rotate")) {
+            Rotation* r = parseRotate(pElement);
+        }
+        if (!strcmp(pElement->Name(),"scale")) {
+            Scale* s = parseScale(pElement);
+
+        }
+        if (!strcmp(pElement->Name(),"group")) {
+            // TODO
+        }
+    }
 }
 
 Model* parseFile(const XMLElement* pElement) {
@@ -65,103 +122,66 @@ Model* parseFile(const XMLElement* pElement) {
                      break;
             default : break;
         }
-        endTriangle != 2 ? endTriangle++ : endTriangle = 0;
+        endTriangle = (endTriangle + 1) % 3;
     }
     return model;
 }
 
-void parseDoc(Scene* scene, XMLNode* pNode) {
-    string s;
-    for(; pNode; pNode=pNode->NextSibling()) {
-        XMLElement* pElement {pNode->ToElement()};
-        if(!strcmp(pElement->Name(),"model")) {
-            if(pElement->Attribute("file")) {
-                scene->addModel(parseFile(pElement));
-            }
-        }
-        if (!strcmp(pElement->Name(),"translate")) {
-            float x = 0;
-            float y = 0;
-            float z = 0;
+Translation* parseTranslate(const XMLElement* pElement) {
+    float x = 0;
+    float y = 0;
+    float z = 0;
 
-            if(pElement->Attribute("X")) {
-                x = stof(pElement->Attribute("X"));
-            }
-            if(pElement->Attribute("Y")) {
-                y = stof(pElement->Attribute("Y"));
-            }
-            if(pElement->Attribute("Z")){
-                z = stof(pElement->Attribute("Z"));
-            }
-
-            Translation* t = new Translation(Point(x,y,z));
-
-        }
-        if (!strcmp(pElement->Name(),"rotate")) {
-            float angle {0};
-            float axisx {0};
-            float axisy {0};
-            float axisz {0};
-
-            if(pElement->Attribute("angle")) {
-                angle = stof(pElement->Attribute("angle"));
-            }
-            if(pElement->Attribute("axisX")) {
-                axisx = stof(pElement->Attribute("axisX"));
-            }
-            if(pElement->Attribute("axisY")) {
-                axisy = stof(pElement->Attribute("axisY"));
-            }
-            if(pElement->Attribute("axisZ")){
-                axisz = stof(pElement->Attribute("axisZ"));
-            }
-
-            Rotation* r = new Rotation(Point(axisx, axisy, axisz), angle);
-        }
-        if (!strcmp(pElement->Name(),"scale")) {
-            float x = 0;
-            float y = 0;
-            float z = 0;
-
-            if(pElement->Attribute("X")) {
-                x = stof(pElement->Attribute("X"));
-            }
-            if(pElement->Attribute("Y")) {
-                y = stof(pElement->Attribute("Y"));
-            }
-            if(pElement->Attribute("Z")){
-                z = stof(pElement->Attribute("Z"));
-            }
-
-            Scale* s = new Scale(Point(x,y,z));
-
-        }
-        if (!strcmp(pElement->Name(),"group")) {
-            // TODO
-        }
+    if(pElement->Attribute("X")) {
+        x = stof(pElement->Attribute("X"));
     }
+    if(pElement->Attribute("Y")) {
+        y = stof(pElement->Attribute("Y"));
+    }
+    if(pElement->Attribute("Z")){
+        z = stof(pElement->Attribute("Z"));
+    }
+
+    return new Translation(Point(x,y,z));
 }
 
-void Parser::ReadXML(Scene* scene, const char* xml) {
-    XMLDocument xmlDoc;
+Rotation* parseRotate(const XMLElement* pElement) {
+    float angle {0};
+    float axisx {0};
+    float axisy {0};
+    float axisz {0};
 
-    XMLError result {xmlDoc.LoadFile(xml)};
-    if(result != XML_SUCCESS) {
-        cerr << "Error:" << result << endl;
-        exit(1);
+    if(pElement->Attribute("angle")) {
+        angle = stof(pElement->Attribute("angle"));
+    }
+    if(pElement->Attribute("axisX")) {
+        axisx = stof(pElement->Attribute("axisX"));
+    }
+    if(pElement->Attribute("axisY")) {
+        axisy = stof(pElement->Attribute("axisY"));
+    }
+    if(pElement->Attribute("axisZ")){
+        axisz = stof(pElement->Attribute("axisZ"));
     }
 
-    XMLNode* pRoot {xmlDoc.FirstChild()};
-    if (pRoot == nullptr) {
-        cout << "Warning: Malformed XML file" << endl;
-        exit(0);
-    } else {
-        XMLNode* pNode {pRoot->FirstChild()};
-        if (pNode == nullptr) {
-            cout<< "Warning: No models found" << endl;
-            exit(0);
-        } else {
-            parseDoc(scene, pNode);
-        }
-    }
+    return new Rotation(Point(axisx, axisy, axisz), angle);
 }
+
+Scale* parseScale(const XMLElement* pElement) {
+    float x = 0;
+    float y = 0;
+    float z = 0;
+
+    if(pElement->Attribute("X")) {
+        x = stof(pElement->Attribute("X"));
+    }
+    if(pElement->Attribute("Y")) {
+        y = stof(pElement->Attribute("Y"));
+    }
+    if(pElement->Attribute("Z")){
+        z = stof(pElement->Attribute("Z"));
+    }
+
+    return new Scale(Point(x,y,z));
+}
+
