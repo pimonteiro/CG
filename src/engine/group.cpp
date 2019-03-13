@@ -1,34 +1,59 @@
 #include "headers/group.h"
 #include "headers/model.h"
 #include "headers/transformation.h"
+#include "headers/rotation.h"
+#include "headers/scale.h"
+#include "headers/translation.h"
+#include <vector>
+
+
+#include <iostream>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
 
 Group::Group() {
 }
 
-void Group::addTransformation(Transformation* t, int row) {
-    transforms.at(row).push_back(t);
+void Group::addTransformation(Transformation* t){
+    transformV.push_back(t);
 }
 
-void Group::addModel(Model* m, int position) {
-    models.at(position).push_back(m);
+void Group::addModel(Model* m){
+    modelV.push_back(m);
 }
 
-void Group::addMatrixElement(int row, int value) {
-    matrix.at(row).push_back(value);
+void Group::addGroup(Group* g){
+    subGroupV.push_back(g);
 }
 
-Transformation* Group::getTransformation(int row, int position) {
-    return transforms.at(row).at(position);
+void Group::teste(int nest) {
+    std::cout << nest << " Numero de modelos: " << modelV.size() << std::endl;
+    std::cout << nest << " Numero de transformations: " << transformV.size() << std::endl;
+
+    std::vector <Group*>::iterator gIt;
+    for(gIt = this->subGroupV.begin(); gIt != this->subGroupV.end(); gIt++){
+        (*gIt)->teste(++nest);
+    }
 }
 
-Model* Group::getModel(int row, int position) {
-    return models.at(row).at(position);
-}
+void Group::draw() {
+    std::vector <Transformation*>::iterator tIt;
+    for(tIt = this->transformV.begin(); tIt != this->transformV.end(); tIt++) {
+        (*tIt)->transform();
+    }
 
-int Group::getDependency(int row, int column) {
-    return matrix.at(row).at(column);
-}
+    std::vector <Model*>::iterator mIt;
+    for(mIt = this->modelV.begin(); mIt != this->modelV.end(); mIt++) {
+        (*mIt)->draw();
+    }
 
-void Group::addMatrixRow(std::vector<int> fullRow) {
-    matrix.push_back(fullRow);
+    std::vector <Group*>::iterator gIt;
+    for(gIt = this->subGroupV.begin(); gIt != this->subGroupV.end(); gIt++) {
+        glPushMatrix();
+        (*gIt)->draw();
+        glPopMatrix();
+    }
 }

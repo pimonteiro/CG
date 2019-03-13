@@ -75,7 +75,7 @@ void renderScene() {
 
     GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
     glPolygonMode(GL_FRONT, modes[mode]);
-    //TODO scene->draw();
+    scene->draw();
 
 
     glutSwapBuffers();
@@ -142,6 +142,7 @@ int main(int argc, char **argv) {
     if(argc == 2) {
         Group* scene = new Group();
         Parser().ReadXML(scene, argv[1]);
+        scene->teste(0);
     } else {
         std::cerr << "Usage: ./engine <file>.xml" << std::endl;
         return 1;

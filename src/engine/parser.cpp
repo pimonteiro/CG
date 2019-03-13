@@ -49,31 +49,39 @@ void Parser::ReadXML(Group* group, const char* xml) {
     }
 }
 
-void parseDoc(Group* group, XMLNode* pNode) {
-    int row {0};
+void parseDoc(Group* group, XMLNode* pN) {
+    XMLNode * pNode = pN->FirstChild();
+    if (pNode == nullptr){
+        exit(0);
+
+    }
     for(; pNode; pNode=pNode->NextSibling()) {
         XMLElement* pElement {pNode->ToElement()};
         if(!strcmp(pElement->Name(),"model")) {
             if(pElement->Attribute("file")) {
                 Model* m = parseFile(pElement);
-                group->addModel(m, row);
+                group->addModel(m);
             }
         }
         if (!strcmp(pElement->Name(),"translate")) {
             Translation* t = parseTranslate(pElement);
-            group->addTransformation(t, row);
-
+            group->addTransformation(t);
         }
         if (!strcmp(pElement->Name(),"rotate")) {
             Rotation* r = parseRotate(pElement);
-            group->addTransformation(r, row);
+            group->addTransformation(r);
         }
         if (!strcmp(pElement->Name(),"scale")) {
             Scale* s = parseScale(pElement);
-            group->addTransformation(s, row);
+            group->addTransformation(s);
         }
         if (!strcmp(pElement->Name(),"group")) {
-            // TODO
+            Group* g = new Group();
+            parseDoc(g, pNode);
+            group->addGroup(g);
+        }
+        if (!strcmp(pElement->Name(),"models")) {
+            parseDoc(group, pNode);
         }
     }
 }
@@ -136,14 +144,14 @@ Translation* parseTranslate(const XMLElement* pElement) {
     float y = 0;
     float z = 0;
 
-    if(pElement->Attribute("X")) {
-        x = stof(pElement->Attribute("X"));
+    if(pElement->Attribute("x")) {
+        x = stof(pElement->Attribute("x"));
     }
-    if(pElement->Attribute("Y")) {
-        y = stof(pElement->Attribute("Y"));
+    if(pElement->Attribute("y")) {
+        y = stof(pElement->Attribute("y"));
     }
-    if(pElement->Attribute("Z")){
-        z = stof(pElement->Attribute("Z"));
+    if(pElement->Attribute("z")){
+        z = stof(pElement->Attribute("z"));
     }
 
     return new Translation(Point(x,y,z));
@@ -176,14 +184,14 @@ Scale* parseScale(const XMLElement* pElement) {
     float y = 0;
     float z = 0;
 
-    if(pElement->Attribute("X")) {
-        x = stof(pElement->Attribute("X"));
+    if(pElement->Attribute("x")) {
+        x = stof(pElement->Attribute("x"));
     }
-    if(pElement->Attribute("Y")) {
-        y = stof(pElement->Attribute("Y"));
+    if(pElement->Attribute("y")) {
+        y = stof(pElement->Attribute("y"));
     }
-    if(pElement->Attribute("Z")){
-        z = stof(pElement->Attribute("Z"));
+    if(pElement->Attribute("z")){
+        z = stof(pElement->Attribute("z"));
     }
 
     return new Scale(Point(x,y,z));
