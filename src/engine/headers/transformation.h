@@ -4,14 +4,14 @@
 #include "point.h"
 
 class Transformation {
-private:
-	Point v;
-public:
-	Transformation(Point);
-	virtual void transform() = 0;
-	Point V(){
-		return v;
-	}
+    private:
+        Point v;
+    public:
+        Transformation(Point);
+        virtual void transform() = 0;
+        Point V(){
+            return v;
+        }
 };
 
 #endif

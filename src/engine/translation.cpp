@@ -10,6 +10,5 @@
 Translation::Translation(Point p): Transformation(p) {}
 
 void Translation::transform(){
-    Point v { V() };
-    glTranslatef(v.X(),v.Y(),v.Z());
+    glTranslatef(this->V().X(), this->V().Y(), this->V().Z());
 }

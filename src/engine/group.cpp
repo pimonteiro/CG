@@ -29,31 +29,16 @@ void Group::addGroup(Group* g){
     subGroupV.push_back(g);
 }
 
-void Group::teste(int nest) {
-    std::cout << nest << " Numero de modelos: " << modelV.size() << std::endl;
-    std::cout << nest << " Numero de transformations: " << transformV.size() << std::endl;
-
-    std::vector <Group*>::iterator gIt;
-    for(gIt = this->subGroupV.begin(); gIt != this->subGroupV.end(); gIt++){
-        (*gIt)->teste(++nest);
-    }
-}
-
 void Group::draw() {
-    std::vector <Transformation*>::iterator tIt;
-    for(tIt = this->transformV.begin(); tIt != this->transformV.end(); tIt++) {
-        (*tIt)->transform();
+    for (auto t = this->transformV.begin(); t != this->transformV.end(); ++t) {
+        (*t)->transform();
     }
-
-    std::vector <Model*>::iterator mIt;
-    for(mIt = this->modelV.begin(); mIt != this->modelV.end(); mIt++) {
-        (*mIt)->draw();
+    for (auto m = this->modelV.begin(); m != this->modelV.end(); ++m) {
+        (*m)->draw();
     }
-
-    std::vector <Group*>::iterator gIt;
-    for(gIt = this->subGroupV.begin(); gIt != this->subGroupV.end(); gIt++) {
+    for (auto g = this->subGroupV.begin(); g != this->subGroupV.end(); ++g) {
         glPushMatrix();
-        (*gIt)->draw();
+        (*g)->draw();
         glPopMatrix();
     }
 }

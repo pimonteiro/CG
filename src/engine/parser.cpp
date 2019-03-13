@@ -53,7 +53,6 @@ void parseDoc(Group* group, XMLNode* pN) {
     XMLNode * pNode = pN->FirstChild();
     if (pNode == nullptr){
         exit(0);
-
     }
     for(; pNode; pNode=pNode->NextSibling()) {
         XMLElement* pElement {pNode->ToElement()};

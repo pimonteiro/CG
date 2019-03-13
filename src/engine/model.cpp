@@ -17,7 +17,6 @@ std::vector<Triangle*> Model::model() {
 
 void Model::draw() {
     std::vector <Triangle*>::iterator itT;
-
     for(itT = this->triV.begin(); itT != this->triV.end(); itT++) {
         (*itT)->draw();
     }

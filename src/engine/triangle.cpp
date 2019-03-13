@@ -54,9 +54,9 @@ void Triangle::draw() {
 
     glBegin(GL_TRIANGLES);
 
-    glVertex3f(this->x->X(), this->x->Y(),this->x->Z());
-    glVertex3f(this->y->X(),this->y->Y(),this->y->Z());
-    glVertex3f(this->z->X(),this->z->Y(),this->z->Z());
+    glVertex3f(this->x->X(), this->x->Y(), this->x->Z());
+    glVertex3f(this->y->X(), this->y->Y(), this->y->Z());
+    glVertex3f(this->z->X(), this->z->Y(), this->z->Z());
 
     glEnd();
 }
