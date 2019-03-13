@@ -58,24 +58,24 @@ void parseDoc(Group* group, XMLNode* pN) {
         XMLElement* pElement {pNode->ToElement()};
         if(!strcmp(pElement->Name(),"model")) {
             if(pElement->Attribute("file")) {
-                Model* m = parseFile(pElement);
+                Model* m {parseFile(pElement)};
                 group->addModel(m);
             }
         }
         if (!strcmp(pElement->Name(),"translate")) {
-            Translation* t = parseTranslate(pElement);
+            Translation* t {parseTranslate(pElement)};
             group->addTransformation(t);
         }
         if (!strcmp(pElement->Name(),"rotate")) {
-            Rotation* r = parseRotate(pElement);
+            Rotation* r {parseRotate(pElement)};
             group->addTransformation(r);
         }
         if (!strcmp(pElement->Name(),"scale")) {
-            Scale* s = parseScale(pElement);
+            Scale* s {parseScale(pElement)};
             group->addTransformation(s);
         }
         if (!strcmp(pElement->Name(),"group")) {
-            Group* g = new Group();
+            Group* g {new Group()};
             parseDoc(g, pNode);
             group->addGroup(g);
         }
