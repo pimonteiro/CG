@@ -11,7 +11,9 @@
 #include "headers/parser.h"
 #include "headers/group.h"
 
-Group* group;
+using namespace std;
+
+Group* group {new Group};
 int axis {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
@@ -44,12 +46,12 @@ void renderScene() {
     float px { static_cast<float>(distCam*cos(camaraBeta)*cos(camaraAlpha)) };
     float py { static_cast<float>(distCam*sin(camaraBeta)) };
     float pz { static_cast<float>(distCam*cos(camaraBeta)*sin(camaraAlpha)) };
-
     // set the camera
     glLoadIdentity();
     gluLookAt(px,py,pz,
-            0.0,0.0,0.0,
-            0.0f,1.0f,0.0f);
+            0.0, 0.0, 0.0,
+            0.0f, 1.0f, 0.0f);
+
     // set axis
     if(axis) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -65,6 +67,7 @@ void renderScene() {
         glVertex3f(0.0f, 0.0f, 10.0f);
         glEnd();
     }
+
     GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
     glPolygonMode(GL_FRONT, modes[mode]);
     group->draw();
@@ -108,11 +111,11 @@ void processKeys(unsigned char key, int x, int y) {
 }
 
 void initCostumGL(int argc, char **argv){
-    glutInit(&argc,argv);
+    glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
-    glutInitWindowPosition(100,100);
-    glutInitWindowSize(800,800);
-    glutCreateWindow("Phase 1!");
+    glutInitWindowPosition(100, 100);
+    glutInitWindowSize(800, 800);
+    glutCreateWindow("CG@UM");
 
     // callback registration
     glutDisplayFunc(renderScene);
@@ -124,18 +127,17 @@ void initCostumGL(int argc, char **argv){
     // OpenGL settings
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glPolygonMode(GL_FRONT, GL_LINE);
 }
 
 int main(int argc, char **argv) {
     if(argc == 2) {
-        Group* group = new Group();
         Parser().ReadXML(group, argv[1]);
         initCostumGL(argc, argv);
         glutMainLoop();
         return 1;
     }
-    std::cerr << "Usage: ./engine <file>.xml" << std::endl;
+    cerr << "Usage: ./engine <file>.xml" << std::endl;
     return 1;
 }
