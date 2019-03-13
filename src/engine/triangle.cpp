@@ -36,18 +36,6 @@ void Triangle::addZ(Point* z) {
     this->z = z;
 }
 
-Point* Triangle::getX() {
-    return this->x;
-}
-
-Point* Triangle::getY() {
-    return this->y;
-}
-
-
-Point* Triangle::getZ() {
-    return this->z;
-}
 
 void Triangle::draw() {
     glColor3f(this->r, this->g, this->b);

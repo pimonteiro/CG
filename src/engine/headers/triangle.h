@@ -12,10 +12,8 @@ class Triangle {
         void addX(Point*);
         void addY(Point*);
         void addZ(Point*);
-        Point* getX();
-        Point* getY();
-        Point* getZ();
-        void draw();
+
+    void draw();
 };
 
 #endif

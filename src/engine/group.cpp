@@ -30,15 +30,15 @@ void Group::addGroup(Group* g){
 }
 
 void Group::draw() {
-    for (auto t = this->transformV.begin(); t != this->transformV.end(); ++t) {
-        (*t)->transform();
+    for (auto& t : this->transformV) {
+        t->transform();
     }
-    for (auto m = this->modelV.begin(); m != this->modelV.end(); ++m) {
-        (*m)->draw();
+    for (auto& m : this->modelV) {
+        m->draw();
     }
-    for (auto g = this->subGroupV.begin(); g != this->subGroupV.end(); ++g) {
+    for (auto& g : this->subGroupV) {
         glPushMatrix();
-        (*g)->draw();
+        g->draw();
         glPopMatrix();
     }
 }

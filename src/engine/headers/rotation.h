@@ -9,9 +9,6 @@ class Rotation: public Transformation {
     public:
         Rotation(Point,float);
         void transform();
-        float getAngle(){
-            return angle;
-        }
 };
 
 #endif

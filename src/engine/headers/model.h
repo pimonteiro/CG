@@ -11,7 +11,6 @@ class Model {
     public:
         Model();
         void addElement(Triangle*);
-        std::vector<Triangle*> model();
         void draw();
 };
 
