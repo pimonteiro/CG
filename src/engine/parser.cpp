@@ -139,9 +139,9 @@ Model* parseFile(const XMLElement* pElement) {
 }
 
 Translation* parseTranslate(const XMLElement* pElement) {
-    float x = 0;
-    float y = 0;
-    float z = 0;
+    float x {0};
+    float y {0};
+    float z {0};
 
     if(pElement->Attribute("x")) {
         x = stof(pElement->Attribute("x"));
@@ -179,9 +179,9 @@ Rotation* parseRotate(const XMLElement* pElement) {
 }
 
 Scale* parseScale(const XMLElement* pElement) {
-    float x = 0;
-    float y = 0;
-    float z = 0;
+    float x {0};
+    float y {0};
+    float z {0};
 
     if(pElement->Attribute("x")) {
         x = stof(pElement->Attribute("x"));
