@@ -1,34 +1,44 @@
 #include "headers/group.h"
 #include "headers/model.h"
 #include "headers/transformation.h"
+#include "headers/rotation.h"
+#include "headers/scale.h"
+#include "headers/translation.h"
+#include <vector>
+
+
+#include <iostream>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
 
 Group::Group() {
 }
 
-void Group::addTranformation(Transformation* t, int row) {
-    transforms.at(row).push_back(t);
+void Group::addTransformation(Transformation* t){
+    transformV.push_back(t);
 }
 
-void Group::addModel(Model* m, int position) {
-    models.at(position).push_back(m);
+void Group::addModel(Model* m){
+    modelV.push_back(m);
 }
 
-void Group::addMatrixElement(int row, int value) {
-    matrix.at(row).push_back(value);
+void Group::addGroup(Group* g){
+    subGroupV.push_back(g);
 }
 
-Transformation* Group::getTransformation(int row, int position) {
-    return transforms.at(row).at(position);
-}
-
-Model* Group::getModel(int row, int position) {
-    return models.at(row).at(position);
-}
-
-int Group::getDependency(int row, int column) {
-    return matrix.at(row).at(column);
-}
-
-void Group::addMatrixRow(std::vector<int> fullRow) {
-    matrix.push_back(fullRow);
+void Group::draw() {
+    for (auto& t : this->transformV) {
+        t->transform();
+    }
+    for (auto& m : this->modelV) {
+        m->draw();
+    }
+    for (auto& g : this->subGroupV) {
+        glPushMatrix();
+        g->draw();
+        glPopMatrix();
+    }
 }

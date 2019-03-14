@@ -10,6 +10,5 @@
 Scale::Scale(Point p): Transformation(p) {}
 
 void Scale::transform(){
-	Point v { V() };
-	glScalef(v.X(),v.Y(),v.Z());
+    glScalef(this->V().X(), this->V().Y(), this->V().Z());
 }

@@ -8,10 +8,12 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include "headers/scene.h"
 #include "headers/parser.h"
+#include "headers/group.h"
 
-Scene* scene;
+using namespace std;
+
+Group* group {new Group};
 int axis {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
@@ -19,44 +21,37 @@ float distCam {20};
 GLenum mode;
 
 void changeSize(int w, int h) {
-
     // Prevent a divide by zero, when window is too short
     // (you cant make a window with zero width).
     if(h == 0)
         h = 1;
-
     // compute window's aspect ratio
     float ratio {w * 1.0f / h};
-
     // Set the projection matrix as current
     glMatrixMode(GL_PROJECTION);
     // Load Identity Matrix
     glLoadIdentity();
-
     // Set the viewport to be the entire window
     glViewport(0, 0, w, h);
-
     // Set perspective
-    gluPerspective(45.0f ,ratio, 1.0f ,1000.0f);
-
+    gluPerspective(45.0f,ratio, 1.0f ,1000.0f);
     // return to the model view matrix mode
     glMatrixMode(GL_MODELVIEW);
 }
 
 void renderScene() {
-
     // clear buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     float px { static_cast<float>(distCam*cos(camaraBeta)*cos(camaraAlpha)) };
     float py { static_cast<float>(distCam*sin(camaraBeta)) };
     float pz { static_cast<float>(distCam*cos(camaraBeta)*sin(camaraAlpha)) };
-
     // set the camera
     glLoadIdentity();
     gluLookAt(px,py,pz,
-            0.0,0.0,0.0,
-            0.0f,1.0f,0.0f);
+            0.0, 0.0, 0.0,
+            0.0f, 1.0f, 0.0f);
+
     // set axis
     if(axis) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -75,9 +70,7 @@ void renderScene() {
 
     GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
     glPolygonMode(GL_FRONT, modes[mode]);
-    scene->draw();
-
-
+    group->draw();
     glutSwapBuffers();
 }
 
@@ -118,12 +111,11 @@ void processKeys(unsigned char key, int x, int y) {
 }
 
 void initCostumGL(int argc, char **argv){
-    glutInit(&argc,argv);
+    glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
-
-    glutInitWindowPosition(100,100);
-    glutInitWindowSize(800,800);
-    glutCreateWindow("Phase 1!");
+    glutInitWindowPosition(100, 100);
+    glutInitWindowSize(800, 800);
+    glutCreateWindow("CG@UM");
 
     // callback registration
     glutDisplayFunc(renderScene);
@@ -131,23 +123,21 @@ void initCostumGL(int argc, char **argv){
     glutIdleFunc(renderScene);
     glutSpecialFunc(processSpecialKeys);
     glutKeyboardFunc(processKeys);
+
     // OpenGL settings
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glPolygonMode(GL_FRONT, GL_LINE);
 }
 
 int main(int argc, char **argv) {
     if(argc == 2) {
-        scene = new Scene();
-        Parser().ReadXML(scene, argv[1]);
-    } else {
-        std::cerr << "Usage: ./engine <file>.xml" << std::endl;
+        Parser().ReadXML(group, argv[1]);
+        initCostumGL(argc, argv);
+        glutMainLoop();
         return 1;
     }
-
-    initCostumGL(argc,argv);
-    glutMainLoop();
+    cerr << "Usage: ./engine <file>.xml" << std::endl;
     return 1;
 }

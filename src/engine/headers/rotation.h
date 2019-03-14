@@ -4,14 +4,11 @@
 #include "transformation.h"
 
 class Rotation: public Transformation {
-private:
-	float angle;
-public:
-	Rotation(Point,float);
-	void transform();
-	float getAngle(){
-		return angle;
-	}
+    private:
+        float angle;
+    public:
+        Rotation(Point,float);
+        void transform();
 };
 
 #endif

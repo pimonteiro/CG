@@ -9,7 +9,7 @@ class Point {
   public:
     Point();
     Point(float, float, float);
-    std::string toString();
+
     float X() {
         return x;
     }

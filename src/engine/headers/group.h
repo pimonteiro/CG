@@ -8,18 +8,15 @@
 
 
 class Group {
-  private:
-    std::vector<std::vector<Transformation*>> transforms;
-    std::vector<std::vector<Model*>> models;
-    std::vector<std::vector<int>> matrix;
-  public:
-    Group();
-    void addTranformation(Transformation* t, int row);
-    void addModel(Model* m, int position);
-    void addMatrixElement(int row, int value);
-    Transformation* getTransformation(int row,int position);
-    Model* getModel(int row, int position);
-    int getDependency(int row, int column);
-    void addMatrixRow(std::vector<int> fullRow);
+    private:
+        std::vector<Transformation*> transformV;
+        std::vector<Model*> modelV;
+        std::vector<Group*> subGroupV;
+    public:
+        Group();
+        void addTransformation(Transformation* t);
+        void addModel(Model* m);
+        void addGroup(Group* g);
+        void draw();
 };
 #endif
