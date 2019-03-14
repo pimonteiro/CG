@@ -50,7 +50,7 @@ void Parser::ReadXML(Group* group, const char* xml) {
 }
 
 void parseDoc(Group* group, XMLNode* pN) {
-    XMLNode * pNode = pN->FirstChild();
+    XMLNode * pNode {pN->FirstChild()};
     if (pNode == nullptr){
         exit(0);
     }
