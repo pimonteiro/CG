@@ -17,7 +17,7 @@ Group* group {new Group};
 int axis {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
-float distCam {20};
+float distCam {1500}; //TODO MUDOU
 GLenum mode;
 
 void changeSize(int w, int h) {
@@ -34,7 +34,7 @@ void changeSize(int w, int h) {
     // Set the viewport to be the entire window
     glViewport(0, 0, w, h);
     // Set perspective
-    gluPerspective(45.0f,ratio, 1.0f ,1000.0f);
+    gluPerspective(45.0f,ratio, 2.5f ,2500.0f);
     // return to the model view matrix mode
     glMatrixMode(GL_MODELVIEW);
 }
@@ -102,20 +102,20 @@ void processKeys(unsigned char key, int x, int y) {
         mode = (mode + 1) % 3;
     }
     if(key == 'm' || key == 'M') {
-        distCam -= 0.2f;
+        distCam -= 5.0f;
     }
     if(key == 'l' || key == 'L') {
-        distCam += 0.2f;
+        distCam += 5.0f;
     }
     glutPostRedisplay();
 }
 
 void initCostumGL(int argc, char **argv){
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE);
+    glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA); //TODO MUDOU
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(800, 800);
-    glutCreateWindow("CG@UM");
+    glutCreateWindow("Solar System - Group 13"); //TODO MUDOU
 
     // callback registration
     glutDisplayFunc(renderScene);
@@ -133,7 +133,7 @@ void initCostumGL(int argc, char **argv){
 
 int main(int argc, char **argv) {
     if(argc == 2) {
-        Parser().ReadXML(group, argv[1]);
+        Parser().ReadXML(group, "solarSystem.xml");
         initCostumGL(argc, argv);
         glutMainLoop();
         return 1;
