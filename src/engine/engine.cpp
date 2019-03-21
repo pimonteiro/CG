@@ -17,7 +17,7 @@ Group* group {new Group};
 int axis {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
-float distCam {1500}; //TODO MUDOU
+float distCam {1500};
 GLenum mode;
 
 void changeSize(int w, int h) {
@@ -112,10 +112,10 @@ void processKeys(unsigned char key, int x, int y) {
 
 void initCostumGL(int argc, char **argv){
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA); //TODO MUDOU
+    glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(800, 800);
-    glutCreateWindow("Solar System - Group 13"); //TODO MUDOU
+    glutCreateWindow("Solar System - Group 13");
 
     // callback registration
     glutDisplayFunc(renderScene);
