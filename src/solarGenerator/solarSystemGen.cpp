@@ -129,7 +129,7 @@ void genSolarSystem(ostringstream* solar){
 
 int main(int argc, char* argv[]){
     if(argc < 2){
-        cerr << "Usage: ./solarSysGen <filename>.xml" << std::endl;
+        cerr << "Usage: ./solarSysGen <filename>.xml" << endl;
         return 1;
     }
     ostringstream solar;
@@ -143,11 +143,3 @@ int main(int argc, char* argv[]){
     dumpFile(solar,argv[1]);
     return 0;
 }
-
-
-
-
-
-
-
-
