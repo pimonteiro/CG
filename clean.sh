@@ -8,4 +8,7 @@ rm -rf CMakeFiles
 cd ../engine
 rm CMakeCache.txt cmake_install.cmake Makefile
 rm -rf CMakeFiles
+cd ../solarGenerator
+rm CMakeCache.txt cmake_install.cmake Makefile
+rm -rf CMakeFiles
 cd ../../

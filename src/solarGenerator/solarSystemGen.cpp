@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iostream>
 #include "../generator/headers/sphere.h"
 #include "../generator/headers/outputAux.h"
 
@@ -15,8 +16,8 @@
 using namespace std;
 
 //"mercury", "venus", "earth", "mars", "pluto", "jupiter", "saturn", "uranus", "neptune", "moon", "titan", "io", "europa", "callisto"
-double plProp[14] = {1.38, 1.95, 2.3, 1.53, 1.18, 11.60, 10.40, 5.04, 4.88, 0.7, 1.45, 0.95,0.6, 1.38};
-double plD[14] = {DMERCURY, 1.7*DMERCURY, 2.4*DMERCURY, 3*DMERCURY, 8.8*DMERCURY, 4.2*DMERCURY, 5.9*DMERCURY, 7*DMERCURY, 8*DMERCURY, DSATTELITE, 3.5*DSATTELITE, 3.5*DSATTELITE, 4.5*DSATTELITE, 5.4*DSATTELITE}; //Falta ter em conta solar a orbita para o colocar no sitio certo
+double plProp[14] {1.38, 1.95, 2.3, 1.53, 1.18, 11.60, 10.40, 5.04, 4.88, 0.7, 1.45, 0.95,0.6, 1.38};
+double plD[14] {DMERCURY, 1.7*DMERCURY, 2.4*DMERCURY, 3*DMERCURY, 8.8*DMERCURY, 4.2*DMERCURY, 5.9*DMERCURY, 7*DMERCURY, 8*DMERCURY, DSATTELITE, 3.5*DSATTELITE, 3.5*DSATTELITE, 4.5*DSATTELITE, 5.4*DSATTELITE}; //Falta ter em conta solar a orbita para o colocar no sitio certo
 
 float angle {40};
 float angleMoons {60};
@@ -120,22 +121,27 @@ void genBigSizePlanets(ostringstream* solar){
 }
 
 
-void genPlanets(ostringstream* solar){
+void genSolarSystem(ostringstream* solar){
     genStars(solar);
     genSmallSizePlanets(solar);
     genBigSizePlanets(solar);
 }
 
 int main(int argc, char* argv[]){
+    if(argc < 2){
+        cerr << "Usage: ./solarSysGen <filename>.xml" << std::endl;
+        return 1;
+    }
     ostringstream solar;
     solar << "<scene>" << endl;
     solar << "<group>" << endl;
 
-    genPlanets(&solar);
+    genSolarSystem(&solar);
 
     solar << "</group>" << endl;
     solar << "</scene>" << endl;
-    dumpFile(solar,"solarSystem.xml");
+    dumpFile(solar,"");
+    return 0;
 }
 
 

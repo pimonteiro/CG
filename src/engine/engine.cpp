@@ -133,7 +133,7 @@ void initCostumGL(int argc, char **argv){
 
 int main(int argc, char **argv) {
     if(argc == 2) {
-        Parser().ReadXML(group, "solarSystem.xml");
+        Parser().ReadXML(group, argv[1]);
         initCostumGL(argc, argv);
         glutMainLoop();
         return 1;
