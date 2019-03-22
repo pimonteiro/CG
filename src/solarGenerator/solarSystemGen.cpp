@@ -140,7 +140,7 @@ int main(int argc, char* argv[]){
 
     solar << "</group>" << endl;
     solar << "</scene>" << endl;
-    dumpFile(solar,"");
+    dumpFile(solar,argv[1]);
     return 0;
 }
 
