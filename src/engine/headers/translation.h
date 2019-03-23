@@ -4,9 +4,10 @@
 #include "transformation.h"
 
 class Translation: public Transformation {
-public:
-	Translation(Point);
-	void transform();
+    public:
+        Translation(Point);
+        ~Translation();
+        void transform();
 };
 
 

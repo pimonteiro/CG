@@ -13,6 +13,12 @@
 Model::Model() {
 }
 
+Model::~Model() {
+    for (auto& t : this->triV) {
+        delete t;
+    }
+}
+
 void Model::addElement(Triangle *triangle) {
     triV.push_back(triangle);
 }

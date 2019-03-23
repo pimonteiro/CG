@@ -17,6 +17,18 @@
 Group::Group() {
 }
 
+Group::~Group() {
+    for (auto& t : this->transformV) {
+        delete t;
+    }
+    for (auto& m : this->modelV) {
+        delete m;
+    }
+    for (auto& g : this->subGroupV) {
+        delete g;
+    }
+}
+
 void Group::addTransformation(Transformation* t){
     transformV.push_back(t);
 }

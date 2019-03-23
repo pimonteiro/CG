@@ -14,6 +14,7 @@ class Group {
         std::vector<Group*> subGroupV;
     public:
         Group();
+        ~Group();
         void addTransformation(Transformation* t);
         void addModel(Model* m);
         void addGroup(Group* g);

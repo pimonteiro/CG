@@ -8,6 +8,7 @@ class Rotation: public Transformation {
         float angle;
     public:
         Rotation(Point,float);
+        ~Rotation();
         void transform();
 };
 

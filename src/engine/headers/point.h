@@ -8,6 +8,7 @@ class Point {
     float x,y,z;
   public:
     Point();
+    ~Point();
     Point(float, float, float);
 
     float X() {

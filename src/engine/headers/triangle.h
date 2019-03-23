@@ -9,6 +9,7 @@ class Triangle {
         float r, g, b;
     public:
         Triangle();
+        ~Triangle();
         void addX(Point*);
         void addY(Point*);
         void addZ(Point*);

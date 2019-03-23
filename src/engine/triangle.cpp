@@ -17,6 +17,12 @@ float randomF() {
     return dist(engine);
 }
 
+Triangle::~Triangle() {
+    if(this->x != nullptr) delete this->x;
+    if(this->y != nullptr) delete this->y;
+    if(this->z != nullptr) delete this->z;
+}
+
 Triangle::Triangle() {
     this->r = randomF();
     this->g = randomF();
