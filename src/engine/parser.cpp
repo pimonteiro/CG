@@ -97,7 +97,7 @@ Model* parseFile(const XMLElement* pElement) {
     if(pElement->Attribute("g")) {
         g = stof(pElement->Attribute("g"));
     }
-    if(pElement->Attribute("axisY")) {
+    if(pElement->Attribute("b")) {
         b = stof(pElement->Attribute("b"));
     }
     model->addColour(r, g, b);
