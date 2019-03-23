@@ -4,5 +4,5 @@ cmake_minimum_required(VERSION 3.5)
 PROJECT(solarSystemGen)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../bin")
-add_executable(solarSysGen solarSystemGen.cpp ../generator/sphere.cpp ../generator/outputAux.cpp)
+add_executable(solarSysGen solarSystemGen.cpp ../generator/sphere.cpp ../generator/outputAux.cpp ../engine/point.cpp)
 set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
