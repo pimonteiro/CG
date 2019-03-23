@@ -18,7 +18,7 @@ using namespace std;
 
 //"mercury", "venus", "earth", "mars", "pluto", "jupiter", "saturn", "uranus", "neptune", "moon", "titan", "io", "europa", "callisto"
 double plProp[14] {1.38, 1.95, 2.3, 1.53, 1.18, 11.60, 10.40, 5.04, 4.88, 0.7, 1.45, 0.95,0.6, 1.38};
-double plD[14] {DMERCURY, 1.7*DMERCURY, 2.4*DMERCURY, 3*DMERCURY, 8.8*DMERCURY, 4.2*DMERCURY, 5.9*DMERCURY, 7*DMERCURY, 8*DMERCURY, DSATTELITE, 3.5*DSATTELITE, 3.5*DSATTELITE, 4.5*DSATTELITE, 5.4*DSATTELITE}; //Falta ter em conta solar a orbita para o colocar no sitio certo
+double plD[14] {DMERCURY, 1.7*DMERCURY, 2.4*DMERCURY, 3*DMERCURY, 8.8*DMERCURY, 4.2*DMERCURY, 5.9*DMERCURY, 7*DMERCURY, 8*DMERCURY, DSATTELITE, 3.5*DSATTELITE, 3.5*DSATTELITE, 4.5*DSATTELITE, 5.4*DSATTELITE};
 Point colors[14] {Point(0.36,0.36,0.36),Point(0.8,0.5,0.2),Point(0.31,0.65,0.76),Point(0.55,0.15,0),Point(0.93,0.85,0.68),Point(0.93,0.8,0.38),Point(0.93,0.86,0.51),
                   Point(0.61,0.77,0.89),Point(0.23,0.35,0.58),Point(0.84,0.84,0.84),Point(0.93,0.8,0.38),Point(0.93,0.85,0.51),Point(0.93,0.57,0.13),Point(0.27,0.27,0.27)};
 
