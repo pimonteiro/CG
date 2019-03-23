@@ -19,7 +19,7 @@ float camaraAlpha {0.7};
 float camaraBeta {0.5};
 float distCam {1500};
 GLenum mode;
-int randomColours {0};
+int randomColours {1};
 
 void changeSize(int w, int h) {
     // Prevent a divide by zero, when window is too short
@@ -71,10 +71,12 @@ void renderScene() {
 
     GLenum modes[] = {GL_FILL,GL_LINE, GL_POINT};
     glPolygonMode(GL_FRONT, modes[mode]);
+
     if(!randomColours)
-        group->draw();
-    else
         group->drawC();
+    else
+        group->draw();
+
     glutSwapBuffers();
 }
 

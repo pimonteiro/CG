@@ -52,7 +52,7 @@ void Group::drawC() {
     }
     for (auto& g : this->subGroupV) {
         glPushMatrix();
-        g->draw();
+        g->drawC();
         glPopMatrix();
     }
 }
