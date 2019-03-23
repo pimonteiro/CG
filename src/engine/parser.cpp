@@ -87,6 +87,21 @@ void parseDoc(Group* group, XMLNode* pN) {
 
 Model* parseFile(const XMLElement* pElement) {
     Model* model {new Model()};
+    float r {0};
+    float g {0};
+    float b {0};
+
+    if(pElement->Attribute("r")) {
+        r = stof(pElement->Attribute("r"));
+    }
+    if(pElement->Attribute("g")) {
+        g = stof(pElement->Attribute("g"));
+    }
+    if(pElement->Attribute("axisY")) {
+        b = stof(pElement->Attribute("b"));
+    }
+    model->addColour(r, g, b);
+
     string s {pElement->Attribute("file")};
     ifstream infile(s);
     if(!infile) {

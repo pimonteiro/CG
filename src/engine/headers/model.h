@@ -8,10 +8,13 @@
 class Model {
     private:
         std::vector<Triangle*> triV;
+        float r, g, b;
     public:
         Model();
         void addElement(Triangle*);
         void draw();
+        void drawC();
+        void addColour(float, float, float);
 };
 
 #endif

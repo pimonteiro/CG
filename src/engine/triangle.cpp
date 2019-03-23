@@ -37,9 +37,20 @@ void Triangle::addZ(Point* z) {
 }
 
 
-void Triangle::draw() {
+void Triangle::drawC() {
     glColor3f(this->r, this->g, this->b);
 
+    glBegin(GL_TRIANGLES);
+
+    glVertex3f(this->x->X(), this->x->Y(), this->x->Z());
+    glVertex3f(this->y->X(), this->y->Y(), this->y->Z());
+    glVertex3f(this->z->X(), this->z->Y(), this->z->Z());
+
+    glEnd();
+}
+
+
+void Triangle::draw() {
     glBegin(GL_TRIANGLES);
 
     glVertex3f(this->x->X(), this->x->Y(), this->x->Z());
