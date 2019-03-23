@@ -42,3 +42,17 @@ void Group::draw() {
         glPopMatrix();
     }
 }
+
+void Group::drawC() {
+    for (auto& t : this->transformV) {
+        t->transform();
+    }
+    for (auto& m : this->modelV) {
+        m->drawC();
+    }
+    for (auto& g : this->subGroupV) {
+        glPushMatrix();
+        g->draw();
+        glPopMatrix();
+    }
+}
