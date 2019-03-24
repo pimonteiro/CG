@@ -8,6 +8,7 @@ class Transformation {
         Point v;
     public:
         Transformation(Point);
+        virtual ~Transformation();
         virtual void transform() = 0;
         Point V(){
             return v;

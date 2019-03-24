@@ -6,6 +6,7 @@
 class Scale: public Transformation {
     public:
         Scale(Point);
+        ~Scale();
         void transform();
 };
 

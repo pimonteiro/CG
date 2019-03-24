@@ -11,6 +11,7 @@ class Model {
         float r, g, b;
     public:
         Model();
+        ~Model();
         void addElement(Triangle*);
         void draw();
         void drawC();
