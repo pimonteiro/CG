@@ -82,7 +82,7 @@ void renderScene() {
     else
         group->draw();
 
-    int time = glutGet(GLUT_ELAPSED_TIME);
+    int time {glutGet(GLUT_ELAPSED_TIME) };
     frame++;
     if(time - timebase > 1000){
         fps = frame * 1000.0/(time - timebase);
