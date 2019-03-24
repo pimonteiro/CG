@@ -15,11 +15,16 @@ using namespace std;
 
 Group* group {new Group};
 int axis {0};
+int fullscreen {0};
+int randomColours {1};
+int timebase {0};
+int frame {0};
+int fps {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
 float distCam {1500};
 GLenum mode;
-int randomColours {1};
+
 
 void changeSize(int w, int h) {
     // Prevent a divide by zero, when window is too short
@@ -77,6 +82,18 @@ void renderScene() {
     else
         group->draw();
 
+    int time = glutGet(GLUT_ELAPSED_TIME);
+    frame++;
+    if(time - timebase > 1000){
+        fps = frame * 1000.0/(time - timebase);
+        char s[100];
+        sprintf(s, "Sistema Solar - Grupo 13    (%d)", fps);
+        glutSetWindowTitle(s);
+        timebase = time;
+        frame = 0;
+    }
+
+
     glutSwapBuffers();
 }
 
@@ -117,6 +134,16 @@ void processKeys(unsigned char key, int x, int y) {
         randomColours = (randomColours + 1) % 2;
     }
     glutPostRedisplay();
+    if(key == 'f' || key == 'F') {
+        if(!fullscreen){
+            glutFullScreen();
+        }
+        else {
+            glutPositionWindow(100, 100);
+            glutReshapeWindow(800, 800);
+        }
+        fullscreen = !fullscreen;
+    }
 }
 
 void initCostumGL(int argc, char **argv){
@@ -140,10 +167,22 @@ void initCostumGL(int argc, char **argv){
     glPolygonMode(GL_FRONT, GL_LINE);
 }
 
+void startMessage(){
+    cout << "Please wait.......\n\n" << endl;
+    cout << "Controls: " << endl;
+    cout << "   WASD -> move camera" << endl;
+    cout << "   M/L -> zoom in/out" << endl;
+    cout << "   C -> change display mode" << endl;
+    cout << "   A -> turn on/off XYZ axis" << endl;
+    cout << "   R -> turn o/off random colors on models" << endl;
+    cout << "   F -> enter or exit FullScreen" << endl;
+}
+
 int main(int argc, char **argv) {
     if(argc == 2) {
         Parser().ReadXML(group, argv[1]);
         initCostumGL(argc, argv);
+        startMessage();
         glutMainLoop();
         return 1;
     }
