@@ -6,14 +6,14 @@
 
 std::string annulus(float innerRadius, float outerRadius, float height, int div){
     std::ostringstream os;
+    std::ostringstream r;
 
-    float angle { static_cast<float>(2*M_PI / div) };
-
+    float angle {static_cast<float>(2*M_PI / div) };
+    float h { height/2 };
+    int points {0};
     for(int i {0}; i < div; i++){
-        float h { height/2 };
         float alpha { static_cast<float>(angle * i) };
 
-        // Top Face
         os << writePoint(cos(alpha)*innerRadius,h,sin(alpha)*innerRadius);
         os << writePoint(cos(angle*(i+1))*innerRadius,h,sin(angle*(i+1))*innerRadius);
         os << writePoint(cos(alpha)*outerRadius,h,sin(alpha)*outerRadius);
@@ -21,7 +21,6 @@ std::string annulus(float innerRadius, float outerRadius, float height, int div)
         os << writePoint(cos(angle*(i+1))*innerRadius,h,sin(angle*(i+1))*innerRadius);
         os << writePoint(cos(angle*(i+1))*outerRadius,h,sin(angle*(i+1))*outerRadius);
 
-        // Bottom Face
         os << writePoint(cos(alpha)*innerRadius,-h,sin(alpha)*innerRadius);
         os << writePoint(cos(alpha)*outerRadius,-h,sin(alpha)*outerRadius);
         os << writePoint(cos(angle*(i+1))*innerRadius,-h,sin(angle*(i+1))*innerRadius);
@@ -29,13 +28,24 @@ std::string annulus(float innerRadius, float outerRadius, float height, int div)
         os << writePoint(cos(angle*(i+1))*outerRadius,-h,sin(angle*(i+1))*outerRadius);
         os << writePoint(cos(angle*(i+1))*innerRadius,-h,sin(angle*(i+1))*innerRadius);
 
-        // Sides
+
+        os << writePoint(cos(alpha)*innerRadius,h,sin(alpha)*innerRadius);
+        os << writePoint(cos(alpha)*innerRadius,-h,sin(alpha)*innerRadius);
+        os << writePoint(cos(angle*(i+1))*innerRadius,h,sin(angle*(i+1))*innerRadius);
+        os << writePoint(cos(angle*(i+1))*innerRadius,-h,sin(angle*(i+1))*innerRadius);
+        os << writePoint(cos(angle*(i+1))*innerRadius,h,sin(angle*(i+1))*innerRadius);
+        os << writePoint(cos(alpha)*innerRadius,-h,sin(alpha)*innerRadius);
+
         os << writePoint(cos(alpha)*outerRadius,h,sin(alpha)*outerRadius);
         os << writePoint(cos(angle*(i+1))*outerRadius,h,sin(angle*(i+1))*outerRadius);
         os << writePoint(cos(alpha)*outerRadius,-h,sin(alpha)*outerRadius);
         os << writePoint(cos(angle*(i+1))*outerRadius,-h,sin(angle*(i+1))*outerRadius);
         os << writePoint(cos(alpha)*outerRadius,-h,sin(alpha)*outerRadius);
         os << writePoint(cos(angle*(i+1))*outerRadius,h,sin(angle*(i+1))*outerRadius);
+
+        points += 24;
     }
-    return os.str();
+    r << points << "\n" << os.str();
+
+    return r.str();
 }
