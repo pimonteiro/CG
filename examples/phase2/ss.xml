@@ -1,0 +1,189 @@
+<scene>
+  <group>
+     <group>
+         <scale x="0.416667" y="0.416667" z="0.416667" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="0.708333" y="0.708333" z="0.708333" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="1" y="1" z="1" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="1.25" y="1.25" z="1.25" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="3.66667" y="3.66667" z="3.66667" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="1.75" y="1.75" z="1.75" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="2.45833" y="2.45833" z="2.45833" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="2.91667" y="2.91667" z="2.91667" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="3.33333" y="3.33333" z="3.33333" />
+         <models>
+             <model file="trajectories.3d" r="1" g="1" b="1" />
+         </models>
+     </group>
+     <group>
+         <scale x="24" y="24" z="24" />
+         <models>
+             <model file="sun.3d" r="1" g="0.2" b="0" />
+         </models>
+     </group>
+     <group>
+         <rotate angle="0" axisX="0" axisY="1" axisZ="0" />
+         <translate x="150" y="0" z="0"/>
+         <scale x="1.38" y="1.38" z="1.38" />
+         <models>
+             <model file="smallPlanets.3d" r="0.36" g="0.36" b="0.36" />
+         </models>
+     </group>
+     <group>
+         <rotate angle="40" axisX="0" axisY="1" axisZ="0" />
+         <translate x="255" y="0" z="0"/>
+         <scale x="1.95" y="1.95" z="1.95" />
+         <models>
+             <model file="smallPlanets.3d" r="0.8" g="0.5" b="0.2" />
+         </models>
+     </group>
+     <group>
+         <rotate angle="80" axisX="0" axisY="1" axisZ="0" />
+         <translate x="360" y="0" z="0"/>
+         <scale x="2.3" y="2.3" z="2.3" />
+         <models>
+             <model file="smallPlanets.3d" r="0.31" g="0.65" b="0.76" />
+         </models>
+             <group>
+                 <scale x="0.434783" y="0.434783" z="0.434783" />
+                 <rotate angle="60" axisX="0" axisY="1" axisZ="0" />
+                 <translate x="20" y="0" z="0"/>
+                 <scale x="0.7" y="0.7" z="0.7" />
+                 <models>
+                     <model file="smallPlanets.3d" r="0.84" g="0.84" b="0.84" />
+                 </models>
+             </group>
+     </group>
+     <group>
+         <rotate angle="120" axisX="0" axisY="1" axisZ="0" />
+         <translate x="450" y="0" z="0"/>
+         <scale x="1.53" y="1.53" z="1.53" />
+         <models>
+             <model file="smallPlanets.3d" r="0.55" g="0.15" b="0" />
+         </models>
+     </group>
+     <group>
+         <rotate angle="360" axisX="0" axisY="1" axisZ="0" />
+         <translate x="1320" y="0" z="0"/>
+         <scale x="1.18" y="1.18" z="1.18" />
+         <models>
+             <model file="smallPlanets.3d" r="0.93" g="0.85" b="0.68" />
+         </models>
+     </group>
+     <group>
+         <rotate angle="200" axisX="0" axisY="1" axisZ="0" />
+         <translate x="630" y="0" z="0"/>
+         <scale x="11.6" y="11.6" z="11.6" />
+         <models>
+             <model file="bigPlanets.3d" r="0.93" g="0.8" b="0.38" />
+         </models>
+         <group>
+             <scale x="0.0862069" y="0.0862069" z="0.0862069" />
+             <rotate angle="60" axisX="0" axisY="1" axisZ="0" />
+             <translate x="70" y="0" z="0" />
+             <scale x="0.95" y="0.95" z="0.95" />
+             <models>
+                 <model file="smallPlanets.3d" r="0.93" g="0.85" b="0.51" />
+             </models>
+         </group>
+         <group>
+             <scale x="0.0862069" y="0.0862069" z="0.0862069" />
+             <rotate angle="120" axisX="0" axisY="1" axisZ="0" />
+             <translate x="90" y="0" z="0" />
+             <scale x="0.6" y="0.6" z="0.6" />
+             <models>
+                 <model file="smallPlanets.3d" r="0.93" g="0.57" b="0.13" />
+             </models>
+         </group>
+         <group>
+             <scale x="0.0862069" y="0.0862069" z="0.0862069" />
+             <rotate angle="240" axisX="0" axisY="1" axisZ="0" />
+             <translate x="108" y="0" z="0" />
+             <scale x="1.38" y="1.38" z="1.38" />
+             <models>
+                 <model file="smallPlanets.3d" r="0.27" g="0.27" b="0.27" />
+             </models>
+         </group>
+     </group>
+     <group>
+         <rotate angle="240" axisX="0" axisY="1" axisZ="0" />
+         <translate x="885" y="0" z="0"/>
+         <scale x="10.4" y="10.4" z="10.4" />
+         <models>
+             <model file="bigPlanets.3d" r="0.93" g="0.86" b="0.51" />
+         </models>
+         <group>
+             <rotate angle="15" axisX="1" axisY="0" axisZ="0" />
+             <models>
+                 <model file="saturnRing1.3d" r="0" g="0" b="0.8" />
+                 <model file="saturnRing2.3d" r="0.8" g="0.4" b="0" />
+                 <model file="saturnRing3.3d" r="0.96" g="0.87" b="0.7" />
+             </models>
+         </group>
+         <group>
+             <scale x="0.0961538" y="0.0961538" z="0.0961538" />
+             <rotate angle="480" axisX="0" axisY="1" axisZ="0" />
+             <translate x="70" y="0" z="0" />
+             <scale x="1.45" y="1.45" z="1.45" />
+             <models>
+                 <model file="smallPlanets.3d" r="0.93" g="0.8" b="0.38" />
+             </models>
+         </group>
+     </group>
+     <group>
+         <rotate angle="280" axisX="0" axisY="1" axisZ="0" />
+         <translate x="1050" y="0" z="0"/>
+         <scale x="5.04" y="5.04" z="5.04" />
+         <models>
+             <model file="bigPlanets.3d" r="0.61" g="0.77" b="0.89" />
+         </models>
+     </group>
+     <group>
+         <rotate angle="320" axisX="0" axisY="1" axisZ="0" />
+         <translate x="1200" y="0" z="0"/>
+         <scale x="4.88" y="4.88" z="4.88" />
+         <models>
+             <model file="bigPlanets.3d" r="0.23" g="0.35" b="0.58" />
+         </models>
+     </group>
+  </group>
+</scene>
