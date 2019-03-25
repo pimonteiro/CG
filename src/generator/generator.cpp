@@ -29,7 +29,7 @@ string drawAnnulus(int argc, char* pString[]) {
     else {
         float inner { stof(pString[2]) };
         float outer { stof(pString[3]) };
-        int height  { stoi(pString[4]) };
+        float height  { stof(pString[4]) };
         int slices  { stoi(pString[5]) };
 
         return annulus(inner, outer, height, slices);
