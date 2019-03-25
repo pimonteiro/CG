@@ -2,7 +2,9 @@
 #include <iostream>
 #include "../generator/headers/sphere.h"
 #include "../generator/headers/outputAux.h"
+#include "../generator/headers/annulus.h"
 #include "../engine/headers/point.h"
+
 
 
 #define SIZE    5
@@ -92,7 +94,7 @@ void genBigSizePlanets(ostringstream* solar){
         switch (i) {
             case 5:
                 for(int j {0}; j < 3; j++){
-                    float prp = (1.0f/plProp[i]);
+                    float prp { static_cast<float>(1.0f/plProp[i]) };
                     *solar << "         <group>" << endl;
                     *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                     *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
@@ -106,7 +108,26 @@ void genBigSizePlanets(ostringstream* solar){
                 }
                 break;
             case 6:
+                ostringstream file1;
+                ostringstream file2;
+                ostringstream file3;
+
+                file1 << annulus(9, 12, 0.4, 1000);
+                file2 << annulus(12.5, 15.5, 0.4, 1000);
+                file3 << annulus(16, 16.8, 0.4, 1000);
+                dumpFile(file1, "saturnRing1.3d");
+                dumpFile(file2, "saturnRing2.3d");
+                dumpFile(file3, "saturnRing3.3d");
+
                 float prp = (1.0f/plProp[i]);
+                *solar << "         <group>" << endl;
+                *solar << "             <rotate angle=\"15\" axisX=\"1\" axisY=\"0\" axisZ=\"0\" />" << endl;
+                *solar << "             <models>" << endl;
+                *solar << "                 <model file=\"saturnRing1.3d\" r=\"0\" g=\"0\" b=\"0.8\" />" << endl;
+                *solar << "                 <model file=\"saturnRing2.3d\" r=\"0.8\" g=\"0.4\" b=\"0\" />" << endl;
+                *solar << "                 <model file=\"saturnRing3.3d\" r=\"0.96\" g=\"0.87\" b=\"0.7\" />" << endl;
+                *solar << "             </models>" << endl;
+                *solar << "         </group>" << endl;
                 *solar << "         <group>" << endl;
                 *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                 *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
@@ -123,8 +144,27 @@ void genBigSizePlanets(ostringstream* solar){
     }
 }
 
+void genTrajectories(ostringstream* solar){
+    ostringstream file;
+    file << annulus(360, 360+2, 1, 5000); // Baseado no da Terra
+    string pF { "trajectories.3d" };
+    dumpFile(file, pF);
+
+    for(int i { 0 }; i < 9; i++){
+        float prop { static_cast<float>(plD[i]/plD[2]) };
+        *solar << "     <group>" << endl;
+        *solar << "         <scale x=\"" << prop << "\" y=\"" << prop << "\" z=\"" << prop << "\" />" << endl;
+        *solar << "         <models>" << endl;
+        *solar << "             <model file=\"" << pF << "\" r=\"1\" g=\"1\" b=\"1\" />" << endl;
+        *solar << "         </models>" << endl;
+        *solar << "     </group>" << endl;
+    }
+}
+
+
 
 void genSolarSystem(ostringstream* solar){
+    genTrajectories(solar);
     genStars(solar);
     genSmallSizePlanets(solar);
     genBigSizePlanets(solar);

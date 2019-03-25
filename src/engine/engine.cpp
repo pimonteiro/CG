@@ -7,6 +7,8 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
+#include <sstream>
+#include <string.h>
 #include <vector>
 #include "headers/parser.h"
 #include "headers/group.h"
@@ -15,11 +17,16 @@ using namespace std;
 
 Group* group {new Group};
 int axis {0};
+int fullscreen {0};
+int randomColours {1};
+int timebase {0};
+int frame {0};
+int fps {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
-float distCam {1500};
+float distCam {1300};
 GLenum mode;
-int randomColours {1};
+
 
 void changeSize(int w, int h) {
     // Prevent a divide by zero, when window is too short
@@ -77,6 +84,19 @@ void renderScene() {
     else
         group->draw();
 
+    int time {glutGet(GLUT_ELAPSED_TIME) };
+    frame++;
+    if(time - timebase > 1000){     // 1 Second
+        fps = frame * 1000.0/(time - timebase);
+        ostringstream os;
+        os << "Sistema Solar - Grupo 13    ( "  <<  fps << ")";
+        char* s {strdup(os.str().c_str())};
+        glutSetWindowTitle(s);
+        timebase = time;
+        frame = 0;
+    }
+
+
     glutSwapBuffers();
 }
 
@@ -117,6 +137,16 @@ void processKeys(unsigned char key, int x, int y) {
         randomColours = (randomColours + 1) % 2;
     }
     glutPostRedisplay();
+    if(key == 'f' || key == 'F') {
+        if(!fullscreen){
+            glutFullScreen();
+        }
+        else {
+            glutPositionWindow(100, 100);
+            glutReshapeWindow(800, 800);
+        }
+        fullscreen = !fullscreen;
+    }
 }
 
 void initCostumGL(int argc, char **argv){
@@ -140,8 +170,20 @@ void initCostumGL(int argc, char **argv){
     glPolygonMode(GL_FRONT, GL_LINE);
 }
 
+void startMessage(){
+    cout << "Please wait.......\n\n" << endl;
+    cout << "Controls: " << endl;
+    cout << "\tWASD -> move the camera" << endl;
+    cout << "\tM/L -> zoom in/out" << endl;
+    cout << "\tC -> change the display mode" << endl;
+    cout << "\tA -> turn on/off the XYZ axis" << endl;
+    cout << "\tR -> turn on/off model's random colours" << endl;
+    cout << "\tF -> enter or exit fullScreen mode" << endl;
+}
+
 int main(int argc, char **argv) {
     if(argc == 2) {
+        startMessage();
         Parser().ReadXML(group, argv[1]);
         initCostumGL(argc, argv);
         glutMainLoop();

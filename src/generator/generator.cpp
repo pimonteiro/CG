@@ -5,6 +5,7 @@
 #include "headers/cone.h"
 #include "headers/plane.h"
 #include "headers/sphere.h"
+#include "headers/annulus.h"
 #include "headers/outputAux.h"
 
 using namespace std;
@@ -16,6 +17,23 @@ void helpMessage(){
     cout << "[*] ./generator box <x-dim> <y-dim> <z-dim> <slices (optional)> <filename>" << endl;
     cout << "[*] ./generator sphere <radius> <slices> <stacks> <filename>" << endl;
     cout << "[*] ./generator cone <bottom radius> <height> <slices> <stacks> <filename>" << endl;
+    cout << "[*] ./generator annulus <inner radius> <outer radius> <height> <slices> <filename>" << endl;
+}
+
+string drawAnnulus(int argc, char* pString[]) {
+    if(argc != 7){
+        cerr << "Insufficient parameters. " << endl;
+        helpMessage();
+        exit(1);
+    }
+    else {
+        float inner { stof(pString[2]) };
+        float outer { stof(pString[3]) };
+        int height  { stoi(pString[4]) };
+        int slices  { stoi(pString[5]) };
+
+        return annulus(inner, outer, height, slices);
+    }
 }
 
 string drawCone(int argc, char* pString[]) {
@@ -27,8 +45,8 @@ string drawCone(int argc, char* pString[]) {
     else {
         float radius { stof(pString[2]) };
         float height { stof(pString[3]) };
-        int slices { stoi(pString[4]) };
-        int stacks { stoi(pString[5]) };
+        int slices   { stoi(pString[4]) };
+        int stacks   { stoi(pString[5]) };
 
         return cone(radius, height, slices, stacks);
     }
@@ -42,8 +60,8 @@ string drawSphere(int argc, char* pString[]) {
     }
     else {
         float radius { stof(pString[2]) };
-        int slices { stoi(pString[3]) };
-        int stacks { stoi(pString[4]) };
+        int slices   { stoi(pString[3]) };
+        int stacks   { stoi(pString[4]) };
 
         return sphere(radius, slices, stacks);
     }
@@ -101,6 +119,9 @@ int main(int argc, char* argv[]) {
             }
             else if(!strcmp("cone",argv[1])) {
                 os << drawCone(argc,argv);
+            }
+            else if(!strcmp("annulus",argv[1])) {
+                os << drawAnnulus(argc,argv);
             }
             else {
                 cerr << "Invalid option. Run with --help for more information." << endl;
