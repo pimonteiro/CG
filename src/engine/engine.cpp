@@ -7,6 +7,8 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
+#include <sstream>
+#include <string.h>
 #include <vector>
 #include "headers/parser.h"
 #include "headers/group.h"
@@ -22,7 +24,7 @@ int frame {0};
 int fps {0};
 float camaraAlpha {0.7};
 float camaraBeta {0.5};
-float distCam {1500};
+float distCam {1300};
 GLenum mode;
 
 
@@ -84,10 +86,11 @@ void renderScene() {
 
     int time {glutGet(GLUT_ELAPSED_TIME) };
     frame++;
-    if(time - timebase > 1000){
+    if(time - timebase > 1000){     // 1 Second
         fps = frame * 1000.0/(time - timebase);
-        char s[100];
-        sprintf(s, "Sistema Solar - Grupo 13    (%d)", fps);
+        std::ostringstream os;
+        os << "Sistema Solar - Grupo 13    ( "  <<  fps << ")";
+        char* s {strdup(os.str().c_str())};
         glutSetWindowTitle(s);
         timebase = time;
         frame = 0;
@@ -170,19 +173,19 @@ void initCostumGL(int argc, char **argv){
 void startMessage(){
     cout << "Please wait.......\n\n" << endl;
     cout << "Controls: " << endl;
-    cout << "   WASD -> move camera" << endl;
-    cout << "   M/L -> zoom in/out" << endl;
-    cout << "   C -> change display mode" << endl;
-    cout << "   A -> turn on/off XYZ axis" << endl;
-    cout << "   R -> turn o/off random colors on models" << endl;
-    cout << "   F -> enter or exit FullScreen" << endl;
+    cout << "\tWASD -> move the camera" << endl;
+    cout << "\tM/L -> zoom in/out" << endl;
+    cout << "\tC -> change the display mode" << endl;
+    cout << "\tA -> turn on/off the XYZ axis" << endl;
+    cout << "\tR -> turn on/off random colours on models" << endl;
+    cout << "\tF -> enter or exit FullScreen mode" << endl;
 }
 
 int main(int argc, char **argv) {
     if(argc == 2) {
+        startMessage();
         Parser().ReadXML(group, argv[1]);
         initCostumGL(argc, argv);
-        startMessage();
         glutMainLoop();
         return 1;
     }

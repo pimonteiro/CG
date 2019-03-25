@@ -94,7 +94,7 @@ void genBigSizePlanets(ostringstream* solar){
         switch (i) {
             case 5:
                 for(int j {0}; j < 3; j++){
-                    float prp = (1.0f/plProp[i]);
+                    float prp { (1.0f/plProp[i]) };
                     *solar << "         <group>" << endl;
                     *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                     *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
