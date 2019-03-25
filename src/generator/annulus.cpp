@@ -7,11 +7,11 @@
 std::string annulus(float innerRadius, float outerRadius, float height, int div){
     std::ostringstream os;
 
-    double angle { 2*(M_PI / div) };
+    float angle { static_cast<float>(2*M_PI / div) };
 
     for(int i {0}; i < div; i++){
         float h { height/2 };
-        double alpha { angle * i };
+        double alpha { static_cast<float>(angle * i) };
 
         // Top Face
         os << writePoint(cos(alpha)*innerRadius,h,sin(alpha)*innerRadius);

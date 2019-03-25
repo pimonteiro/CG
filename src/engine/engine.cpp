@@ -88,7 +88,7 @@ void renderScene() {
     frame++;
     if(time - timebase > 1000){     // 1 Second
         fps = frame * 1000.0/(time - timebase);
-        std::ostringstream os;
+        ostringstream os;
         os << "Sistema Solar - Grupo 13    ( "  <<  fps << ")";
         char* s {strdup(os.str().c_str())};
         glutSetWindowTitle(s);
@@ -177,8 +177,8 @@ void startMessage(){
     cout << "\tM/L -> zoom in/out" << endl;
     cout << "\tC -> change the display mode" << endl;
     cout << "\tA -> turn on/off the XYZ axis" << endl;
-    cout << "\tR -> turn on/off random colours on models" << endl;
-    cout << "\tF -> enter or exit FullScreen mode" << endl;
+    cout << "\tR -> turn on/off model's random colours" << endl;
+    cout << "\tF -> enter or exit fullScreen mode" << endl;
 }
 
 int main(int argc, char **argv) {
