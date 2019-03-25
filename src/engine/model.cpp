@@ -1,5 +1,5 @@
 #include "headers/model.h"
-#include "headers/point.h"
+#include "headers/triangle.h"
 #include <iostream>
 #include <random>
 
@@ -9,36 +9,36 @@
 #include <GL/glut.h>
 #endif
 
+
 Model::Model() {
 }
 
-void Model::addElement(Point* point) {
-    pointsV.push_back(point);
+Model::~Model() {
+    for (auto& t : this->triV) {
+        delete t;
+    }
 }
 
-void Model::addColor(Point* color) {
-    colorsV.push_back(color);
+void Model::addElement(Triangle *triangle) {
+    triV.push_back(triangle);
 }
-std::vector<Point*> Model::model() {
-    return this->pointsV;
+
+void Model::addColour(float r, float g, float b) {
+    this->r = r;
+    this->g = g;
+    this->b = b;
 }
 
 void Model::draw() {
-    std::vector <Point*>::iterator itP, itC;
-    itC = this->colorsV.begin();
-
-    int changeColor {0};
-
-    glBegin(GL_TRIANGLES);
-    glColor3f((*itC)->X(), (*itC)->Y(), (*itC)->Z());
-    for(itP = this->pointsV.begin(); itP != this->pointsV.end(); itP++) {
-        glVertex3f((*itP)->X(), (*itP)->Y(), (*itP)->Z());
-        changeColor++;
-        if(changeColor==3){
-            changeColor = 0;
-            itC++;
-            glColor3f((*itC)->X(), (*itC)->Y(), (*itC)->Z());
-        }
+    glColor3f(this->r, this->g, this->b);
+    for (auto& t : this->triV) {
+        t->draw();
     }
-    glEnd();
+}
+
+
+void Model::drawC() {
+    for (auto& t : this->triV) {
+        t->drawC();
+    }
 }

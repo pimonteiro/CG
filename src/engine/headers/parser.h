@@ -2,11 +2,11 @@
 #define __PARSER_H__
 
 
-#include "scene.h"
+#include "group.h"
 
 class Parser {
   public:
     Parser();
-    void ReadXML(Scene*, char*);
+    void ReadXML(Group*, const char*);
 };
 #endif

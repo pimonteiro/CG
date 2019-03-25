@@ -8,8 +8,9 @@ class Point {
     float x,y,z;
   public:
     Point();
+    ~Point();
     Point(float, float, float);
-    std::string toString();
+
     float X() {
         return x;
     }
