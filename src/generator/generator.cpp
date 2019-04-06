@@ -112,11 +112,9 @@ main(int argc, char* argv[])
 {
         if (argc < 2)
                 cerr << "Run with --help for more information." << endl;
-
         else {
                 if (!strcmp("--help", argv[1]))
                         helpMessage();
-
                 else {
                         ostringstream os;
 

@@ -1,6 +1,7 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <GL/glew.h>
 #include <GL/glut.h>
 #endif
 
@@ -176,6 +177,9 @@ initCostumGL(int argc, char **argv)
         glutIdleFunc(renderScene);
         glutSpecialFunc(processSpecialKeys);
         glutKeyboardFunc(processKeys);
+#ifndef __APPLE__
+        glewInit();
+#endif
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
