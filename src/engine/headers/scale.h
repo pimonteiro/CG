@@ -3,11 +3,12 @@
 
 #include "transformation.h"
 
-class Scale: public Transformation {
-    public:
-        Scale(Point);
-        ~Scale();
-        void transform();
+class Scale: public Transformation
+{
+        public:
+                Scale(Point);
+                ~Scale();
+                void transform();
 };
 
 

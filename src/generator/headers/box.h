@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string box(float,float,float,int);
+std::string box(float, float, float, int);
 
 #endif

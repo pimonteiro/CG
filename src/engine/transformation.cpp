@@ -2,5 +2,6 @@
 
 Transformation::Transformation(Point p): v(p) {}
 
-Transformation::~Transformation() {
+Transformation::~Transformation()
+{
 }

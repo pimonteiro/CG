@@ -5,17 +5,18 @@
 #include <vector>
 #include "triangle.h"
 
-class Model {
-    private:
-        std::vector<Triangle*> triV;
-        float r, g, b;
-    public:
-        Model();
-        ~Model();
-        void addElement(Triangle*);
-        void draw();
-        void drawC();
-        void addColour(float, float, float);
+class Model
+{
+        private:
+                std::vector<Triangle*> triV;
+                float r, g, b;
+        public:
+                Model();
+                ~Model();
+                void addElement(Triangle*);
+                void draw();
+                void drawC();
+                void addColour(float, float, float);
 };
 
 #endif
