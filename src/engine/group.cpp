@@ -14,57 +14,68 @@
 #include <GL/glut.h>
 #endif
 
-Group::Group() {
+Group::Group()
+{
 }
 
-Group::~Group() {
-    for (auto& t : this->transformV) {
-        delete t;
-    }
-    for (auto& m : this->modelV) {
-        delete m;
-    }
-    for (auto& g : this->subGroupV) {
-        delete g;
-    }
+Group::~Group()
+{
+        for (auto& t : this->transformV)
+                delete t;
+
+        for (auto& m : this->modelV)
+                delete m;
+
+        for (auto& g : this->subGroupV)
+                delete g;
 }
 
-void Group::addTransformation(Transformation* t){
-    transformV.push_back(t);
+void
+Group::addTransformation(Transformation* t)
+{
+        transformV.push_back(t);
 }
 
-void Group::addModel(Model* m){
-    modelV.push_back(m);
+void
+Group::addModel(Model* m)
+{
+        modelV.push_back(m);
 }
 
-void Group::addGroup(Group* g){
-    subGroupV.push_back(g);
+void
+Group::addGroup(Group* g)
+{
+        subGroupV.push_back(g);
 }
 
-void Group::draw() {
-    for (auto& t : this->transformV) {
-        t->transform();
-    }
-    for (auto& m : this->modelV) {
-        m->draw();
-    }
-    for (auto& g : this->subGroupV) {
-        glPushMatrix();
-        g->draw();
-        glPopMatrix();
-    }
+void
+Group::draw()
+{
+        for (auto& t : this->transformV)
+                t->transform();
+
+        for (auto& m : this->modelV)
+                m->draw();
+
+        for (auto& g : this->subGroupV) {
+                glPushMatrix();
+                g->draw();
+                glPopMatrix();
+        }
 }
 
-void Group::drawC() {
-    for (auto& t : this->transformV) {
-        t->transform();
-    }
-    for (auto& m : this->modelV) {
-        m->drawC();
-    }
-    for (auto& g : this->subGroupV) {
-        glPushMatrix();
-        g->drawC();
-        glPopMatrix();
-    }
+void
+Group::drawC()
+{
+        for (auto& t : this->transformV)
+                t->transform();
+
+        for (auto& m : this->modelV)
+                m->drawC();
+
+        for (auto& g : this->subGroupV) {
+                glPushMatrix();
+                g->drawC();
+                glPopMatrix();
+        }
 }

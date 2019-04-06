@@ -3,7 +3,7 @@
 
 #include <string>
 
-std::string writePoint(float , float , float);
+std::string writePoint(float, float, float);
 void dumpFile(const std::ostringstream&, const std::string&);
 
 #endif

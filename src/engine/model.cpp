@@ -10,35 +10,43 @@
 #endif
 
 
-Model::Model() {
+Model::Model()
+{
 }
 
-Model::~Model() {
-    for (auto& t : this->triV) {
-        delete t;
-    }
+Model::~Model()
+{
+        for (auto& t : this->triV)
+                delete t;
 }
 
-void Model::addElement(Triangle *triangle) {
-    triV.push_back(triangle);
+void
+Model::addElement(Triangle *triangle)
+{
+        triV.push_back(triangle);
 }
 
-void Model::addColour(float r, float g, float b) {
-    this->r = r;
-    this->g = g;
-    this->b = b;
+void
+Model::addColour(float r, float g, float b)
+{
+        this->r = r;
+        this->g = g;
+        this->b = b;
 }
 
-void Model::draw() {
-    glColor3f(this->r, this->g, this->b);
-    for (auto& t : this->triV) {
-        t->draw();
-    }
+void
+Model::draw()
+{
+        glColor3f(this->r, this->g, this->b);
+
+        for (auto& t : this->triV)
+                t->draw();
 }
 
 
-void Model::drawC() {
-    for (auto& t : this->triV) {
-        t->drawC();
-    }
+void
+Model::drawC()
+{
+        for (auto& t : this->triV)
+                t->drawC();
 }

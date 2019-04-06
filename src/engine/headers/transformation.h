@@ -3,16 +3,18 @@
 
 #include "point.h"
 
-class Transformation {
-    private:
-        Point v;
-    public:
-        Transformation(Point);
-        virtual ~Transformation();
-        virtual void transform() = 0;
-        Point V(){
-            return v;
-        }
+class Transformation
+{
+        private:
+                Point v;
+        public:
+                Transformation(Point);
+                virtual ~Transformation();
+                virtual void transform() = 0;
+                Point
+                V() {
+                        return v;
+                }
 };
 
 #endif
