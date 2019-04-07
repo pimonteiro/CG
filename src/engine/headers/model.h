@@ -20,9 +20,10 @@ class Model
         public:
                 Model(int);
                 ~Model();
-                void addElement(Triangle*);
+                void addElement(float);
                 void draw();
                 void addColour(float, float, float);
+                void prepare();
 };
 
 #endif

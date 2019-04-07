@@ -12,22 +12,20 @@
 
 Model::Model(int numberPoints)
 {
-    this->size = numberPoints;
-    this->index = 0;
-    this->buffer = new GLuint[1];
-    this->pointArray = new float[this->size];
+        this->size = numberPoints;
+        this->index = 0;
+        this->buffer = new GLuint[1];
+        this->pointArray = new float[this->size];
 }
 
 Model::~Model()
 {
-        for (auto& t : this->triV)
-                delete t;
 }
 
 void
-Model::addElement(Triangle *triangle)
+Model::addElement(float cord)
 {
-        triV.push_back(triangle);
+        this->pointArray[this->index++] = cord;
 }
 
 void
@@ -39,11 +37,19 @@ Model::addColour(float r, float g, float b)
 }
 
 void
+Model::prepare()
+{
+        glGenBuffers(1, (this)->buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, *(this)->buffer);
+        glBufferData(GL_ARRAY_BUFFER, this->size * sizeof(float), this->pointArray, GL_STATIC_DRAW);
+}
+
+void
 Model::draw()
 {
+        glBindBuffer(GL_ARRAY_BUFFER, (this)->buffer[0]);
+        glVertexPointer(3, GL_FLOAT, 0, 0);
         glColor3f(this->r, this->g, this->b);
-
-        for (auto& t : this->triV)
-                t->draw();
+        glDrawArrays(GL_TRIANGLES, 0, (this->size) - 1);
 }
 
