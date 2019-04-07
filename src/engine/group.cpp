@@ -7,10 +7,10 @@
 #include <vector>
 
 
-#include <iostream>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <GL/glew.h>
 #include <GL/glut.h>
 #endif
 
@@ -47,6 +47,7 @@ Group::addGroup(Group* g)
 {
         subGroupV.push_back(g);
 }
+
 
 void
 Group::draw()
