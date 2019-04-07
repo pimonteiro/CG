@@ -10,8 +10,12 @@
 #endif
 
 
-Model::Model()
+Model::Model(int numberPoints)
 {
+    this->size = numberPoints;
+    this->index = 0;
+    this->buffer = new GLuint[1];
+    this->pointArray = new float[this->size];
 }
 
 Model::~Model()

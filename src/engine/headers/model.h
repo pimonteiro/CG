@@ -18,7 +18,7 @@ class Model
                 int index;
                 float *pointArray;
         public:
-                Model();
+                Model(int);
                 ~Model();
                 void addElement(Triangle*);
                 void draw();
