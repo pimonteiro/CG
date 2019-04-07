@@ -19,7 +19,6 @@ using namespace std;
 Group* group {new Group};
 int axis {0};
 int fullscreen {0};
-int randomColours {1};
 int timebase {0};
 int frame {0};
 int fps {0};
@@ -83,12 +82,7 @@ renderScene()
 
         GLenum modes[] = {GL_FILL, GL_LINE, GL_POINT};
         glPolygonMode(GL_FRONT, modes[mode]);
-
-        if (!randomColours)
-                group->drawC();
-        else
-                group->draw();
-
+        group->draw();
         int time {glutGet(GLUT_ELAPSED_TIME) };
         frame++;
 
@@ -145,9 +139,6 @@ processKeys(unsigned char key, int x, int y)
 
         if (key == 'l' || key == 'L')
                 distCam += 5.0f;
-
-        if (key == 'r' || key == 'R')
-                randomColours = (randomColours + 1) % 2;
 
         glutPostRedisplay();
 
