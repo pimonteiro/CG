@@ -100,7 +100,6 @@ parseDoc(Group* group, XMLNode* pN)
 Model*
 parseFile(const XMLElement* pElement)
 {
-        Model* model {new Model()};
         float r {0};
         float g {0};
         float b {0};
@@ -114,7 +113,6 @@ parseFile(const XMLElement* pElement)
         if (pElement->Attribute("b"))
                 b = stof(pElement->Attribute("b"));
 
-        model->addColour(r, g, b);
         string s {pElement->Attribute("file")};
         ifstream infile(s);
 
@@ -124,10 +122,10 @@ parseFile(const XMLElement* pElement)
         }
 
         string line;
-        // Number of points
         getline(infile, line);
-        Triangle* triangle {new Triangle};
-        int endTriangle {0};
+        int nPoints {stoi(line)};
+        Model* model {new Model(nPoints)};
+        model->addColour(r, g, b);
 
         while (getline(infile, line)) {
                 vector<string> v;
@@ -136,52 +134,8 @@ parseFile(const XMLElement* pElement)
                 for (string word; buf >> word;)
                         v.push_back(word);
 
-                int it {0};
-                float x;
-                float y;
-                float z;
-
-                for (vector<string>::const_iterator i {v.begin()}; i != v.end(); ++i) {
-                        switch (it) {
-                        case 0 :
-                                x = stof(*i);
-                                break;
-
-                        case 1 :
-                                y = stof(*i);
-                                break;
-
-                        case 2 :
-                                z = stof(*i);
-                                break;
-
-                        default :
-                                break;
-                        }
-
-                        it++;
-                }
-
-                switch (endTriangle) {
-                case 0 :
-                        triangle->addX(new Point(x, y, z));
-                        break;
-
-                case 1 :
-                        triangle->addY(new Point(x, y, z));
-                        break;
-
-                case 2 :
-                        triangle->addZ(new Point(x, y, z));
-                        model->addElement(triangle);
-                        triangle = new Triangle();
-                        break;
-
-                default :
-                        break;
-                }
-
-                endTriangle = (endTriangle + 1) % 3;
+                for (auto i {v.begin()}; i != v.end(); ++i)
+                        model->addElement(stof(*i));
         }
 
         return model;
