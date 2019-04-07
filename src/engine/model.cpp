@@ -1,11 +1,11 @@
 #include "headers/model.h"
-#include "headers/triangle.h"
 #include <iostream>
 #include <random>
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <GL/glew.h>
 #include <GL/glut.h>
 #endif
 
@@ -43,10 +43,3 @@ Model::draw()
                 t->draw();
 }
 
-
-void
-Model::drawC()
-{
-        for (auto& t : this->triV)
-                t->drawC();
-}
