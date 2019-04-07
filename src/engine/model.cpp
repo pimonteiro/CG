@@ -9,6 +9,14 @@
 #include <GL/glut.h>
 #endif
 
+float
+randomF()
+{
+        std::random_device seeder;
+        std::mt19937 engine(seeder());
+        std::uniform_real_distribution<float> dist(0, 1);
+        return dist(engine);
+}
 
 Model::Model(int numberPoints)
 {
@@ -16,6 +24,9 @@ Model::Model(int numberPoints)
         this->index = 0;
         this->buffer = new GLuint[1];
         this->pointArray = new float[this->size];
+        this->r = randomF();
+        this->g = randomF();
+        this->b = randomF();
 }
 
 Model::~Model()
