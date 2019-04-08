@@ -10,6 +10,8 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <random>
+
 
 using namespace tinyxml2;
 using namespace std;
@@ -21,6 +23,15 @@ Translation* parseTranslate(const XMLElement*);
 Scale* parseScale(const XMLElement*);
 Rotation* parseRotate(const XMLElement*);
 
+
+float
+randomF()
+{
+        std::random_device seeder;
+        std::mt19937 engine(seeder());
+        std::uniform_real_distribution<float> dist(0, 1);
+        return dist(engine);
+}
 
 Parser::Parser()
 {
@@ -100,9 +111,9 @@ parseDoc(Group* group, XMLNode* pN)
 Model*
 parseFile(const XMLElement* pElement)
 {
-        float r {0};
-        float g {0};
-        float b {0};
+        float r {randomF()};
+        float g {randomF()};
+        float b {randomF()};
 
         if (pElement->Attribute("r"))
                 r = stof(pElement->Attribute("r"));
