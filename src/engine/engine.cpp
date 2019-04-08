@@ -176,6 +176,7 @@ initCostumGL(int argc, char **argv)
         glEnable(GL_CULL_FACE);
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glPolygonMode(GL_FRONT, GL_LINE);
+        glEnableClientState(GL_VERTEX_ARRAY);
 }
 
 void
