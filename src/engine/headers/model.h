@@ -13,17 +13,16 @@ class Model
 {
         private:
                 float r, g, b;
-                GLuint *buffer;
                 int size; /* number of dots */
                 int index;
                 float *pointArray;
         public:
+                GLuint buffer[1];
                 Model(int);
                 ~Model();
                 void addElement(float);
                 void draw();
                 void addColour(float, float, float);
-                void prepare();
 };
 
 #endif
