@@ -38,7 +38,7 @@ Model::addColour(float r, float g, float b)
 void
 Model::draw()
 {
-        float* verts = new float[this->size];
+        float* verts {new float[this->size]};
 
         for (int index = 0;  index < this->size; index++)
                 verts[index] = this->pointArray[index];
