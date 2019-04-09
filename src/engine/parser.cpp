@@ -168,7 +168,7 @@ parseTranslate(const XMLElement* pElement)
         if (pElement->Attribute("z"))
                 z = stof(pElement->Attribute("z"));
 
-        return new Translation(Point(x, y, z));
+        return new Translation();
 }
 
 Rotation*
@@ -191,7 +191,7 @@ parseRotate(const XMLElement* pElement)
         if (pElement->Attribute("axisZ"))
                 axisz = stof(pElement->Attribute("axisZ"));
 
-        return new Rotation(Point(axisx, axisy, axisz), angle);
+        return new Rotation(Point(axisx, axisy, axisz), angle, 0.f);
 }
 
 Scale*
