@@ -82,7 +82,6 @@ renderScene()
 
         GLenum modes[] = {GL_FILL, GL_LINE, GL_POINT};
         glPolygonMode(GL_FRONT, modes[mode]);
-        group->prepare();
         group->draw();
         int time {glutGet(GLUT_ELAPSED_TIME) };
         frame++;

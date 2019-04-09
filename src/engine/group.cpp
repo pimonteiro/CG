@@ -48,15 +48,6 @@ Group::addGroup(Group* g)
         subGroupV.push_back(g);
 }
 
-void
-Group::prepare()
-{
-        for (auto& m : this->modelV)
-                m->prepare();
-
-        for (auto& g : this->subGroupV)
-                g->prepare();
-}
 
 void
 Group::draw()

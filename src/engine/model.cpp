@@ -36,7 +36,7 @@ Model::addColour(float r, float g, float b)
 }
 
 void
-Model::prepare()
+Model::draw()
 {
         float* verts = new float[this->size];
 
@@ -47,11 +47,6 @@ Model::prepare()
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
         glBufferData(GL_ARRAY_BUFFER, this->size * sizeof(float), verts, GL_STATIC_DRAW);
         delete [] verts;
-}
-
-void
-Model::draw()
-{
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
         glVertexPointer(3, GL_FLOAT, 0, 0);
         glColor3f(this->r, this->g, this->b);

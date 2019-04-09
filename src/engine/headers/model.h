@@ -23,7 +23,6 @@ class Model
                 void addElement(float);
                 void draw();
                 void addColour(float, float, float);
-                void prepare();
 };
 
 #endif

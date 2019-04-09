@@ -20,6 +20,5 @@ class Group
                 void addModel(Model* m);
                 void addGroup(Group* g);
                 void draw();
-                void prepare();
 };
 #endif
