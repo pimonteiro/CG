@@ -6,9 +6,9 @@
 class Rotation: public Transformation
 {
         private:
-                float angle;
+                float angle, time;
         public:
-                Rotation(Point, float);
+                Rotation(Point, float, float);
                 ~Rotation();
                 void transform();
 };
