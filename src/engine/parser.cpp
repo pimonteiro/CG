@@ -19,7 +19,7 @@ using namespace std;
 
 void parseDoc(Group*, XMLNode*);
 Model* parseFile(const XMLElement*);
-Translation* parseTranslate(const XMLElement*);
+Translation* parseTranslate(XMLElement*);
 Scale* parseScale(const XMLElement*);
 Rotation* parseRotate(const XMLElement*);
 
@@ -153,27 +153,42 @@ parseFile(const XMLElement* pElement)
 }
 
 Translation*
-parseTranslate(const XMLElement* pElement)
+parseTranslate(XMLElement* pElement)
 {
+        Translation* t {new Translation()};
+
+        if (pElement->Attribute("time"))
+                t->addTime(fabs(stof(pElement->Attribute("time"))));
+
+        XMLNode *pNode1 {pElement->FirstChild()};
         float x {0};
         float y {0};
         float z {0};
 
-        if (pElement->Attribute("x"))
-                x = stof(pElement->Attribute("x"));
+        for (; pNode1; pNode1 = pNode1->NextSibling()) {
+                XMLElement* pElement1 = pNode1->ToElement();
 
-        if (pElement->Attribute("y"))
-                y = stof(pElement->Attribute("y"));
+                if (!strcmp(pElement1->Name(), "point")) {
+                        if (pElement->Attribute("x"))
+                                x = stof(pElement->Attribute("x"));
 
-        if (pElement->Attribute("z"))
-                z = stof(pElement->Attribute("z"));
+                        if (pElement->Attribute("y"))
+                                y = stof(pElement->Attribute("y"));
 
-        return new Translation();
+                        if (pElement->Attribute("z"))
+                                z = stof(pElement->Attribute("z"));
+
+                        t->addPoint(new Point(x, y, z));
+                }
+        }
+
+        return t;
 }
 
 Rotation*
 parseRotate(const XMLElement* pElement)
 {
+        float time {0};
         float angle {0};
         float axisx {0};
         float axisy {0};
@@ -191,7 +206,10 @@ parseRotate(const XMLElement* pElement)
         if (pElement->Attribute("axisZ"))
                 axisz = stof(pElement->Attribute("axisZ"));
 
-        return new Rotation(Point(axisx, axisy, axisz), angle, 0.f);
+        if (pElement->Attribute("time"))
+                time = fabs(stof(pElement->Attribute("time")));
+
+        return new Rotation(Point(axisx, axisy, axisz), angle, time);
 }
 
 Scale*

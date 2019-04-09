@@ -6,10 +6,12 @@
 class Translation: public Transformation
 {
         private:
-                std::vector<Point> pointV;
+                std::vector<Point*> pointV;
+                float time;
         public:
                 Translation();
-                void addPoint(Point);
+                void addPoint(Point*);
+                void addTime(float);
                 ~Translation();
                 void transform();
 };
