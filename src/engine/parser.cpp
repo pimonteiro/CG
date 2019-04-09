@@ -160,7 +160,7 @@ parseTranslate(XMLElement* pElement)
         if (pElement->Attribute("time"))
                 t->addTime(stof(pElement->Attribute("time")));
 
-        XMLNode *pNode1 = pElement->FirstChild();
+        XMLNode *pNode1 {pElement->FirstChild()};
         float x {0};
         float y {0};
         float z {0};
