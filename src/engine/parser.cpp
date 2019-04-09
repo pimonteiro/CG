@@ -169,14 +169,14 @@ parseTranslate(XMLElement* pElement)
                 XMLElement* pElement1 = pNode1->ToElement();
 
                 if (!strcmp(pElement1->Name(), "point")) {
-                        if (pElement->Attribute("x"))
-                                x = stof(pElement->Attribute("x"));
+                        if (pElement1->Attribute("x"))
+                                x = stof(pElement1->Attribute("x"));
 
-                        if (pElement->Attribute("y"))
-                                y = stof(pElement->Attribute("y"));
+                        if (pElement1->Attribute("y"))
+                                y = stof(pElement1->Attribute("y"));
 
-                        if (pElement->Attribute("z"))
-                                z = stof(pElement->Attribute("z"));
+                        if (pElement1->Attribute("z"))
+                                z = stof(pElement1->Attribute("z"));
 
                         t->addPoint(new Point(x, y, z));
                 }

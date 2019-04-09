@@ -47,7 +47,7 @@ genSmallSizePlanets(ostringstream* solar)
                         ang = angle * i;
 
                 *solar << "         <rotate angle=\"" << ang << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
-                *solar << "         <translate x=\"" << plD[i] << "\" y=\"0\" z=\"0\"" << "/>" << endl;
+                *solar << "         <translate><point x=\"" << plD[i] << "\" y=\"0\" z=\"0\"" << "/></translate>" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
                 *solar << "             <model file=\"" << pF << "\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
@@ -58,7 +58,7 @@ genSmallSizePlanets(ostringstream* solar)
                         *solar << "             <group>" << endl;
                         *solar << "                 <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                         *solar << "                 <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
-                        *solar << "                 <translate x=\"" << plD[9] << "\" y=\"0\" z=\"0\"" << "/>" << endl;
+                        *solar << "                 <translate><point x=\"" << plD[9] << "\" y=\"0\" z=\"0\"" << "/></translate>" << endl;
                         *solar << "                 <scale x=\"" << plProp[9] << "\" y=\"" << plProp[9] << "\" z=\"" << plProp[9] << "\" />" << endl;
                         *solar << "                 <models>" << endl;
                         *solar << "                     <model file=\"" << pF << "\" r=\"" << colors[9].X() << "\" g=\"" << colors[9].Y() << "\" b=\"" << colors[9].Z() << "\" />" << endl;
@@ -97,7 +97,7 @@ genBigSizePlanets(ostringstream* solar)
         for (int i { 5 }; i < 9; i++) {
                 *solar << "     <group>" << endl;
                 *solar << "         <rotate angle=\"" << angle*i << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
-                *solar << "         <translate x=\"" << plD[i] << "\" y=\"0\" z=\"0\"" << "/>" << endl;
+                *solar << "         <translate><point x=\"" << plD[i] << "\" y=\"0\" z=\"0\"" << "/></translate>" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
                 *solar << "             <model file=\"" << pF << "\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
@@ -110,7 +110,7 @@ genBigSizePlanets(ostringstream* solar)
                                 *solar << "         <group>" << endl;
                                 *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                                 *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
-                                *solar << "             <translate x=\"" << plD[11 + j] << "\" y=\"0\" z=\"0\" />" << endl;
+                                *solar << "             <translate><point x=\"" << plD[11 + j] << "\" y=\"0\" z=\"0\" /></translate>" << endl;
                                 *solar << "             <scale x=\"" << plProp[11 + j] << "\" y=\"" << plProp[11 + j] << "\" z=\"" << plProp[11 + j] << "\" />" << endl;
                                 *solar << "             <models>" << endl;
                                 *solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[11 + j].X() << "\" g=\"" << colors[11 + j].Y() << "\" b=\"" << colors[11 + j].Z() << "\" />" << endl;
@@ -143,7 +143,7 @@ genBigSizePlanets(ostringstream* solar)
                         *solar << "         <group>" << endl;
                         *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                         *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
-                        *solar << "             <translate x=\"" << plD[10] << "\" y=\"0\" z=\"0\" />" << endl;
+                        *solar << "             <translate><point x=\"" << plD[10] << "\" y=\"0\" z=\"0\" /></translate>" << endl;
                         *solar << "             <scale x=\"" << plProp[10] << "\" y=\"" << plProp[10] << "\" z=\"" << plProp[10] << "\" />" << endl;
                         *solar << "             <models>" << endl;
                         *solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[10].X() << "\" g=\"" << colors[10].Y() << "\" b=\"" << colors[10].Z() << "\" />" << endl;
