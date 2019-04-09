@@ -48,7 +48,6 @@ sumNPoints(const std::string& s)
         while (getline(s0, oneLine)) {
                 if (regex_match(oneLine, p))
                         counter += stoi(oneLine);
-
                 else
                         os << oneLine << '\n';
         }

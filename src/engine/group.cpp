@@ -7,10 +7,10 @@
 #include <vector>
 
 
-#include <iostream>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <GL/glew.h>
 #include <GL/glut.h>
 #endif
 
@@ -48,14 +48,17 @@ Group::addGroup(Group* g)
         subGroupV.push_back(g);
 }
 
+
 void
 Group::draw()
 {
         for (auto& t : this->transformV)
                 t->transform();
 
-        for (auto& m : this->modelV)
+        for (auto& m : this->modelV) {
+                m->prepare();
                 m->draw();
+        }
 
         for (auto& g : this->subGroupV) {
                 glPushMatrix();
@@ -64,18 +67,3 @@ Group::draw()
         }
 }
 
-void
-Group::drawC()
-{
-        for (auto& t : this->transformV)
-                t->transform();
-
-        for (auto& m : this->modelV)
-                m->drawC();
-
-        for (auto& g : this->subGroupV) {
-                glPushMatrix();
-                g->drawC();
-                glPopMatrix();
-        }
-}

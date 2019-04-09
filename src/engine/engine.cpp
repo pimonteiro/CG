@@ -1,6 +1,7 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <GL/glew.h>
 #include <GL/glut.h>
 #endif
 
@@ -18,7 +19,6 @@ using namespace std;
 Group* group {new Group};
 int axis {0};
 int fullscreen {0};
-int randomColours {1};
 int timebase {0};
 int frame {0};
 int fps {0};
@@ -82,12 +82,7 @@ renderScene()
 
         GLenum modes[] = {GL_FILL, GL_LINE, GL_POINT};
         glPolygonMode(GL_FRONT, modes[mode]);
-
-        if (!randomColours)
-                group->drawC();
-        else
-                group->draw();
-
+        group->draw();
         int time {glutGet(GLUT_ELAPSED_TIME) };
         frame++;
 
@@ -145,9 +140,6 @@ processKeys(unsigned char key, int x, int y)
         if (key == 'l' || key == 'L')
                 distCam += 5.0f;
 
-        if (key == 'r' || key == 'R')
-                randomColours = (randomColours + 1) % 2;
-
         glutPostRedisplay();
 
         if (key == 'f' || key == 'F') {
@@ -176,11 +168,15 @@ initCostumGL(int argc, char **argv)
         glutIdleFunc(renderScene);
         glutSpecialFunc(processSpecialKeys);
         glutKeyboardFunc(processKeys);
+#ifndef __APPLE__
+        glewInit();
+#endif
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glPolygonMode(GL_FRONT, GL_LINE);
+        glEnableClientState(GL_VERTEX_ARRAY);
 }
 
 void
