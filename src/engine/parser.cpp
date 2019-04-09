@@ -158,7 +158,7 @@ parseTranslate(XMLElement* pElement)
         Translation* t {new Translation()};
 
         if (pElement->Attribute("time"))
-                t->addTime(stof(pElement->Attribute("time")));
+                t->addTime(fabs(stof(pElement->Attribute("time"))));
 
         XMLNode *pNode1 {pElement->FirstChild()};
         float x {0};
@@ -207,7 +207,7 @@ parseRotate(const XMLElement* pElement)
                 axisz = stof(pElement->Attribute("axisZ"));
 
         if (pElement->Attribute("time"))
-                time = stof(pElement->Attribute("time"));
+                time = fabs(stof(pElement->Attribute("time")));
 
         return new Rotation(Point(axisx, axisy, axisz), angle, time);
 }
