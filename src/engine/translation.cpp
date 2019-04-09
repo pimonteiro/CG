@@ -12,9 +12,16 @@
 Translation::Translation(): Transformation(Point()) {}
 
 void
-Translation::addPoint(Point p)
+Translation::addPoint(Point* p)
 {
         this->pointV.push_back(p);
+}
+
+
+void
+Translation::addTime(float t)
+{
+        this->time = t;
 }
 
 Translation::~Translation() {}
