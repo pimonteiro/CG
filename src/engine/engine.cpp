@@ -82,6 +82,7 @@ renderScene()
 
         GLenum modes[] = {GL_FILL, GL_LINE, GL_POINT};
         glPolygonMode(GL_FRONT, modes[mode]);
+        group->prepare();
         group->draw();
         int time {glutGet(GLUT_ELAPSED_TIME) };
         frame++;
@@ -162,6 +163,7 @@ initCostumGL(int argc, char **argv)
         glutInitWindowPosition(100, 100);
         glutInitWindowSize(800, 800);
         glutCreateWindow("Solar System - Group 13");
+        glEnableClientState(GL_VERTEX_ARRAY);
         // callback registration
         glutDisplayFunc(renderScene);
         glutReshapeFunc(changeSize);
@@ -174,9 +176,7 @@ initCostumGL(int argc, char **argv)
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glPolygonMode(GL_FRONT, GL_LINE);
-        glEnableClientState(GL_VERTEX_ARRAY);
 }
 
 void

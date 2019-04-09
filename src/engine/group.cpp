@@ -48,6 +48,15 @@ Group::addGroup(Group* g)
         subGroupV.push_back(g);
 }
 
+void
+Group::prepare()
+{
+        for (auto& m : this->modelV)
+                m->prepare();
+
+        for (auto& g : this->subGroupV)
+                g->prepare();
+}
 
 void
 Group::draw()
@@ -55,10 +64,8 @@ Group::draw()
         for (auto& t : this->transformV)
                 t->transform();
 
-        for (auto& m : this->modelV) {
-                m->prepare();
+        for (auto& m : this->modelV)
                 m->draw();
-        }
 
         for (auto& g : this->subGroupV) {
                 glPushMatrix();
