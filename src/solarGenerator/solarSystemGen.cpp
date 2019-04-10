@@ -29,9 +29,7 @@ float angle {40};
 float angleMoons {60};
 
 
-void
-genSmallSizePlanets(ostringstream* solar)
-{
+void genSmallSizePlanets(ostringstream *solar) {
         ostringstream file;
         file << sphere(1.0f * SIZE, SMALLSTACKS, SMALLSTACKS);
         string pF {"smallPlanets.3d" };
@@ -70,9 +68,7 @@ genSmallSizePlanets(ostringstream* solar)
         }
 }
 
-void
-genStars(ostringstream* solar)
-{
+void genStars(ostringstream *solar) {
         string s1 { "sun.3d" };
         float s1Prop { 24 };
         ostringstream file;
@@ -86,9 +82,7 @@ genStars(ostringstream* solar)
         *solar << "     </group>" << endl;
 }
 
-void
-genBigSizePlanets(ostringstream* solar)
-{
+void genBigSizePlanets(ostringstream *solar) {
         ostringstream file;
         file << sphere(1.0f * SIZE, BIGSTACKS, BIGSTACKS);
         string pF { "bigPlanets.3d" };
@@ -96,7 +90,7 @@ genBigSizePlanets(ostringstream* solar)
 
         for (int i { 5 }; i < 9; i++) {
                 *solar << "     <group>" << endl;
-                *solar << "         <rotate angle=\"" << angle*i << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
+                *solar << "         <rotate angle=\"" << angle *i << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                 *solar << "         <translate x=\"" << plD[i] << "\" y=\"0\" z=\"0\"" << "/>" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
@@ -157,9 +151,7 @@ genBigSizePlanets(ostringstream* solar)
         }
 }
 
-void
-genTrajectories(ostringstream* solar)
-{
+void genTrajectories(ostringstream *solar) {
         ostringstream file;
         file << annulus(360, 360 + 2, 1, 5000); // Baseado no da Terra
         string pF { "trajectories.3d" };
@@ -178,18 +170,14 @@ genTrajectories(ostringstream* solar)
 
 
 
-void
-genSolarSystem(ostringstream* solar)
-{
+void genSolarSystem(ostringstream *solar) {
         genTrajectories(solar);
         genStars(solar);
         genSmallSizePlanets(solar);
         genBigSizePlanets(solar);
 }
 
-int
-main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
         if (argc < 2) {
                 cerr << "Usage: ./solarSysGen <filename>.xml" << endl;
                 return 1;

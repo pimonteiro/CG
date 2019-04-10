@@ -7,9 +7,7 @@
 
 std::string trans(float, float, float);
 
-std::string
-sphere(float radius, int slices, int stacks)
-{
+std::string sphere(float radius, int slices, int stacks) {
         if (radius <= 0.0f || slices <= 0 || stacks <= 0)
                 fputs("All parameters must be positive numbers\n", stderr);
 
@@ -47,8 +45,6 @@ sphere(float radius, int slices, int stacks)
         return r.str();
 }
 
-std::string
-trans(float a, float b, float c)
-{
+std::string trans(float a, float b, float c) {
         return writePoint(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
 }

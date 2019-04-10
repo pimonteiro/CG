@@ -9,20 +9,19 @@
 #endif
 
 
-class Model
-{
-        private:
-                float r, g, b;
-                int size; /* number of dots */
-                int index;
-                float *pointArray;
-        public:
-                GLuint buffer[1];
-                Model(int);
-                ~Model();
-                void addElement(float);
-                void draw();
-                void addColour(float, float, float);
+class Model {
+    private:
+        float r, g, b;
+        int size; /* number of dots */
+        int index;
+        float *pointArray;
+    public:
+        GLuint buffer[1];
+        Model(int);
+        ~Model();
+        void addElement(float);
+        void draw();
+        void addColour(float, float, float);
 };
 
 #endif

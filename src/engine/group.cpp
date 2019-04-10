@@ -14,51 +14,41 @@
 #include <GL/glut.h>
 #endif
 
-Group::Group()
-{
+Group::Group() {
 }
 
-Group::~Group()
-{
-        for (auto& t : this->transformV)
+Group::~Group() {
+        for (auto &t : this->transformV)
                 delete t;
 
-        for (auto& m : this->modelV)
+        for (auto &m : this->modelV)
                 delete m;
 
-        for (auto& g : this->subGroupV)
+        for (auto &g : this->subGroupV)
                 delete g;
 }
 
-void
-Group::addTransformation(Transformation* t)
-{
+void Group::addTransformation(Transformation *t) {
         transformV.push_back(t);
 }
 
-void
-Group::addModel(Model* m)
-{
+void Group::addModel(Model *m) {
         modelV.push_back(m);
 }
 
-void
-Group::addGroup(Group* g)
-{
+void Group::addGroup(Group *g) {
         subGroupV.push_back(g);
 }
 
 
-void
-Group::draw()
-{
-        for (auto& t : this->transformV)
+void Group::draw() {
+        for (auto &t : this->transformV)
                 t->transform();
 
-        for (auto& m : this->modelV)
+        for (auto &m : this->modelV)
                 m->draw();
 
-        for (auto& g : this->subGroupV) {
+        for (auto &g : this->subGroupV) {
                 glPushMatrix();
                 g->draw();
                 glPopMatrix();

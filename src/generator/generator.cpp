@@ -12,9 +12,7 @@ using namespace std;
 
 
 // Display usage of program
-void
-helpMessage()
-{
+void helpMessage() {
         cout << "[*] ./generator plane <dim> <filename>" << endl;
         cout << "[*] ./generator box <x-dim> <y-dim> <z-dim> <slices (optional)> <filename>" << endl;
         cout << "[*] ./generator sphere <radius> <slices> <stacks> <filename>" << endl;
@@ -22,9 +20,7 @@ helpMessage()
         cout << "[*] ./generator annulus <inner radius> <outer radius> <height> <slices> <filename>" << endl;
 }
 
-string
-drawAnnulus(int argc, char* pString[])
-{
+string drawAnnulus(int argc, char *pString[]) {
         if (argc != 7) {
                 cerr << "Insufficient parameters. " << endl;
                 helpMessage();
@@ -38,9 +34,7 @@ drawAnnulus(int argc, char* pString[])
         }
 }
 
-string
-drawCone(int argc, char* pString[])
-{
+string drawCone(int argc, char *pString[]) {
         if (argc != 7) {
                 cerr << "Insufficient parameters." << endl;
                 helpMessage();
@@ -54,9 +48,7 @@ drawCone(int argc, char* pString[])
         }
 }
 
-string
-drawSphere(int argc, char* pString[])
-{
+string drawSphere(int argc, char *pString[]) {
         if (argc != 6) {
                 cerr << "Insufficient parameters." << endl;
                 helpMessage();
@@ -69,9 +61,7 @@ drawSphere(int argc, char* pString[])
         }
 }
 
-string
-drawPlane(int argc, char* pString[])
-{
+string drawPlane(int argc, char *pString[]) {
         if (argc != 4 ) {
                 cerr << "Insufficient parameters." << endl;
                 helpMessage();
@@ -82,9 +72,7 @@ drawPlane(int argc, char* pString[])
         }
 }
 
-string
-drawBox(int argc, char* pString[])
-{
+string drawBox(int argc, char *pString[]) {
         if (!(argc == 6 || argc == 7)) { //Must have 6 minimum parameters (1 optional)
                 cerr << "Insufficient parameters." << endl;
                 helpMessage();
@@ -107,9 +95,7 @@ drawBox(int argc, char* pString[])
         }
 }
 
-int
-main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
         if (argc < 2)
                 cerr << "Run with --help for more information." << endl;
         else {

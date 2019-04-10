@@ -3,17 +3,16 @@
 #include <vector>
 #include "transformation.h"
 
-class Translation: public Transformation
-{
-        private:
-                std::vector<Point*> pointV;
-                float time;
-        public:
-                Translation();
-                void addPoint(Point*);
-                void addTime(float);
-                ~Translation();
-                void transform();
+class Translation: public Transformation {
+    private:
+        std::vector<Point *> pointV;
+        float time;
+    public:
+        Translation();
+        void addPoint(Point *);
+        void addTime(float);
+        ~Translation();
+        void transform();
 };
 
 

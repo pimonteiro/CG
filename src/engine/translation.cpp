@@ -11,23 +11,17 @@
 
 Translation::Translation(): Transformation(Point()) {}
 
-void
-Translation::addPoint(Point* p)
-{
+void Translation::addPoint(Point *p) {
         this->pointV.push_back(p);
 }
 
 
-void
-Translation::addTime(float t)
-{
+void Translation::addTime(float t) {
         this->time = t;
 }
 
 Translation::~Translation() {}
 
-void
-Translation::transform()
-{
+void Translation::transform() {
         //    glTranslatef(this->V().X(), this->V().Y(), this->V().Z());
 }
