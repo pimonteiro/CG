@@ -82,9 +82,9 @@ Point Catmull::getCatmullRomPoint(float t, Point p0, Point p1, Point p2, Point p
 // given  global t, returns the point in the curve
 Point Catmull::getGlobalCatmullRomPoint(float gt, float *deriv) {
 
-    int nP = this->contP.size();
-	float t = gt * nP; // this is the real global t
-	int index = floor(t);  // which segment
+    int nP { this->contP.size()};
+	float t { gt * nP} ; // this is the real global t
+	int index { floor(t) };  // which segment
 	t = t - index; // where within  the segment
 
 	// indices store the points
@@ -100,10 +100,10 @@ Point Catmull::getGlobalCatmullRomPoint(float gt, float *deriv) {
 void Catmull::renderCatmullRomCurve() {
 	glColor3f(1,1,1);
     glBegin(GL_LINE_LOOP);
-    for(int i = 0; i < 1000; i++){
-		float t = 0.001f * i;
+    for(int i {0}; i < 1000; i++){
+		float t { 0.001f * i} ;
         float deriv[3];
-        Point pos = this->getGlobalCatmullRomPoint(t, deriv);
+        Point pos {this->getGlobalCatmullRomPoint(t, deriv)};
         glVertex3f(pos.X(),pos.Y(),pos.Z());
     }
     glEnd();
@@ -113,7 +113,7 @@ void Catmull::renderCatmullRomCurve() {
 void Catmull::transform(){
 	renderCatmullRomCurve();
 	float deriv[3];
-	Point pos = this->getGlobalCatmullRomPoint(this->t,deriv);
+	Point pos { this->getGlobalCatmullRomPoint(this->t,deriv)};
 	this->incT();
 	glTranslatef(pos.X(),pos.Y(), pos.Z());
 	if(this->ownRotation){ // Rotates using self derivated rotation
