@@ -100,8 +100,8 @@ Point Catmull::getGlobalCatmullRomPoint(float gt, float *deriv) {
 void Catmull::renderCatmullRomCurve() {
 	glColor3f(1,1,1);
     glBegin(GL_LINE_LOOP);
-    for(int i = 0; i < 10000; i++){
-		float t = 0.0001f * i;
+    for(int i = 0; i < 1000; i++){
+		float t = 0.001f * i;
         float deriv[3];
         Point pos = this->getGlobalCatmullRomPoint(t, deriv);
         glVertex3f(pos.X(),pos.Y(),pos.Z());
@@ -116,7 +116,6 @@ void Catmull::transform(){
 	Point pos = this->getGlobalCatmullRomPoint(this->t,deriv);
 	this->incT();
 	glTranslatef(pos.X(),pos.Y(), pos.Z());
-	// TODO CHECK BECAUSE OF ROTATIONS BEFORE THE CURVE
 	if(this->ownRotation){ // Rotates using self derivated rotation
 			float zr[3];
 			cross(deriv, this->yAxis, zr);
