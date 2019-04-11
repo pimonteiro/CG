@@ -98,8 +98,10 @@ Point Catmull::getGlobalCatmullRomPoint(float gt, float *deriv) {
 }
 
 void Catmull::renderCatmullRomCurve() {
+	glColor3f(1,1,1);
     glBegin(GL_LINE_LOOP);
-    for(float t = 0.0f; t < 1.0f; t+=0.0001f){
+    for(int i = 0; i < 10000; i++){
+		float t = 0.0001f * i;
         float deriv[3];
         Point pos = this->getGlobalCatmullRomPoint(t, deriv);
         glVertex3f(pos.X(),pos.Y(),pos.Z());
