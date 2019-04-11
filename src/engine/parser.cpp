@@ -5,6 +5,7 @@
 #include "headers/scale.h"
 #include "headers/rotation.h"
 #include "headers/translation.h"
+#include "headers/catmull.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -22,6 +23,7 @@ Model* parseFile(const XMLElement*);
 Translation* parseTranslate(XMLElement*);
 Scale* parseScale(const XMLElement*);
 Rotation* parseRotate(const XMLElement*);
+Catmull* parseCatmul(XMLElement* pElement);
 
 
 float
@@ -83,8 +85,14 @@ parseDoc(Group* group, XMLNode* pN)
                 }
 
                 if (!strcmp(pElement->Name(), "translate")) {
-                        Translation* t {parseTranslate(pElement)};
-                        group->addTransformation(t);
+                        if(pElement->Attribute("time")){
+                                Catmull* c {parseCatmul(pElement)};
+                                group->addTransformation(c);
+                        }
+                        else {
+                                Translation* t {parseTranslate(pElement)};
+                                group->addTransformation(t);
+                        }
                 }
 
                 if (!strcmp(pElement->Name(), "rotate")) {
@@ -152,14 +160,15 @@ parseFile(const XMLElement* pElement)
         return model;
 }
 
-Translation*
-parseTranslate(XMLElement* pElement)
-{
-        Translation* t {new Translation()};
-
-        if (pElement->Attribute("time"))
-                t->addTime(fabs(stof(pElement->Attribute("time"))));
-
+Catmull*
+parseCatmul(XMLElement* pElement){
+        Catmull* t;
+        if (pElement->Attribute("time")){
+                float time {fabs(stof(pElement->Attribute("time")))};
+                int flag {stoi(pElement->Attribute("selfRotate"))};
+                t = new Catmull(flag,time);
+        }
+        
         XMLNode *pNode1 {pElement->FirstChild()};
         float x {0};
         float y {0};
@@ -177,11 +186,30 @@ parseTranslate(XMLElement* pElement)
 
                         if (pElement1->Attribute("z"))
                                 z = stof(pElement1->Attribute("z"));
-
-                        t->addPoint(new Point(x, y, z));
+                        t->addPoint(Point(x,y,z));
                 }
         }
+        return t;
+}
+Translation*
+parseTranslate(XMLElement* pElement)
+{
+        float x {0};
+        float y {0};
+        float z {0};
 
+        Translation* t = new Translation();
+
+        if(pElement->Attribute("x")) {
+                x = stof(pElement->Attribute("x"));
+        }
+        if(pElement->Attribute("y")) {
+                y = stof(pElement->Attribute("y"));
+        }
+        if(pElement->Attribute("z")){
+                z = stof(pElement->Attribute("z"));
+        }
+        t->addPoint(new Point(x,y,z));
         return t;
 }
 
