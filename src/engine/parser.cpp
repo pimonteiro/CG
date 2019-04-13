@@ -85,11 +85,10 @@ parseDoc(Group* group, XMLNode* pN)
                 }
 
                 if (!strcmp(pElement->Name(), "translate")) {
-                        if(pElement->Attribute("time")){
+                        if (pElement->Attribute("time")) {
                                 Catmull* c {parseCatmul(pElement)};
                                 group->addTransformation(c);
-                        }
-                        else {
+                        } else {
                                 Translation* t {parseTranslate(pElement)};
                                 group->addTransformation(t);
                         }
@@ -161,14 +160,16 @@ parseFile(const XMLElement* pElement)
 }
 
 Catmull*
-parseCatmul(XMLElement* pElement){
+parseCatmul(XMLElement* pElement)
+{
         Catmull* t;
-        if (pElement->Attribute("time")){
+
+        if (pElement->Attribute("time")) {
                 float time {fabs(stof(pElement->Attribute("time")))};
                 int flag {stoi(pElement->Attribute("selfRotate"))};
-                t = new Catmull(flag,time);
+                t = new Catmull(flag, time);
         }
-        
+
         XMLNode *pNode1 {pElement->FirstChild()};
         float x {0};
         float y {0};
@@ -186,9 +187,11 @@ parseCatmul(XMLElement* pElement){
 
                         if (pElement1->Attribute("z"))
                                 z = stof(pElement1->Attribute("z"));
-                        t->addPoint(Point(x,y,z));
+
+                        t->addPoint(Point(x, y, z));
                 }
         }
+
         return t;
 }
 Translation*
@@ -197,19 +200,18 @@ parseTranslate(XMLElement* pElement)
         float x {0};
         float y {0};
         float z {0};
-
         Translation* t = new Translation();
 
-        if(pElement->Attribute("x")) {
+        if (pElement->Attribute("x"))
                 x = stof(pElement->Attribute("x"));
-        }
-        if(pElement->Attribute("y")) {
+
+        if (pElement->Attribute("y"))
                 y = stof(pElement->Attribute("y"));
-        }
-        if(pElement->Attribute("z")){
+
+        if (pElement->Attribute("z"))
                 z = stof(pElement->Attribute("z"));
-        }
-        t->addPoint(new Point(x,y,z));
+
+        t->addPoint(new Point(x, y, z));
         return t;
 }
 
