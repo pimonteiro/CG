@@ -16,7 +16,7 @@ Catmull::Catmull(int rot, float time): Transformation(Point())
         this->ownRotation = rot;
         this->t = 0;
         this->time = time;
-        float t[3] = {0, 1, 0};
+        float t[3] {0, 1, 0};
         setYAxis(t);
 }
 

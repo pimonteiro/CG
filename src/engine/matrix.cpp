@@ -35,7 +35,7 @@ cross(float *a, float *b, float *res)
 void
 normalize(float *a)
 {
-        float l = sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
+        float l {sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2])};
         a[0] = a[0] / l;
         a[1] = a[1] / l;
         a[2] = a[2] / l;
@@ -45,17 +45,17 @@ normalize(float *a)
 float
 length(float *v)
 {
-        float res = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+        float res {sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2])};
         return res;
 }
 
 void
 multMatrixVector(float *m, float *v, float *res)
 {
-        for (int j = 0; j < 4; ++j) {
+        for (int j {0}; j < 4; ++j) {
                 res[j] = 0;
 
-                for (int k = 0; k < 4; ++k)
+                for (int k {0}; k < 4; ++k)
                         res[j] += v[k] * m[j * 4 + k];
         }
 }

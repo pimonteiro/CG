@@ -200,7 +200,7 @@ parseTranslate(XMLElement* pElement)
         float x {0};
         float y {0};
         float z {0};
-        Translation* t = new Translation();
+        Translation* t {new Translation()};
 
         if (pElement->Attribute("x"))
                 x = stof(pElement->Attribute("x"));
