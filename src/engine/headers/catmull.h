@@ -8,7 +8,7 @@
 class Catmull: public Transformation
 {
         private:
-                std::vector<Point> contP;
+                std::vector<Point*> contP;
                 int ownRotation;
                 float time;
                 float t;
@@ -20,13 +20,10 @@ class Catmull: public Transformation
                 void setYAxis(float*);
                 void incT();
                 int getRotation();
-                void addPoint(Point);
+                void addPoint(Point*);
                 Point getCatmullRomPoint(float, Point, Point, Point, Point, float*);
                 Point getGlobalCatmullRomPoint(float, float*);
                 void renderCatmullRomCurve();
                 void transform();
 };
-
-
-
 #endif

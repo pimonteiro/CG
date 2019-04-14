@@ -188,7 +188,8 @@ parseCatmul(XMLElement* pElement)
                         if (pElement1->Attribute("z"))
                                 z = stof(pElement1->Attribute("z"));
 
-                        t->addPoint(Point(x, y, z));
+                        Point *p {new Point(x, y, z)};
+                        t->addPoint(p);
                 }
         }
 
@@ -200,7 +201,6 @@ parseTranslate(XMLElement* pElement)
         float x {0};
         float y {0};
         float z {0};
-        Translation* t {new Translation()};
 
         if (pElement->Attribute("x"))
                 x = stof(pElement->Attribute("x"));
@@ -211,7 +211,7 @@ parseTranslate(XMLElement* pElement)
         if (pElement->Attribute("z"))
                 z = stof(pElement->Attribute("z"));
 
-        t->addPoint(new Point(x, y, z));
+        Translation* t {new Translation(Point(x, y, z))};
         return t;
 }
 

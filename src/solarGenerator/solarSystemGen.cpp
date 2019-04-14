@@ -38,7 +38,7 @@ void
 trajectoryPoints(float r, ostringstream* solar)
 {
         for (int i { 0 }; i < 8; i++) {
-                float ang {static_cast<float>((M_PI) / 4) * i };
+                float ang {static_cast<float>((M_PI) / 4.0f) * i };
                 float x { r * cos(ang)};
                 float z { r * sin(ang)};
                 *solar << "         <point x=\"" << x << "\" y=\"0\" z=\"" << z << "\" />" << endl;

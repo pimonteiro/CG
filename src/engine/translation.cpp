@@ -7,21 +7,12 @@
 #include <vector>
 #include "headers/translation.h"
 
-Translation::Translation(): Transformation(Point()) {}
-
-void
-Translation::addPoint(Point* p)
-{
-        this->pointV.push_back(p);
-}
-
+Translation::Translation(Point p): Transformation(p) {}
 
 Translation::~Translation() {}
-
 
 void
 Translation::transform()
 {
-        glTranslatef(this->pointV.at(0)->X(), this->pointV.at(0)->Y(), this->pointV.at(0)->Z());
-
+        glTranslatef(this->V().X(), this->V().Y(), this->V().Z());
 }

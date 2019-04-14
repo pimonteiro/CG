@@ -5,14 +5,9 @@
 
 class Translation: public Transformation
 {
-        private:
-                std::vector<Point*> pointV;
         public:
-                Translation();
-                void addPoint(Point*);
+                Translation(Point);
                 ~Translation();
                 void transform();
 };
-
-
 #endif

@@ -22,9 +22,8 @@ Catmull::Catmull(int rot, float time): Transformation(Point())
 
 Catmull::~Catmull() {}
 
-
 void
-Catmull:: addPoint(Point p)
+Catmull:: addPoint(Point *p)
 {
         this->contP.push_back(p);
 }
@@ -90,7 +89,6 @@ Catmull::getCatmullRomPoint(float t, Point p0, Point p1, Point p2, Point p3, flo
         return Point(ppos[0], ppos[1], ppos[2]);
 }
 
-
 // given  global t, returns the point in the curve
 Point
 Catmull::getGlobalCatmullRomPoint(float gt, float *deriv)
@@ -105,7 +103,7 @@ Catmull::getGlobalCatmullRomPoint(float gt, float *deriv)
         indices[1] = (indices[0] + 1) % nP;
         indices[2] = (indices[1] + 1) % nP;
         indices[3] = (indices[2] + 1) % nP;
-        return getCatmullRomPoint(t, this->contP[indices[0]], this->contP[indices[1]], this->contP[indices[2]], this->contP[indices[3]], deriv);
+        return getCatmullRomPoint(t, *this->contP[indices[0]], *this->contP[indices[1]], *this->contP[indices[2]], *this->contP[indices[3]], deriv);
 }
 
 void
@@ -123,7 +121,6 @@ Catmull::renderCatmullRomCurve()
 
         glEnd();
 }
-
 
 void
 Catmull::transform()
