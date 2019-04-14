@@ -3,17 +3,13 @@
 #include <fstream>
 #include <sstream>
 
-std::string
-writePoint(float a, float b, float c)
-{
+std::string writePoint(float a, float b, float c) {
         std::ostringstream os;
         os << a << " " << b << " " << c << '\n';
         return os.str();
 }
 
-void
-dumpFile(const std::ostringstream& os, const std::string& file)
-{
+void dumpFile(const std::ostringstream &os, const std::string &file) {
         std::ofstream outfile;
         outfile.open(file);
 

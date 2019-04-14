@@ -16,7 +16,7 @@
 
 using namespace std;
 
-Group* group {new Group};
+Group *group {new Group};
 int axis {0};
 int fullscreen {0};
 int timebase {0};
@@ -28,9 +28,7 @@ float distCam {1300};
 GLenum mode;
 
 
-void
-changeSize(int w, int h)
-{
+void changeSize(int w, int h) {
         // Prevent a divide by zero, when window is too short
         // (you cant make a window with zero width).
         if (h == 0)
@@ -50,9 +48,7 @@ changeSize(int w, int h)
         glMatrixMode(GL_MODELVIEW);
 }
 
-void
-renderScene()
-{
+void renderScene() {
         // clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         float px { static_cast<float>(distCam * cos(camaraBeta)*cos(camaraAlpha)) };
@@ -90,7 +86,7 @@ renderScene()
                 fps = frame * 1000.0 / (time - timebase);
                 ostringstream os;
                 os << "Sistema Solar - Grupo 13    ( "  <<  fps << ")";
-                char* s {strdup(os.str().c_str())};
+                char *s {strdup(os.str().c_str())};
                 glutSetWindowTitle(s);
                 timebase = time;
                 frame = 0;
@@ -99,9 +95,7 @@ renderScene()
         glutSwapBuffers();
 }
 
-void
-processSpecialKeys(int key, int xx, int yy)
-{
+void processSpecialKeys(int key, int xx, int yy) {
         if (key == GLUT_KEY_RIGHT)
                 camaraAlpha += M_PI / 50;
 
@@ -125,9 +119,7 @@ processSpecialKeys(int key, int xx, int yy)
         glutPostRedisplay();
 }
 
-void
-processKeys(unsigned char key, int x, int y)
-{
+void processKeys(unsigned char key, int x, int y) {
         if (key == 'a' || key == 'A')
                 axis = !axis;
 
@@ -154,9 +146,7 @@ processKeys(unsigned char key, int x, int y)
         }
 }
 
-void
-initCostumGL(int argc, char **argv)
-{
+void initCostumGL(int argc, char **argv) {
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
         glutInitWindowPosition(100, 100);
@@ -178,9 +168,7 @@ initCostumGL(int argc, char **argv)
         glPolygonMode(GL_FRONT, GL_LINE);
 }
 
-void
-startMessage()
-{
+void startMessage() {
         cout << "Please wait.......\n\n" << endl;
         cout << "Controls: " << endl;
         cout << "\tWASD -> move the camera" << endl;
@@ -191,9 +179,7 @@ startMessage()
         cout << "\tF -> enter or exit fullScreen mode" << endl;
 }
 
-int
-main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
         if (argc == 2) {
                 startMessage();
                 Parser().ReadXML(group, argv[1]);

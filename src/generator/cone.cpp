@@ -4,9 +4,7 @@
 #include <sstream>
 #include <cmath>
 
-std::string
-frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int* nPoints, int isFirst)
-{
+std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int *nPoints, int isFirst) {
         std::ostringstream os;
 
         for (int i {0}; i < slices; i++) {
@@ -40,9 +38,7 @@ frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dH
         return os.str();
 }
 
-std::string
-cone(float radius, float height, int slices, int stacks)
-{
+std::string cone(float radius, float height, int slices, int stacks) {
         if (radius <= 0.0f || slices <= 0 || stacks <= 0)
                 std::cerr << "All parameters must be positive numbers\n";
 
