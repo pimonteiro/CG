@@ -7,7 +7,7 @@
 
 #include "headers/catmull.h"
 #include "headers/matrix.h"
-#include <math.h>
+#include <cmath>
 
 #define T_INCREMENT	0.0001
 

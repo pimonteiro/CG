@@ -4,7 +4,6 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #endif
-#include <vector>
 #include "headers/translation.h"
 
 Translation::Translation(Point p): Transformation(p) {}

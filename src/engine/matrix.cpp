@@ -1,5 +1,5 @@
 #include "headers/matrix.h"
-#include <math.h>
+#include <cmath>
 
 void
 buildRotMatrix(float *x, float *y, float *z, float *m)
