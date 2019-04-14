@@ -28,7 +28,7 @@ if(NOT OPENGL_FOUND)
 endif(NOT OPENGL_FOUND)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../bin")
-add_executable(engine engine.cpp model.cpp tinyxml2.cpp parser.cpp point.cpp group.cpp transformation.cpp translation.cpp scale.cpp rotation.cpp)
+add_executable(engine engine.cpp model.cpp tinyxml2.cpp parser.cpp point.cpp group.cpp transformation.cpp translation.cpp scale.cpp rotation.cpp matrix.cpp catmull.cpp)
 set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
 target_link_libraries(engine ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${GLEW_LIBRARY})
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -O2")
