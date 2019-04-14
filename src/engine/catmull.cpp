@@ -23,25 +23,25 @@ Catmull::Catmull(int rot, float time): Transformation(Point())
 Catmull::~Catmull() {}
 
 void
-Catmull:: addPoint(Point *p)
+Catmull::addPoint(Point *p)
 {
         this->contP.push_back(p);
 }
 
 int
-Catmull:: getRotation()
+Catmull::getRotation()
 {
         return this->ownRotation;
 }
 
 void
-Catmull:: incT()
+Catmull::incT()
 {
         this->t += T_INCREMENT;
 }
 
 void
-Catmull:: setYAxis(float y[3])
+Catmull::setYAxis(float y[3])
 {
         this->yAxis[0] = y[0];
         this->yAxis[1] = y[1];
