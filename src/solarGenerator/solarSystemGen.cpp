@@ -35,9 +35,7 @@ float angleMoons {60};
 
 
 
-void
-planetOrbitalPoints(float r, ostringstream* solar)
-{
+void planetOrbitalPoints(float r, ostringstream *solar) {
         for (int i { 0 }; i < 8; i++) {
                 float ang {static_cast<float>((M_PI) / 4.0f) *i };
                 float x { r * cos(ang)};
@@ -197,12 +195,11 @@ void genTrajectories(ostringstream *solar) {
 }
 
 
-void genComet(ostringstream* solar){
+void genComet(ostringstream *solar) {
         ostringstream file;
         file << bezierPatch("teapot-2.patch", 30);
         string pF {"comet.3d"};
-        dumpFile(file,pF);
-
+        dumpFile(file, pF);
         *solar << "     <group>" << endl;
         *solar << "         <scale x=\"3\" y=\"3\" z=\"3\" />" << endl;
         *solar << "         <translate time=\"" << plTime[10] << "\" selfRotate=\"1\" >" << endl;
@@ -223,9 +220,7 @@ void genComet(ostringstream* solar){
 }
 
 
-void
-genSolarSystem(ostringstream* solar)
-{
+void genSolarSystem(ostringstream *solar) {
         //genTrajectories(solar);
         genStars(solar);
         genComet(solar);

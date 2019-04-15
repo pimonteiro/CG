@@ -11,20 +11,17 @@
 
 #define T_INCREMENT	0.0001
 
-Catmull::Catmull(): Transformation(Point())
-{
+Catmull::Catmull(): Transformation(Point()) {
         this->t = 0;
         float t[3] {0, 1, 0};
         setYAxis(t);
 }
 
-void
-Catmull::addFlag(int rot){
+void Catmull::addFlag(int rot) {
         this->ownRotation = rot;
 }
 
-void
-Catmull::addTime(int t){
+void Catmull::addTime(int t) {
         this->time = t;
 }
 

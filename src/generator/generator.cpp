@@ -21,9 +21,7 @@ void helpMessage() {
         cout << "[*] ./generator bezier-patch <patch-filename> <tesselation-level> <filename>" << endl;
 }
 
-string
-drawBezierPatch(int argc, char* pString[])
-{
+string drawBezierPatch(int argc, char *pString[]) {
         if (argc != 5) {
                 cerr << "Insufficient parameters. " << endl;
                 helpMessage();
@@ -36,9 +34,7 @@ drawBezierPatch(int argc, char* pString[])
 }
 
 
-string
-drawAnnulus(int argc, char* pString[])
-{
+string drawAnnulus(int argc, char *pString[]) {
         if (argc != 7) {
                 cerr << "Insufficient parameters. " << endl;
                 helpMessage();
