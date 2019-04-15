@@ -15,8 +15,10 @@ class Catmull: public Transformation
                 float yAxis[3];
 
         public:
-                Catmull(int, float);
+                Catmull();
                 ~Catmull();
+                void addFlag(int);
+                void addTime(int);
                 void setYAxis(float*);
                 void incT();
                 int getRotation();
