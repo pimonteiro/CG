@@ -3,27 +3,23 @@
 
 #include <string>
 
-class Point
-{
-        private:
-                float x, y, z;
-        public:
-                Point();
-                ~Point();
-                Point(float, float, float);
+class Point {
+    private:
+        float x, y, z;
+    public:
+        Point();
+        ~Point();
+        Point(float, float, float);
 
-                float
-                X() {
-                        return x;
-                }
-                float
-                Y() {
-                        return y;
-                }
-                float
-                Z() {
-                        return z;
-                }
+        float X() {
+                return x;
+        }
+        float Y() {
+                return y;
+        }
+        float Z() {
+                return z;
+        }
 };
 
 #endif

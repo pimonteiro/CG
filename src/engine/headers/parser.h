@@ -4,10 +4,9 @@
 
 #include "group.h"
 
-class Parser
-{
-        public:
-                Parser();
-                void ReadXML(Group*, const char*);
+class Parser {
+    public:
+        Parser();
+        void ReadXML(Group *, const char *);
 };
 #endif

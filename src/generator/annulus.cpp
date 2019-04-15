@@ -4,9 +4,7 @@
 #include <cmath>
 
 
-std::string
-annulus(float innerRadius, float outerRadius, float height, int div)
-{
+std::string annulus(float innerRadius, float outerRadius, float height, int div) {
         std::ostringstream os;
         std::ostringstream r;
         float angle {static_cast<float>(2 * M_PI / div) };

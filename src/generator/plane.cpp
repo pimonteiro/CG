@@ -2,9 +2,7 @@
 #include "headers/plane.h"
 #include "headers/outputAux.h"
 
-std::string
-plane(float xO, float yO, float zO, float xP, float zP, int type, int place)
-{
+std::string plane(float xO, float yO, float zO, float xP, float zP, int type, int place) {
         std::ostringstream os;
         os << "6\n";
         float x, y, z;

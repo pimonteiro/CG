@@ -18,30 +18,25 @@ using namespace tinyxml2;
 using namespace std;
 
 
-void parseDoc(Group*, XMLNode*);
-Model* parseFile(const XMLElement*);
-Translation* parseTranslate(XMLElement*);
-Scale* parseScale(const XMLElement*);
-Rotation* parseRotate(const XMLElement*);
-Catmull* parseCatmul(XMLElement* pElement);
+void parseDoc(Group *, XMLNode *);
+Model *parseFile(const XMLElement *);
+Translation *parseTranslate(XMLElement *);
+Scale *parseScale(const XMLElement *);
+Rotation *parseRotate(const XMLElement *);
+Catmull *parseCatmul(XMLElement *pElement);
 
 
-float
-randomF()
-{
+float randomF() {
         std::random_device seeder;
         std::mt19937 engine(seeder());
         std::uniform_real_distribution<float> dist(0, 1);
         return dist(engine);
 }
 
-Parser::Parser()
-{
+Parser::Parser() {
 }
 
-void
-Parser::ReadXML(Group* group, const char* xml)
-{
+void Parser::ReadXML(Group *group, const char *xml) {
         XMLDocument xmlDoc;
         XMLError result {xmlDoc.LoadFile(xml)};
 
@@ -50,13 +45,13 @@ Parser::ReadXML(Group* group, const char* xml)
                 exit(1);
         }
 
-        XMLNode* pRoot {xmlDoc.FirstChild()};
+        XMLNode *pRoot {xmlDoc.FirstChild()};
 
         if (pRoot == nullptr) {
                 cout << "Warning: Malformed XML file" << endl;
                 exit(0);
         } else {
-                XMLNode* pNode {pRoot->FirstChild()};
+                XMLNode *pNode {pRoot->FirstChild()};
 
                 if (pNode == nullptr) {
                         cout << "Warning: No models found" << endl;
@@ -66,46 +61,44 @@ Parser::ReadXML(Group* group, const char* xml)
         }
 }
 
-void
-parseDoc(Group* group, XMLNode* pN)
-{
-        XMLNode * pNode {pN->FirstChild()};
+void parseDoc(Group *group, XMLNode *pN) {
+        XMLNode *pNode {pN->FirstChild()};
 
         if (pNode == nullptr)
                 exit(0);
 
         for (; pNode; pNode = pNode->NextSibling()) {
-                XMLElement* pElement {pNode->ToElement()};
+                XMLElement *pElement {pNode->ToElement()};
 
                 if (!strcmp(pElement->Name(), "model")) {
                         if (pElement->Attribute("file")) {
-                                Model* m {parseFile(pElement)};
+                                Model *m {parseFile(pElement)};
                                 group->addModel(m);
                         }
                 }
 
                 if (!strcmp(pElement->Name(), "translate")) {
                         if (pElement->Attribute("time")) {
-                                Catmull* c {parseCatmul(pElement)};
+                                Catmull *c {parseCatmul(pElement)};
                                 group->addTransformation(c);
                         } else {
-                                Translation* t {parseTranslate(pElement)};
+                                Translation *t {parseTranslate(pElement)};
                                 group->addTransformation(t);
                         }
                 }
 
                 if (!strcmp(pElement->Name(), "rotate")) {
-                        Rotation* r {parseRotate(pElement)};
+                        Rotation *r {parseRotate(pElement)};
                         group->addTransformation(r);
                 }
 
                 if (!strcmp(pElement->Name(), "scale")) {
-                        Scale* s {parseScale(pElement)};
+                        Scale *s {parseScale(pElement)};
                         group->addTransformation(s);
                 }
 
                 if (!strcmp(pElement->Name(), "group")) {
-                        Group* g {new Group()};
+                        Group *g {new Group()};
                         parseDoc(g, pNode);
                         group->addGroup(g);
                 }
@@ -115,9 +108,7 @@ parseDoc(Group* group, XMLNode* pN)
         }
 }
 
-Model*
-parseFile(const XMLElement* pElement)
-{
+Model *parseFile(const XMLElement *pElement) {
         float r {randomF()};
         float g {randomF()};
         float b {randomF()};
@@ -142,7 +133,7 @@ parseFile(const XMLElement* pElement)
         string line;
         getline(infile, line);
         int nPoints {stoi(line)};
-        Model* model {new Model(nPoints)};
+        Model *model {new Model(nPoints)};
         model->addColour(r, g, b);
 
         while (getline(infile, line)) {
@@ -159,10 +150,8 @@ parseFile(const XMLElement* pElement)
         return model;
 }
 
-Catmull*
-parseCatmul(XMLElement* pElement)
-{
-        Catmull* t;
+Catmull *parseCatmul(XMLElement *pElement) {
+        Catmull *t;
 
         if (pElement->Attribute("time")) {
                 float time {fabs(stof(pElement->Attribute("time")))};
@@ -176,7 +165,7 @@ parseCatmul(XMLElement* pElement)
         float z {0};
 
         for (; pNode1; pNode1 = pNode1->NextSibling()) {
-                XMLElement* pElement1 = pNode1->ToElement();
+                XMLElement *pElement1 = pNode1->ToElement();
 
                 if (!strcmp(pElement1->Name(), "point")) {
                         if (pElement1->Attribute("x"))
@@ -195,9 +184,7 @@ parseCatmul(XMLElement* pElement)
 
         return t;
 }
-Translation*
-parseTranslate(XMLElement* pElement)
-{
+Translation *parseTranslate(XMLElement *pElement) {
         float x {0};
         float y {0};
         float z {0};
@@ -211,13 +198,11 @@ parseTranslate(XMLElement* pElement)
         if (pElement->Attribute("z"))
                 z = stof(pElement->Attribute("z"));
 
-        Translation* t {new Translation(Point(x, y, z))};
+        Translation *t {new Translation(Point(x, y, z))};
         return t;
 }
 
-Rotation*
-parseRotate(const XMLElement* pElement)
-{
+Rotation *parseRotate(const XMLElement *pElement) {
         float time {0};
         float angle {0};
         float axisx {0};
@@ -242,9 +227,7 @@ parseRotate(const XMLElement* pElement)
         return new Rotation(Point(axisx, axisy, axisz), angle, time);
 }
 
-Scale*
-parseScale(const XMLElement* pElement)
-{
+Scale *parseScale(const XMLElement *pElement) {
         float x {0};
         float y {0};
         float z {0};

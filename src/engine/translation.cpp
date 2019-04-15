@@ -10,8 +10,6 @@ Translation::Translation(Point p): Transformation(p) {}
 
 Translation::~Translation() {}
 
-void
-Translation::transform()
-{
+void Translation::transform() {
         glTranslatef(this->V().X(), this->V().Y(), this->V().Z());
 }

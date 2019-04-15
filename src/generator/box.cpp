@@ -4,11 +4,9 @@
 #include <regex>
 
 
-std::string sumNPoints(const std::string&);
+std::string sumNPoints(const std::string &);
 
-std::string
-box(float xP, float yP, float zP, int div)
-{
+std::string box(float xP, float yP, float zP, int div) {
         double dz  {zP / (2 * div)};
         double zO  {-zP / 2 + dz};
         double dx  {xP / (2 * div)};
@@ -36,9 +34,7 @@ box(float xP, float yP, float zP, int div)
         return sumNPoints(os.str());
 }
 
-std::string
-sumNPoints(const std::string& s)
-{
+std::string sumNPoints(const std::string &s) {
         std::istringstream s0(s);
         std::ostringstream os, r;
         int counter{0};
