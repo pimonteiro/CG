@@ -1,6 +1,6 @@
 #include "headers/bezierPatch.h"
 #include "headers/outputAux.h"
-#include "../engine/headers/matrix.h"
+#include "../lib/headers/matrix.h"
 
 #include <iostream>
 #include <sstream>
@@ -128,10 +128,10 @@ std::string bezierPatch(std::string filename, int div) {
 
         //Read all points
         std::getline(file, line);
-        int n_points { atoi(line.c_str())};
-        float points[n_points][3];
+        int nPoints { atoi(line.c_str())};
+        float points[nPoints][3];
 
-        for (int i {0}; i < n_points; i++) {
+        for (int i {0}; i < nPoints; i++) {
                 float x, y, z;
                 char c[2];
                 std::getline(file, line);

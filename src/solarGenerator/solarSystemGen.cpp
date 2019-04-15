@@ -6,7 +6,7 @@
 #include "../generator/headers/outputAux.h"
 #include "../generator/headers/annulus.h"
 #include "../generator/headers/bezierPatch.h"
-#include "../engine/headers/point.h"
+#include "../lib/headers/point.h"
 
 
 #define SIZE    5

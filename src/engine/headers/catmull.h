@@ -3,14 +3,14 @@
 
 #include <vector>
 #include "transformation.h"
-#include "point.h"
+#include "../../lib/headers/point.h"
 
 class Catmull: public Transformation {
     private:
         std::vector<Point *> contP;
         int ownRotation;
         float time;
-        float t;
+        float t;            // Parametric value of where the object is in the curve.
         float yAxis[3];
 
     public:

@@ -151,7 +151,7 @@ Model *parseFile(const XMLElement *pElement) {
 }
 
 Catmull *parseCatmul(XMLElement *pElement) {
-        Catmull *t = new Catmull();
+        Catmull *t { new Catmull() };
 
         if (pElement->Attribute("time")) {
                 float time {fabs(stof(pElement->Attribute("time")))};
