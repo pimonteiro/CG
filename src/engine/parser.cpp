@@ -150,13 +150,16 @@ Model *parseFile(const XMLElement *pElement) {
         return model;
 }
 
-Catmull *parseCatmul(XMLElement *pElement) {
-        Catmull *t;
+Catmull*
+parseCatmul(XMLElement* pElement)
+{
+        Catmull* t = new Catmull();
 
         if (pElement->Attribute("time")) {
                 float time {fabs(stof(pElement->Attribute("time")))};
                 int flag {stoi(pElement->Attribute("selfRotate"))};
-                t = new Catmull(flag, time);
+                t->addFlag(flag);
+                t->addTime(time);
         }
 
         XMLNode *pNode1 {pElement->FirstChild()};

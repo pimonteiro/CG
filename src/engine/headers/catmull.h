@@ -13,16 +13,18 @@ class Catmull: public Transformation {
         float t;
         float yAxis[3];
 
-    public:
-        Catmull(int, float);
-        ~Catmull();
-        void setYAxis(float *);
-        void incT();
-        int getRotation();
-        void addPoint(Point *);
-        Point getCatmullRomPoint(float, Point, Point, Point, Point, float *);
-        Point getGlobalCatmullRomPoint(float, float *);
-        void renderCatmullRomCurve();
-        void transform();
+        public:
+                Catmull();
+                ~Catmull();
+                void addFlag(int);
+                void addTime(int);
+                void setYAxis(float*);
+                void incT();
+                int getRotation();
+                void addPoint(Point*);
+                Point getCatmullRomPoint(float, Point, Point, Point, Point, float*);
+                Point getGlobalCatmullRomPoint(float, float*);
+                void renderCatmullRomCurve();
+                void transform();
 };
 #endif
