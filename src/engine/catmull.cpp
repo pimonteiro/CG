@@ -22,7 +22,7 @@ void Catmull::addFlag(int rot) {
 }
 
 void Catmull::addTime(int t) {
-        this->time = t;
+        this->time = abs(t);
 }
 
 Catmull::~Catmull() {}
