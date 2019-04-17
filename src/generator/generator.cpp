@@ -7,9 +7,9 @@
 #include "headers/sphere.h"
 #include "headers/annulus.h"
 #include "headers/outputAux.h"
+#include "headers/bezierPatch.h"
 
 using namespace std;
-
 
 // Display usage of program
 void helpMessage() {
@@ -18,7 +18,21 @@ void helpMessage() {
         cout << "[*] ./generator sphere <radius> <slices> <stacks> <filename>" << endl;
         cout << "[*] ./generator cone <bottom radius> <height> <slices> <stacks> <filename>" << endl;
         cout << "[*] ./generator annulus <inner radius> <outer radius> <height> <slices> <filename>" << endl;
+        cout << "[*] ./generator bezier-patch <patch-filename> <tesselation-level> <filename>" << endl;
 }
+
+string drawBezierPatch(int argc, char *pString[]) {
+        if (argc != 5) {
+                cerr << "Insufficient parameters. " << endl;
+                helpMessage();
+                exit(1);
+        } else {
+                string filename { pString[2] };
+                int tesselation { atoi(pString[3]) };
+                return bezierPatch(filename, tesselation);
+        }
+}
+
 
 string drawAnnulus(int argc, char *pString[]) {
         if (argc != 7) {
@@ -114,6 +128,8 @@ int main(int argc, char *argv[]) {
                                 os << drawCone(argc, argv);
                         else if (!strcmp("annulus", argv[1]))
                                 os << drawAnnulus(argc, argv);
+                        else if (!strcmp("bezier-patch", argv[1]))
+                                os << drawBezierPatch(argc, argv);
                         else
                                 cerr << "Invalid option. Run with --help for more information." << endl;
 

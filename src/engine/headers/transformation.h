@@ -1,7 +1,7 @@
 #ifndef __TRANSFORMATION_H__
 #define __TRANSFORMATION_H__
 
-#include "point.h"
+#include "../../lib/headers/point.h"
 
 class Transformation {
     private:
