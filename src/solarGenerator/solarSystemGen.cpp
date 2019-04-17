@@ -70,7 +70,7 @@ void genSmallSizePlanets(ostringstream *solar) {
                 *solar << "         </models>" << endl;
 
                 if (i == 2) {
-                        float prp { (1.0f / plProp[i]) };
+                        float prp { static_cast<float>(1.0f / plProp[i]) };
                         *solar << "             <group>" << endl;
                         *solar << "                 <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                         *solar << "                 <translate time=\"" << plTime[9] << "\" selfRotate=\"0\" >" << endl;

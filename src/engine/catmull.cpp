@@ -112,7 +112,7 @@ void Catmull::renderCatmullRomCurve() {
 void Catmull::transform() {
         renderCatmullRomCurve();
         float deriv[3];
-        float tt = glutGet(GLUT_ELAPSED_TIME) / this->time;
+        float tt { glutGet(GLUT_ELAPSED_TIME) / this->time };
         Point pos { this->getGlobalCatmullRomPoint(tt, deriv)};
         glTranslatef(pos.X(), pos.Y(), pos.Z());
 
