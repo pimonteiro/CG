@@ -18,7 +18,7 @@
 #define DMERCURY    150
 #define DSATTELITE  20
 
-#define YEARTOMS        2
+#define YEARTOSEC       6*1000 // Represented in seconds
 
 using namespace std;
 
@@ -28,7 +28,7 @@ double plD[14] {DMERCURY, 1.7 * DMERCURY, 2.4 * DMERCURY, 3 * DMERCURY, 8.8 * DM
 Point colors[14] {Point(0.36, 0.36, 0.36), Point(0.8, 0.5, 0.2), Point(0.31, 0.65, 0.76), Point(0.55, 0.15, 0), Point(0.93, 0.85, 0.68), Point(0.93, 0.8, 0.38), Point(0.93, 0.86, 0.51),
               Point(0.61, 0.77, 0.89), Point(0.23, 0.35, 0.58), Point(0.84, 0.84, 0.84), Point(0.93, 0.8, 0.38), Point(0.93, 0.85, 0.51), Point(0.93, 0.57, 0.13), Point(0.27, 0.27, 0.27)
 };
-float plTime[14] {YEARTOMS * 0.2, YEARTOMS * 0.6, YEARTOMS * 1, YEARTOMS * 1.9, YEARTOMS * 248, YEARTOMS * 11.9, YEARTOMS * 29.5, YEARTOMS * 84, YEARTOMS * 164.8, YEARTOMS, YEARTOMS, YEARTOMS, YEARTOMS, YEARTOMS};
+float plTime[14] {YEARTOSEC * 0.2, YEARTOSEC * 0.6, YEARTOSEC * 1, YEARTOSEC * 1.9, YEARTOSEC * 248, YEARTOSEC * 11.9, YEARTOSEC * 29.5, YEARTOSEC * 84, YEARTOSEC * 164.8, YEARTOSEC, YEARTOSEC, YEARTOSEC, YEARTOSEC, YEARTOSEC};
 
 float angle {40};
 float angleMoons {60};

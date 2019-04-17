@@ -12,7 +12,6 @@
 #define T_INCREMENT	0.0001
 
 Catmull::Catmull(): Transformation(Point()) {
-        this->t = 0;
         float t[3] {0, 1, 0};
         setYAxis(t);
 }
@@ -21,7 +20,7 @@ void Catmull::addFlag(int rot) {
         this->ownRotation = rot;
 }
 
-void Catmull::addTime(int t) {
+void Catmull::addTime(float t) {
         this->time = abs(t);
 }
 
@@ -35,9 +34,6 @@ int Catmull::getRotation() {
         return this->ownRotation;
 }
 
-void Catmull::incT() {
-        this->t += T_INCREMENT;
-}
 
 void Catmull::setYAxis(float y[3]) {
         this->yAxis[0] = y[0];
@@ -116,8 +112,8 @@ void Catmull::renderCatmullRomCurve() {
 void Catmull::transform() {
         renderCatmullRomCurve();
         float deriv[3];
-        Point pos { this->getGlobalCatmullRomPoint(this->t, deriv)};
-        this->incT();
+        float tt = glutGet(GLUT_ELAPSED_TIME) / this->time;
+        Point pos { this->getGlobalCatmullRomPoint(tt, deriv)};
         glTranslatef(pos.X(), pos.Y(), pos.Z());
 
         if (this->ownRotation) { // Rotates using self derivated rotation

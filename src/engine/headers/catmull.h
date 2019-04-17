@@ -10,16 +10,14 @@ class Catmull: public Transformation {
         std::vector<Point *> contP;
         int ownRotation;
         float time;
-        float t;            // Parametric value of where the object is in the curve.
         float yAxis[3];
 
     public:
         Catmull();
         ~Catmull();
         void addFlag(int);
-        void addTime(int);
+        void addTime(float);
         void setYAxis(float *);
-        void incT();
         int getRotation();
         void addPoint(Point *);
         Point getCatmullRomPoint(float, Point, Point, Point, Point, float *);
