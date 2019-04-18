@@ -18,7 +18,7 @@
 #define DMERCURY    150
 #define DSATTELITE  20
 
-#define YEARTOMS        2
+#define YEARTOSEC       6*1000 // Represented in seconds
 
 using namespace std;
 
@@ -28,18 +28,18 @@ double plD[14] {DMERCURY, 1.7 * DMERCURY, 2.4 * DMERCURY, 3 * DMERCURY, 8.8 * DM
 Point colors[14] {Point(0.36, 0.36, 0.36), Point(0.8, 0.5, 0.2), Point(0.31, 0.65, 0.76), Point(0.55, 0.15, 0), Point(0.93, 0.85, 0.68), Point(0.93, 0.8, 0.38), Point(0.93, 0.86, 0.51),
               Point(0.61, 0.77, 0.89), Point(0.23, 0.35, 0.58), Point(0.84, 0.84, 0.84), Point(0.93, 0.8, 0.38), Point(0.93, 0.85, 0.51), Point(0.93, 0.57, 0.13), Point(0.27, 0.27, 0.27)
 };
-float plTime[14] {YEARTOMS * 0.2, YEARTOMS * 0.6, YEARTOMS * 1, YEARTOMS * 1.9, YEARTOMS * 248, YEARTOMS * 11.9, YEARTOMS * 29.5, YEARTOMS * 84, YEARTOMS * 164.8, YEARTOMS, YEARTOMS, YEARTOMS, YEARTOMS, YEARTOMS};
+float plTime[14] {YEARTOSEC * 0.2, YEARTOSEC * 0.6, YEARTOSEC * 1, YEARTOSEC * 1.9, YEARTOSEC * 248, YEARTOSEC * 11.9, YEARTOSEC * 29.5, YEARTOSEC * 84, YEARTOSEC * 164.8, YEARTOSEC, YEARTOSEC, YEARTOSEC, YEARTOSEC, YEARTOSEC};
 
 float angle {40};
 float angleMoons {60};
 
 
 
-void planetOrbitalPoints(float r, ostringstream *solar) {
+void planetOrbitalPoints(float r, ostringstream *solar, float prop) {
         for (int i { 0 }; i < 8; i++) {
                 float ang {static_cast<float>((M_PI) / 4.0f) *i };
-                float x { r * cos(ang)};
-                float z { r * sin(ang)};
+                float x { r * cos(ang) * prop};
+                float z { r * sin(ang) * prop};
                 *solar << "         <point x=\"" << x << "\" y=\"0\" z=\"" << z << "\" />" << endl;
         }
 }
@@ -62,7 +62,7 @@ void genSmallSizePlanets(ostringstream *solar) {
 
                 *solar << "         <rotate angle=\"" << ang << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                 *solar << "         <translate time=\"" << plTime[i] << "\" selfRotate=\"0\" >" << endl;
-                planetOrbitalPoints(plD[i], solar);
+                planetOrbitalPoints(plD[i], solar, 1);
                 *solar << "         </translate>" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
@@ -70,14 +70,13 @@ void genSmallSizePlanets(ostringstream *solar) {
                 *solar << "         </models>" << endl;
 
                 if (i == 2) {
-                        double prp { (1.0f / plProp[i]) };
+                        float prp { static_cast<float>(1.0f / plProp[i]) };
                         *solar << "             <group>" << endl;
-                        *solar << "                 <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                         *solar << "                 <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                         *solar << "                 <translate time=\"" << plTime[9] << "\" selfRotate=\"0\" >" << endl;
-                        planetOrbitalPoints(plD[9], solar);
+                        planetOrbitalPoints(plD[9], solar, prp);
                         *solar << "                 </translate>" << endl;
-                        *solar << "                 <scale x=\"" << plProp[9] << "\" y=\"" << plProp[9] << "\" z=\"" << plProp[9] << "\" />" << endl;
+                        *solar << "                 <scale x=\"" << prp*plProp[9] << "\" y=\"" << prp*plProp[9] << "\" z=\"" << prp*plProp[9] << "\" />" << endl;
                         *solar << "                 <models>" << endl;
                         *solar << "                     <model file=\"" << pF << "\" r=\"" << colors[9].X() << "\" g=\"" << colors[9].Y() << "\" b=\"" << colors[9].Z() << "\" />" << endl;
                         *solar << "                 </models>" << endl;
@@ -112,7 +111,7 @@ void genBigSizePlanets(ostringstream *solar) {
                 *solar << "     <group>" << endl;
                 *solar << "         <rotate angle=\"" << angle *i << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                 *solar << "         <translate time=\"" << plTime[i] << "\" selfRotate=\"0\" >" << endl;
-                planetOrbitalPoints(plD[i], solar);
+                planetOrbitalPoints(plD[i], solar, 1);
                 *solar << "         </translate>" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
@@ -124,12 +123,11 @@ void genBigSizePlanets(ostringstream *solar) {
                         for (int j {0}; j < 3; j++) {
                                 float prp { static_cast<float>(1.0f / plProp[i]) };
                                 *solar << "         <group>" << endl;
-                                *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                                 *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                                 *solar << "             <translate time=\"" << plTime[11 + j] << "\" selfRotate=\"0\" >" << endl;
-                                planetOrbitalPoints(plD[11 + j], solar);
+                                planetOrbitalPoints(plD[11 + j], solar, prp);
                                 *solar << "             </translate>" << endl;
-                                *solar << "             <scale x=\"" << plProp[11 + j] << "\" y=\"" << plProp[11 + j] << "\" z=\"" << plProp[11 + j] << "\" />" << endl;
+                                *solar << "             <scale x=\"" << prp*plProp[11 + j] << "\" y=\"" << prp*plProp[11 + j] << "\" z=\"" << prp*plProp[11 + j] << "\" />" << endl;
                                 *solar << "             <models>" << endl;
                                 *solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[11 + j].X() << "\" g=\"" << colors[11 + j].Y() << "\" b=\"" << colors[11 + j].Z() << "\" />" << endl;
                                 *solar << "             </models>" << endl;
@@ -159,12 +157,11 @@ void genBigSizePlanets(ostringstream *solar) {
                         *solar << "             </models>" << endl;
                         *solar << "         </group>" << endl;
                         *solar << "         <group>" << endl;
-                        *solar << "             <scale x=\"" << prp << "\" y=\"" << prp << "\" z=\"" << prp << "\" />" << endl;
                         *solar << "             <rotate angle=\"" << angleMoons << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                         *solar << "             <translate time=\"" << plTime[10] << "\" selfRotate=\"0\" >" << endl;
-                        planetOrbitalPoints(plD[10], solar);
+                        planetOrbitalPoints(plD[10], solar, prp);
                         *solar << "             </translate>" << endl;
-                        *solar << "             <scale x=\"" << plProp[10] << "\" y=\"" << plProp[10] << "\" z=\"" << plProp[10] << "\" />" << endl;
+                        *solar << "             <scale x=\"" << prp*plProp[10] << "\" y=\"" << prp*plProp[10] << "\" z=\"" << prp*plProp[10] << "\" />" << endl;
                         *solar << "             <models>" << endl;
                         *solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[10].X() << "\" g=\"" << colors[10].Y() << "\" b=\"" << colors[10].Z() << "\" />" << endl;
                         *solar << "             </models>" << endl;
