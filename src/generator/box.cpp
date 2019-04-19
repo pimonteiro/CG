@@ -6,7 +6,7 @@
 
 std::string sumNPoints(const std::string &);
 
-std::string box(float xP, float yP, float zP, int div) {
+std::string box(float xP, float zP, int div) {
         double dz  {zP / (2 * div)};
         double zO  {-zP / 2 + dz};
         double dx  {xP / (2 * div)};

@@ -101,11 +101,9 @@ string drawBox(int argc, char *pString[]) {
 
                 float xDim { stof(pString[2]) };
 
-                float yDim { stof(pString[3]) };
-
                 float zDim { stof(pString[4]) };
 
-                return box(xDim, yDim, zDim, div);
+                return box(xDim, zDim, div);
         }
 }
 

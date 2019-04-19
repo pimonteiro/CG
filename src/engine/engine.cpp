@@ -27,6 +27,10 @@ float camaraBeta {0.5};
 float distCam {1300};
 GLenum mode;
 
+template <typename T>
+void ignore(T &&)
+{ }
+
 
 void changeSize(int w, int h) {
         // Prevent a divide by zero, when window is too short
@@ -79,7 +83,7 @@ void renderScene() {
         GLenum modes[] = {GL_FILL, GL_LINE, GL_POINT};
         glPolygonMode(GL_FRONT, modes[mode]);
         group->draw();
-        int time {glutGet(GLUT_ELAPSED_TIME) };
+        int time {glutGet(GLUT_ELAPSED_TIME)};
         frame++;
 
         if (time - timebase > 1000) {   // 1 Second
@@ -96,6 +100,9 @@ void renderScene() {
 }
 
 void processSpecialKeys(int key, int xx, int yy) {
+        ignore(xx);
+        ignore(yy);
+
         if (key == GLUT_KEY_RIGHT)
                 camaraAlpha += M_PI / 50;
 
@@ -120,6 +127,9 @@ void processSpecialKeys(int key, int xx, int yy) {
 }
 
 void processKeys(unsigned char key, int x, int y) {
+        ignore(x);
+        ignore(y);
+
         if (key == 'a' || key == 'A')
                 axis = !axis;
 
