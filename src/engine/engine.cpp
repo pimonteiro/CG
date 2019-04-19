@@ -102,6 +102,7 @@ void renderScene() {
 void processSpecialKeys(int key, int xx, int yy) {
         ignore(xx);
         ignore(yy);
+
         if (key == GLUT_KEY_RIGHT)
                 camaraAlpha += M_PI / 50;
 
@@ -128,6 +129,7 @@ void processSpecialKeys(int key, int xx, int yy) {
 void processKeys(unsigned char key, int x, int y) {
         ignore(x);
         ignore(y);
+
         if (key == 'a' || key == 'A')
                 axis = !axis;
 
