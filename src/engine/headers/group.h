@@ -9,16 +9,15 @@
 
 class Group {
     private:
-        std::vector<Transformation*> transformV;
-        std::vector<Model*> modelV;
-        std::vector<Group*> subGroupV;
+        std::vector<Transformation *> transformV;
+        std::vector<Model *> modelV;
+        std::vector<Group *> subGroupV;
     public:
         Group();
         ~Group();
-        void addTransformation(Transformation* t);
-        void addModel(Model* m);
-        void addGroup(Group* g);
+        void addTransformation(Transformation *t);
+        void addModel(Model *m);
+        void addGroup(Group *g);
         void draw();
-        void drawC();
 };
 #endif

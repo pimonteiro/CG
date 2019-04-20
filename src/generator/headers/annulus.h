@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string annulus(float,float,float,int);
+std::string annulus(float, float, float, int);
 
 #endif

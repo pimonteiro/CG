@@ -1,20 +1,26 @@
 #ifndef __MODEL_H__
 #define __MODEL_H__
 
-#include <string>
-#include <vector>
-#include "triangle.h"
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glew.h>
+#include <GL/glut.h>
+#endif
+
 
 class Model {
     private:
-        std::vector<Triangle*> triV;
         float r, g, b;
+        int size; /* number of dots */
+        int index;
+        float *pointArray;
     public:
-        Model();
+        GLuint buffer[1];
+        Model(int);
         ~Model();
-        void addElement(Triangle*);
+        void addElement(float);
         void draw();
-        void drawC();
         void addColour(float, float, float);
 };
 

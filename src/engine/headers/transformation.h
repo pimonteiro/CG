@@ -1,7 +1,7 @@
 #ifndef __TRANSFORMATION_H__
 #define __TRANSFORMATION_H__
 
-#include "point.h"
+#include "../../lib/headers/point.h"
 
 class Transformation {
     private:
@@ -10,8 +10,8 @@ class Transformation {
         Transformation(Point);
         virtual ~Transformation();
         virtual void transform() = 0;
-        Point V(){
-            return v;
+        Point V() {
+                return v;
         }
 };
 
