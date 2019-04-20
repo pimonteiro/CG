@@ -112,7 +112,7 @@ void genBigSizePlanets(ostringstream *solar) {
                 *solar << "         <translate time=\"" << plTime[i] << "\" selfRotate=\"0\" >" << endl;
                 planetOrbitalPoints(plD[i], solar, 1);
                 *solar << "         </translate>" << endl;
-                *solar << "         <rotate time=\"" << plTime[i]<< "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
+                *solar << "         <rotate time=\"" << plTime[i] << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
                 *solar << "             <model file=\"" << pF << "\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
