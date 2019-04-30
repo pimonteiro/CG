@@ -6,6 +6,8 @@
 #include "headers/rotation.h"
 #include "headers/translation.h"
 #include "headers/catmull.h"
+#include "headers/material.h"
+#include "headers/texture.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -110,19 +112,6 @@ void parseDoc(Group *group, XMLNode *pN) {
 }
 
 Model *parseFile(const XMLElement *pElement) {
-        float r {randomF()};
-        float g {randomF()};
-        float b {randomF()};
-
-        if (pElement->Attribute("r"))
-                r = stof(pElement->Attribute("r"));
-
-        if (pElement->Attribute("g"))
-                g = stof(pElement->Attribute("g"));
-
-        if (pElement->Attribute("b"))
-                b = stof(pElement->Attribute("b"));
-
         string s {pElement->Attribute("file")};
         ifstream infile(s);
 
@@ -135,7 +124,6 @@ Model *parseFile(const XMLElement *pElement) {
         getline(infile, line);
         int nPoints {stoi(line)};
         Model *model {new Model(nPoints)};
-        model->addColour(r, g, b);
 
         while (getline(infile, line)) {
                 vector<string> v;
@@ -147,6 +135,40 @@ Model *parseFile(const XMLElement *pElement) {
                 for (auto i {v.begin()}; i != v.end(); ++i)
                         model->addElement(stof(*i));
         }
+        
+        Material m = Material();
+        Texture t = Texture();
+
+        if(pElement->Attribute("texture")){
+                string filename = pElement->Attribute("texture");
+                t.addFile(filename);
+        }
+        else if (pElement->Attribute("type")){
+                float r {0};
+                float g {0};
+                float b {0};
+                if (pElement->Attribute("r"))
+                        r = stof(pElement->Attribute("r"));
+
+                if (pElement->Attribute("g"))
+                        g = stof(pElement->Attribute("g"));
+
+                if (pElement->Attribute("b"))
+                        b = stof(pElement->Attribute("b"));
+                m.addColor(r,g,b);
+
+                string type = pElement->Attribute("type");
+                if(type.compare("diffuse") == 0)
+                        m.addType(DIFFUSE);
+                if(type.compare("specular") == 0)
+                        m.addType(SPECULAR);
+                if(type.compare("emissive") == 0)
+                        m.addType(EMISSIVE);
+                if(type.compare("ambiente") == 0)
+                        m.addType(AMBIENTE);
+        }
+        model->addTexture(t);
+        model->addMaterial(m);
 
         return model;
 }

@@ -2,6 +2,7 @@
 #define __TEXTURE_H__
 
 #include <vector>
+#include <string>
 #include "../../lib/headers/point.h"
 
 class Texture {
@@ -14,9 +15,9 @@ class Texture {
         unsigned int textBuffer;
         Texture();
         ~Texture();
-        void addFile(char*);
-        void prepare(GLint);
-        void draw(GLint);
+        void addFile(std::string);
+        void prepare(int);
+        void draw(int);
 };
 
 #endif
