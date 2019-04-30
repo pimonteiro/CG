@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#niclude <string>
 #include "../generator/headers/sphere.h"
 #include "../generator/headers/outputAux.h"
 #include "../generator/headers/annulus.h"
@@ -29,6 +30,7 @@ Point colors[14] {Point(0.36, 0.36, 0.36), Point(0.8, 0.5, 0.2), Point(0.31, 0.6
               Point(0.61, 0.77, 0.89), Point(0.23, 0.35, 0.58), Point(0.84, 0.84, 0.84), Point(0.93, 0.8, 0.38), Point(0.93, 0.85, 0.51), Point(0.93, 0.57, 0.13), Point(0.27, 0.27, 0.27)
 };
 float plTime[14] {YEARTOSEC * 0.2, YEARTOSEC * 0.6, YEARTOSEC * 1, YEARTOSEC * 1.9, YEARTOSEC * 248, YEARTOSEC * 11.9, YEARTOSEC * 29.5, YEARTOSEC * 84, YEARTOSEC * 164.8, YEARTOSEC, YEARTOSEC, YEARTOSEC, YEARTOSEC, YEARTOSEC};
+string textures[14] {"","","earth.png",""};
 
 float angle {40};
 float angleMoons {60};
@@ -66,7 +68,7 @@ void genSmallSizePlanets(ostringstream *solar) {
                 *solar << "         </translate>" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
-                *solar << "             <model file=\"" << pF << "\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
+                *solar << "             <model file=\"" << pF << "\" type=\"diffuse\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
                 *solar << "         </models>" << endl;
 
                 if (i == 2) {
@@ -96,7 +98,7 @@ void genStars(ostringstream *solar) {
         *solar << "     <group>" << endl;
         *solar << "         <scale x=\"" << s1Prop << "\" y=\"" << s1Prop << "\" z=\"" << s1Prop << "\" />" << endl;
         *solar << "         <models>" << endl;
-        *solar << "             <model file=\"" << s1 <<  "\" r=\"1\" g=\"0.2\" b=\"0\" />" << endl;
+        *solar << "             <model file=\"" << s1 << "\" texture=\"sun.png\" />" << endl;
         *solar << "         </models>" << endl;
         *solar << "     </group>" << endl;
 }

@@ -1,5 +1,6 @@
 #include "headers/group.h"
 #include "headers/model.h"
+#include "headers/light.h"
 #include "headers/transformation.h"
 #include "headers/rotation.h"
 #include "headers/scale.h"
@@ -40,8 +41,19 @@ void Group::addGroup(Group *g) {
         subGroupV.push_back(g);
 }
 
+void Group::addLights(std::vector<Light *> ls){
+        int i = 0;
+        for (auto &l : ls){
+                l->addIndex(i++);
+                this->lights.push_back(l);
+        }
+}
+
 
 void Group::draw() {
+        for(auto &g : this->lights) {
+                g->draw();
+        }
         for (auto &t : this->transformV)
                 t->transform();
 

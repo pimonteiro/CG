@@ -176,6 +176,8 @@ void initCostumGL(int argc, char **argv) {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glEnable(GL_TEXTURE_2D);
+        glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
         glPolygonMode(GL_FRONT, GL_LINE);
 
         // Setup Buffers

@@ -8,6 +8,7 @@
 #include "headers/catmull.h"
 #include "headers/material.h"
 #include "headers/texture.h"
+#include "headers/light.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -25,7 +26,8 @@ Model *parseFile(const XMLElement *);
 Translation *parseTranslate(XMLElement *);
 Scale *parseScale(const XMLElement *);
 Rotation *parseRotate(const XMLElement *);
-Catmull *parseCatmul(XMLElement *pElement);
+Catmull *parseCatmul(XMLElement *);
+std::vector<Light *> parseLights(XMLElement *);
 
 
 float randomF() {
@@ -72,6 +74,11 @@ void parseDoc(Group *group, XMLNode *pN) {
         for (; pNode; pNode = pNode->NextSibling()) {
                 XMLElement *pElement {pNode->ToElement()};
 
+                if (!strcmp(pElement->Name(), "lights")) {
+                        vector<Light *> ls {parseLights(pElement)};
+                        group->addLights(ls);
+                }
+
                 if (!strcmp(pElement->Name(), "model")) {
                         if (pElement->Attribute("file")) {
                                 Model *m {parseFile(pElement)};
@@ -109,6 +116,45 @@ void parseDoc(Group *group, XMLNode *pN) {
                 if (!strcmp(pElement->Name(), "models"))
                         parseDoc(group, pNode);
         }
+}
+
+std::vector<Light *> parseLights(const XMLElement *pElement){
+        XMLNode *pNode1 {pElement->FirstChild()};
+        std::vector<Light *> ls;
+        float x {0};
+        float y {0};
+        float z {0};
+
+        for (; pNode1; pNode1 = pNode1->NextSibling()) {
+                XMLElement *pElement1 = pNode1->ToElement();
+
+                if (!strcmp(pElement1->Name(), "light")) {
+                        int type = UNDEF;
+                        if (pElement1->Attribute("x"))
+                                x = stof(pElement1->Attribute("x"));
+
+                        if (pElement1->Attribute("y"))
+                                y = stof(pElement1->Attribute("y"));
+
+                        if (pElement1->Attribute("z"))
+                                z = stof(pElement1->Attribute("z"));
+                        
+                        if (pElement1->Attribute("type")){
+                                string tt = pElement1->Attribute("type");
+                                if(tt.compare("POINT") == 0)
+                                        type = POINT;
+                                else if(tt.compare("DIRECTIONAL") == 0)
+                                        type = DIRECTIONAL;
+                                else if(tt.compare("SPOT") == 0)
+                                        type = SPOT;
+                        }
+                        Point p {Point(x, y, z)};
+                        
+                        Light *l = new Light(type, p);
+                        ls.push_back(l);
+                }
+        }
+        return ls;
 }
 
 Model *parseFile(const XMLElement *pElement) {
