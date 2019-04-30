@@ -192,11 +192,19 @@ void initCostumGL() {
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+        glEnable(GL_TEXTURE_2D);
         glPolygonMode(GL_FRONT, GL_LINE);
+<<<<<<< HEAD
         // Setup Buffers
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
         group->prepare();
+=======
+
+        // Setup Buffers
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+>>>>>>> 4580364... add material and texture setup
 }
 
 void startMessage() {
