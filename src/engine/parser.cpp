@@ -7,16 +7,12 @@
 #include "headers/rotation.h"
 #include "headers/translation.h"
 #include "headers/catmull.h"
-#include "headers/material.h"
-<<<<<<< HEAD
+#include "headers/textre.h"
 #include "headers/light.h"
 #include "headers/directionalLight.h"
 #include "headers/pointLight.h"
 #include "headers/spotLight.h"
 #include "../lib/headers/point.h"
-=======
-#include "headers/texture.h"
->>>>>>> 86e8202... update makefile and parser to support textures/materials
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -34,8 +30,13 @@ Model *parseFile(const XMLElement *);
 Translation *parseTranslate(XMLElement *);
 Scale *parseScale(const XMLElement *);
 Rotation *parseRotate(const XMLElement *);
+<<<<<<< HEAD
 Catmull *parseCatmul(XMLElement *pElement);
 Light *parseLight(XMLElement *);
+=======
+Catmull *parseCatmul(XMLElement *);
+std::vector<Light *> parseLights(XMLElement *);
+>>>>>>> 3e58457... add light support and parse
 
 
 float randomF() {
@@ -81,6 +82,11 @@ void parseDoc(Group *group, XMLNode *pN) {
 
         for (; pNode; pNode = pNode->NextSibling()) {
                 XMLElement *pElement {pNode->ToElement()};
+
+                if (!strcmp(pElement->Name(), "lights")) {
+                        vector<Light *> ls {parseLights(pElement)};
+                        group->addLights(ls);
+                }
 
                 if (!strcmp(pElement->Name(), "model")) {
                         if (pElement->Attribute("file")) {
