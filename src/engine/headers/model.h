@@ -8,6 +8,8 @@
 #include <GL/glut.h>
 #endif
 
+#include "texture.h"
+#include "material.h"
 
 class Model {
     private:
@@ -15,13 +17,17 @@ class Model {
         int size; /* number of dots */
         int index;
         float *pointArray;
+        Texture texture;
+        Material material;
     public:
-        GLuint buffer[1];
+        GLuint buffer[2];
         Model(int);
         ~Model();
+        void addTexture(Texture);
+        void addMaterial(Material);
         void addElement(float);
         void draw();
-        void addColour(float, float, float);
+        void prepare();
 };
 
 #endif

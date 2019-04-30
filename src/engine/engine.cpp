@@ -162,20 +162,25 @@ void initCostumGL(int argc, char **argv) {
         glutInitWindowPosition(100, 100);
         glutInitWindowSize(800, 800);
         glutCreateWindow("Solar System - Group 13");
-        glEnableClientState(GL_VERTEX_ARRAY);
         // callback registration
         glutDisplayFunc(renderScene);
         glutReshapeFunc(changeSize);
         glutIdleFunc(renderScene);
         glutSpecialFunc(processSpecialKeys);
         glutKeyboardFunc(processKeys);
+        glewInit();
 #ifndef __APPLE__
         glewInit();
 #endif
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+        glEnable(GL_TEXTURE_2D);
         glPolygonMode(GL_FRONT, GL_LINE);
+
+        // Setup Buffers
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void startMessage() {
@@ -192,8 +197,8 @@ void startMessage() {
 int main(int argc, char **argv) {
         if (argc == 2) {
                 startMessage();
+                                initCostumGL(argc, argv);
                 Parser().ReadXML(group, argv[1]);
-                initCostumGL(argc, argv);
                 glutMainLoop();
                 return 1;
         }

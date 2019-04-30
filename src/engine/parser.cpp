@@ -73,6 +73,7 @@ void parseDoc(Group *group, XMLNode *pN) {
                 if (!strcmp(pElement->Name(), "model")) {
                         if (pElement->Attribute("file")) {
                                 Model *m {parseFile(pElement)};
+                                m->prepare();
                                 group->addModel(m);
                         }
                 }
