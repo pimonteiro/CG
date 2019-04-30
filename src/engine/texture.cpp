@@ -8,15 +8,20 @@
 #endif
 
 #include <IL/il.h>
+#include <string>
+#include <string.h>
 
 Texture::Texture(){
     this->filename = NULL;
+	this->imageHeight = -1;
+	this->imageWidth = -1;
 }
 
 Texture::~Texture(){}
 
-void Texture::addFile(char* file){
-    this->filename = file;
+void Texture::addFile(std::string file){
+	this->filename = new char[file.length() + 1];
+	strcpy(this->filename, file.c_str());
 }
 
 void Texture::prepare(GLint buff){
