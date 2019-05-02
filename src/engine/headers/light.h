@@ -3,21 +3,33 @@
 
 #include "../../lib/headers/point.h"
 
-#define UNDEF           -1
-#define POINT           0
-#define DIRECTIONAL     1
-#define SPOT            2
-
 class Light {
     private:
-        int type;
-        Point p;
+        Point pos;
         int i;
+        float color[4];
+        float amb[4];
     public:
-        Light(int, Point);
+        Light(Point);
         ~Light();
-        void addIndex(int);
-        void draw();
+        virtual void draw() = 0;
+        void setColor(float*);
+        void setAmb(float*);
+        void setIndex(int);
+        void turnOn();
+        void turnOff();
+        Point POS() {
+            return pos;
+        }
+        float* COLOR(){
+            return color;
+        }
+        int INDEX(){
+            return i;
+        }
+        float* AMB(){
+            return amb;
+        }
 };
 
 #endif
