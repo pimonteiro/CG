@@ -10,13 +10,13 @@
 
 #include "texture.h"
 #include "material.h"
+#include "../../lib/headers/point.h"
+#include <vector>
 
 class Model {
     private:
-        float r, g, b;
-        int size; /* number of dots */
-        int index;
-        float *pointArray;
+        int nPoints;
+        std::vector<Point *> points;
         Texture texture;
         Material material;
     public:
@@ -25,7 +25,7 @@ class Model {
         ~Model();
         void addTexture(Texture);
         void addMaterial(Material);
-        void addElement(float);
+        void addPoint(Point *);
         void draw();
         void prepare();
 };

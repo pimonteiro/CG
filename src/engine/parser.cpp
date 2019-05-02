@@ -9,6 +9,9 @@
 #include "headers/material.h"
 #include "headers/texture.h"
 #include "headers/light.h"
+#include "headers/directionalLight.h"
+#include "headers/pointLight.h"
+#include "headers/spotLight.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -118,7 +121,7 @@ void parseDoc(Group *group, XMLNode *pN) {
         }
 }
 
-std::vector<Light *> parseLights(const XMLElement *pElement){
+std::vector<Light *> parseLights(XMLElement *pElement){
         XMLNode *pNode1 {pElement->FirstChild()};
         std::vector<Light *> ls;
         float x {0};
@@ -129,7 +132,6 @@ std::vector<Light *> parseLights(const XMLElement *pElement){
                 XMLElement *pElement1 = pNode1->ToElement();
 
                 if (!strcmp(pElement1->Name(), "light")) {
-                        int type = UNDEF;
                         if (pElement1->Attribute("x"))
                                 x = stof(pElement1->Attribute("x"));
 
@@ -138,20 +140,86 @@ std::vector<Light *> parseLights(const XMLElement *pElement){
 
                         if (pElement1->Attribute("z"))
                                 z = stof(pElement1->Attribute("z"));
-                        
+
+                        int flaC = 0; // Has Color?
+                        int flaA = 0; // Has Ambient Color?
+                        int flaSD = 0; // Has Spot Direction?
+                        float color[4];
+                        float amb[4];
+                        float spotDir[3];
+                        if(pElement->Attribute("diffR")){
+                            flaC = 1;
+                            color[0] = stof(pElement->Attribute("diffR"));
+                        }
+                        if(pElement->Attribute("diffG")){
+                            flaC = 1;
+                            color[1] = stof(pElement->Attribute("diffG"));
+                        }
+                        if(pElement->Attribute("diffB")){
+                            flaC = 1;
+                            color[2] = stof(pElement->Attribute("diffB"));
+                        }
+                        if(pElement->Attribute("diffA")){
+                            flaC = 1;
+                            color[3] = stof(pElement->Attribute("diffA"));
+                        }
+
+                        if(pElement->Attribute("ambR")){
+                            flaA = 1;
+                            amb[0] = stof(pElement->Attribute("ambR"));
+                        }
+                        if(pElement->Attribute("ambG")){
+                            flaA = 1;
+                            amb[1] = stof(pElement->Attribute("ambG"));
+                        }
+                        if(pElement->Attribute("ambB")){
+                            flaA = 1;
+                            amb[2] = stof(pElement->Attribute("ambB"));
+                        }
+                        if(pElement->Attribute("ambA")){
+                            flaA = 1;
+                            amb[3] = stof(pElement->Attribute("ambA"));
+                        }
+
+                        if (pElement1->Attribute("spotDirx"))
+                                spotDir[0] = stof(pElement1->Attribute("spotDirx"));
+
+                        if (pElement1->Attribute("spotDiry"))
+                                spotDir[1] = stof(pElement1->Attribute("spotDiry"));
+
+                        if (pElement1->Attribute("spotDirz"))
+                                spotDir[2] = stof(pElement1->Attribute("spotDirz"));
+
                         if (pElement1->Attribute("type")){
                                 string tt = pElement1->Attribute("type");
-                                if(tt.compare("POINT") == 0)
-                                        type = POINT;
-                                else if(tt.compare("DIRECTIONAL") == 0)
-                                        type = DIRECTIONAL;
-                                else if(tt.compare("SPOT") == 0)
-                                        type = SPOT;
+                                if(tt.compare("POINT") == 0){
+                                    PointLight *l = new PointLight(Point(x,y,z));
+                                    if(flaA) l->setAmb(amb);
+                                    if(flaC) l->setColor(color);
+                                    ls.push_back(l);
+                                }
+                                else if(tt.compare("DIRECTIONAL") == 0){
+                                    DirectionalLight *l = new DirectionalLight(Point(x,y,z));
+                                    if(flaA) l->setAmb(amb);
+                                    if(flaC) l->setColor(color);
+                                    ls.push_back(l);
+                                }
+                                else if(tt.compare("SPOT") == 0){
+                                    SpotLight *l = new SpotLight(Point(x,y,z));
+                                    if(flaA) l->setAmb(amb);
+                                    if(flaC) l->setColor(color);
+                                    if(flaSD) l->setSpotDir(spotDir);
+                                    if (pElement1->Attribute("cutOff"))
+                                            l->setCutOff(stof(pElement1->Attribute("cutOff")));
+                                    if (pElement1->Attribute("exp"))
+                                            l->setExp(stof(pElement1->Attribute("exp")));
+                                    ls.push_back(l);
+                                }
+                                else {
+                                    cerr << "Bad light format.\n";
+                                    exit(1);
+                                }
                         }
-                        Point p {Point(x, y, z)};
-                        
-                        Light *l = new Light(type, p);
-                        ls.push_back(l);
                 }
         }
         return ls;
@@ -178,10 +246,13 @@ Model *parseFile(const XMLElement *pElement) {
                 for (string word; buf >> word;)
                         v.push_back(word);
 
-                for (auto i {v.begin()}; i != v.end(); ++i)
-                        model->addElement(stof(*i));
+                float point[3];
+                int j = 0;
+                for (auto i {v.begin()}; i != v.end(); ++i, j++)
+                        point[j] = stof(*i);
+                model->addPoint(new Point(point[0], point[1], point[2]));
         }
-        
+
         Material m = Material();
         Texture t = Texture();
 
@@ -313,4 +384,3 @@ Scale *parseScale(const XMLElement *pElement) {
 
         return new Scale(Point(x, y, z));
 }
-
