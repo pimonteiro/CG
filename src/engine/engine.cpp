@@ -184,7 +184,7 @@ void initInitialGL(int argc, char **argv) {
         glutKeyboardFunc(processKeys);
         glewInit();
 #ifndef __APPLE__
-        glewInit();
+    glewInit();
 #endif
 }
 
@@ -192,21 +192,15 @@ void initCostumGL() {
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+        glEnable(GL_LIGHT0); // TODO VAI SER ELIMINADO
         glPolygonMode(GL_FRONT, GL_LINE);
-<<<<<<< HEAD
         // Setup Buffers
-        glEnableClientState(GL_VERTEX_ARRAY);
+	    glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
-        group->prepare();
-=======
-
-        // Setup Buffers
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
->>>>>>> 4580364... add material and texture setup
+	    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void startMessage() {

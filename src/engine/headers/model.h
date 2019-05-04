@@ -20,7 +20,7 @@ class Model {
         std::vector<Point *> textPoints;
         Material material;
     public:
-        GLuint buffer[2];
+        GLuint buffer[3];
         Model(int);
         ~Model();
         void addVertexPoint(Point *);

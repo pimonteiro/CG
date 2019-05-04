@@ -24,11 +24,11 @@ void Texture::addFile(std::string file){
 	strcpy(this->filename, file.c_str());
 }
 
-void Texture::prepare(GLint buff){
+void Texture::loadImage(){
 	if(this->filename != NULL){
 		unsigned int t, tw, th;
 		unsigned char *texData;
-		
+
 		ilInit();
 		ilGenImages(1, &t);
 		ilBindImage(t);
@@ -50,28 +50,6 @@ void Texture::prepare(GLint buff){
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-		for (int i = 1; i < tw - 2; i++) {
-			for (int j = 1; j < th - 1; j++) {
-				this->pointArray.push_back(i+1);
-				this->pointArray.push_back(j);
-				this->pointArray.push_back(i);
-				this->pointArray.push_back(j);
-			}
-		}
-
-		glBindBuffer(GL_ARRAY_BUFFER, buff);
-		glBufferData(GL_ARRAY_BUFFER, this->pointArray.size() * sizeof(float), &(this->pointArray[0]), GL_STATIC_DRAW);
-	}
-}
-
-void Texture::draw(GLint buff){
-	// TODO IMPROVE
-	if(this->filename != NULL){
-		glBindBuffer(GL_ARRAY_BUFFER, buff);
-		for (int i = 1; i < this->imageWidth - 2; i++) {
-			glDrawArrays(GL_TRIANGLE_STRIP, (this->imageWidth - 2) * 2 * i, (this->imageWidth - 2) * 2);
-		}
+		//glGenerateMipmap(GL_TEXTURE_2D);
 	}
 }
