@@ -5,8 +5,8 @@
 
 class DirectionalLight : public Light {
     public:
-        DirectionalLight(Point);
+        DirectionalLight();
         ~DirectionalLight();
         void draw();
 };
-#endif 
+#endif

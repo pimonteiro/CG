@@ -9,7 +9,7 @@
 #include "headers/light.h"
 #include "../lib/headers/point.h"
 
-DirectionalLight::DirectionalLight(Point p): Light(p) {}
+DirectionalLight::DirectionalLight(): Light() {}
 
 void DirectionalLight::draw(){
     Point p = this->POS();

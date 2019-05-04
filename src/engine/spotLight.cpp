@@ -7,7 +7,7 @@
 
 #include "headers/spotLight.h"
 
-SpotLight::SpotLight(Point p): Light(p) {
+SpotLight::SpotLight(): Light() {
     float defSpotDir[3] {0, 0, -1};
     for(int i = 0; i < 3; i++){
         this->spotDir[i] = defSpotDir[i];

@@ -5,7 +5,7 @@
 
 class PointLight : public Light {
     public:
-        PointLight(Point);
+        PointLight();
         ~PointLight();
         void draw();
 };

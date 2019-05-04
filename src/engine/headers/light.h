@@ -10,12 +10,13 @@ class Light {
         float color[4];
         float amb[4];
     public:
-        Light(Point);
+        Light();
         ~Light();
         virtual void draw() = 0;
         void setColor(float*);
         void setAmb(float*);
         void setIndex(int);
+        void setPos(float*);
         void turnOn();
         void turnOff();
         Point POS() {

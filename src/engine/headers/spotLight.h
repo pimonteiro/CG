@@ -9,7 +9,7 @@ class SpotLight : public Light {
         float cutOff;
         float exp;
     public:
-        SpotLight(Point);
+        SpotLight();
         ~SpotLight();
         void setSpotDir(float[3]);
         void setCutOff(float);
