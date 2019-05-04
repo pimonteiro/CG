@@ -16,8 +16,7 @@ class Texture {
         Texture();
         ~Texture();
         void addFile(std::string);
-        void prepare(int);
-        void draw(int);
+        void loadImage(int);
 };
 
 #endif

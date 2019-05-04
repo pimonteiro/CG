@@ -9,9 +9,9 @@
 
 Material::Material(){
     this->type = NOSURFACE;
-    this->r = 0;
-    this->g = 0;
-    this->b = 0;
+    this->r = 1;
+    this->g = 1;
+    this->b = 1;
 }
 
 Material::~Material(){}
@@ -32,7 +32,7 @@ void Material::setup(){
     switch (this->type)
     {
         case DIFFUSE:
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
             break;
         case SPECULAR:
             glMaterialfv(GL_FRONT, GL_SPECULAR, color);
@@ -44,6 +44,7 @@ void Material::setup(){
             glMaterialfv(GL_FRONT, GL_AMBIENT, color);
             break;
         default:
+            glColor3fv(color);
             break;
     }
 }

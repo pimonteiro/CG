@@ -156,33 +156,38 @@ void processKeys(unsigned char key, int x, int y) {
         }
 }
 
-void initCostumGL(int argc, char **argv) {
-        glutInit(&argc, argv);
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-        glutInitWindowPosition(100, 100);
-        glutInitWindowSize(800, 800);
-        glutCreateWindow("Solar System - Group 13");
-        // callback registration
-        glutDisplayFunc(renderScene);
-        glutReshapeFunc(changeSize);
-        glutIdleFunc(renderScene);
-        glutSpecialFunc(processSpecialKeys);
-        glutKeyboardFunc(processKeys);
-        glewInit();
+void initInitialGL(int argc, char **argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+    glutInitWindowPosition(100, 100);
+    glutInitWindowSize(800, 800);
+    glutCreateWindow("Solar System - Group 13");
+    // callback registration
+    glutDisplayFunc(renderScene);
+    glutReshapeFunc(changeSize);
+    glutIdleFunc(renderScene);
+    glutSpecialFunc(processSpecialKeys);
+    glutKeyboardFunc(processKeys);
+    glewInit();
 #ifndef __APPLE__
-        glewInit();
+    glewInit();
 #endif
+}
+
+void initCostumGL() {
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+        glEnable(GL_LIGHT0); // TODO VAI SER ELIMINADO
         glPolygonMode(GL_FRONT, GL_LINE);
 
         // Setup Buffers
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	    glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
+	    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void startMessage() {
@@ -199,8 +204,9 @@ void startMessage() {
 int main(int argc, char **argv) {
         if (argc == 2) {
                 startMessage();
-                                initCostumGL(argc, argv);
+                initInitialGL(argc, argv);
                 Parser().ReadXML(group, argv[1]);
+                initCostumGL();
                 glutMainLoop();
                 return 1;
         }

@@ -16,16 +16,20 @@
 class Model {
     private:
         int nPoints;
-        std::vector<Point *> points;
+        std::vector<Point *> vertPoints;
+        std::vector<Point *> normPoints;
+        std::vector<Point *> textPoints;
         Texture texture;
         Material material;
     public:
-        GLuint buffer[2];
+        GLuint buffer[3];
         Model(int);
         ~Model();
         void addTexture(Texture);
         void addMaterial(Material);
-        void addPoint(Point *);
+        void addVertexPoint(Point *);
+        void addNormPoint(Point *);
+        void addTextPoint(Point *);
         void draw();
         void prepare();
 };

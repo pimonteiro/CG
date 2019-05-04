@@ -20,7 +20,7 @@ class Group {
         void addTransformation(Transformation *t);
         void addModel(Model *m);
         void addGroup(Group *g);
-        void addLights(std::vector<Light *>);
+        void addLight(Light *);
         void draw();
 };
 #endif

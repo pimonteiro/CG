@@ -41,18 +41,17 @@ void Group::addGroup(Group *g) {
         subGroupV.push_back(g);
 }
 
-void Group::addLights(std::vector<Light *> ls){
-        int i = 0;
-        for (auto &l : ls){
-                l->addIndex(i++);
-                this->lights.push_back(l);
-        }
+void Group::addLight(Light *l){
+        int i = this->lights.size();
+        l->setIndex(i++);
+        l->turnOn();
+        this->lights.push_back(l);
 }
 
 
 void Group::draw() {
-        for(auto &g : this->lights) {
-                g->draw();
+        for(auto &l : this->lights) {
+                l->draw();
         }
         for (auto &t : this->transformV)
                 t->transform();
@@ -66,4 +65,3 @@ void Group::draw() {
                 glPopMatrix();
         }
 }
-
