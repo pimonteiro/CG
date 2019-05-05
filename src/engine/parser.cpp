@@ -7,6 +7,11 @@
 #include "headers/rotation.h"
 #include "headers/translation.h"
 #include "headers/catmull.h"
+#include "headers/material.h"
+#include "headers/light.h"
+#include "headers/directionalLight.h"
+#include "headers/pointLight.h"
+#include "headers/spotLight.h"
 #include "../lib/headers/point.h"
 #include <iostream>
 #include <fstream>
