@@ -26,6 +26,7 @@ Translation *parseTranslate(XMLElement *);
 Scale *parseScale(const XMLElement *);
 Rotation *parseRotate(const XMLElement *);
 Catmull *parseCatmul(XMLElement *pElement);
+Light *parseLight(XMLElement *);
 
 
 float randomF() {
@@ -109,6 +110,143 @@ void parseDoc(Group *group, XMLNode *pN) {
                         parseDoc(group, pNode);
         }
 }
+
+Light *parseLight(XMLElement *pElement1) {
+        float pos[3];
+        float amb[4];
+        float spotDir[3];
+        float color[4];
+        int flaC = 0; // Has Color?
+        int flaA = 0; // Has Ambient Color?
+        int flaSD = 0; // Has Spot Direction?
+        int flaP = 0; // Has Position?
+
+        if (!strcmp(pElement1->Name(), "light")) {
+                if (pElement1->Attribute("x")) {
+                        pos[0] = stof(pElement1->Attribute("x"));
+                        flaP = 1;
+                }
+
+                if (pElement1->Attribute("y")) {
+                        pos[1] = stof(pElement1->Attribute("y"));
+                        flaP = 1;
+                }
+
+                if (pElement1->Attribute("z")) {
+                        pos[2] = stof(pElement1->Attribute("z"));
+                        flaP = 1;
+                }
+
+                if (pElement1->Attribute("diffR")) {
+                        flaC = 1;
+                        color[0] = stof(pElement1->Attribute("diffR"));
+                }
+
+                if (pElement1->Attribute("diffG")) {
+                        flaC = 1;
+                        color[1] = stof(pElement1->Attribute("diffG"));
+                }
+
+                if (pElement1->Attribute("diffB")) {
+                        flaC = 1;
+                        color[2] = stof(pElement1->Attribute("diffB"));
+                }
+
+                if (pElement1->Attribute("diffA")) {
+                        flaC = 1;
+                        color[3] = stof(pElement1->Attribute("diffA"));
+                }
+
+                if (pElement1->Attribute("ambR")) {
+                        flaA = 1;
+                        amb[0] = stof(pElement1->Attribute("ambR"));
+                }
+
+                if (pElement1->Attribute("ambG")) {
+                        flaA = 1;
+                        amb[1] = stof(pElement1->Attribute("ambG"));
+                }
+
+                if (pElement1->Attribute("ambB")) {
+                        flaA = 1;
+                        amb[2] = stof(pElement1->Attribute("ambB"));
+                }
+
+                if (pElement1->Attribute("ambA")) {
+                        flaA = 1;
+                        amb[3] = stof(pElement1->Attribute("ambA"));
+                }
+
+                if (pElement1->Attribute("spotDirx"))
+                        spotDir[0] = stof(pElement1->Attribute("spotDirx"));
+
+                if (pElement1->Attribute("spotDiry"))
+                        spotDir[1] = stof(pElement1->Attribute("spotDiry"));
+
+                if (pElement1->Attribute("spotDirz"))
+                        spotDir[2] = stof(pElement1->Attribute("spotDirz"));
+
+                if (pElement1->Attribute("type")) {
+                        string tt = pElement1->Attribute("type");
+
+                        if (tt.compare("POINT") == 0) {
+                                PointLight *l = new PointLight();
+
+                                if (flaA)
+                                        l->setAmb(amb);
+
+                                if (flaC)
+                                        l->setColor(color);
+
+                                if (flaP)
+                                        l->setPos(pos);
+
+                                return l;
+                        } else if (tt.compare("DIRECTIONAL") == 0) {
+                                DirectionalLight *l = new DirectionalLight();
+
+                                if (flaA)
+                                        l->setAmb(amb);
+
+                                if (flaC)
+                                        l->setColor(color);
+
+                                if (flaP)
+                                        l->setPos(pos);
+
+                                return l;
+                        } else if (tt.compare("SPOT") == 0) {
+                                SpotLight *l = new SpotLight();
+
+                                if (flaA)
+                                        l->setAmb(amb);
+
+                                if (flaC)
+                                        l->setColor(color);
+
+                                if (flaSD)
+                                        l->setSpotDir(spotDir);
+
+                                if (flaP)
+                                        l->setPos(pos);
+
+                                if (pElement1->Attribute("cutOff"))
+                                        l->setCutOff(stof(pElement1->Attribute("cutOff")));
+
+                                if (pElement1->Attribute("exp"))
+                                        l->setExp(stof(pElement1->Attribute("exp")));
+
+                                return l;
+                        } else {
+                                cerr << "Bad light format.\n";
+                                exit(1);
+                        }
+                }
+        }
+
+        return nullptr;
+}
+
 
 Model *parseFile(const XMLElement *pElement) {
         string s {pElement->Attribute("file")};
