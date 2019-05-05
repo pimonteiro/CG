@@ -6,6 +6,7 @@
 #endif
 
 #include "headers/model.h"
+#include "headers/material.h"
 
 Model::Model(int n) {
         this->nPoints = n;
@@ -23,6 +24,10 @@ void Model::addNormPoint(Point *p) {
 
 void Model::addTextPoint(Point *p) {
         this->textPoints.push_back(p);
+}
+
+void Model::addMaterial(Material m) {
+        this->material = m;
 }
 
 void Model::prepare() {
@@ -53,6 +58,7 @@ void Model::prepare() {
 }
 
 void Model::draw() {
+        this->material.setup();
         // Vertex Buffer
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
         glVertexPointer(3, GL_FLOAT, 0, 0);

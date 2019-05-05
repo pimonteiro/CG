@@ -2,6 +2,7 @@
 #include "headers/model.h"
 #include "headers/group.h"
 #include "headers/tinyxml2.h"
+#include "headers/material.h"
 #include "headers/scale.h"
 #include "headers/rotation.h"
 #include "headers/translation.h"
@@ -110,20 +111,6 @@ void parseDoc(Group *group, XMLNode *pN) {
 }
 
 Model *parseFile(const XMLElement *pElement) {
-        /*
-                float r {randomF()};
-                float g {randomF()};
-                float b {randomF()};
-
-                if (pElement->Attribute("r"))
-                        r = stof(pElement->Attribute("r"));
-
-                if (pElement->Attribute("g"))
-                        g = stof(pElement->Attribute("g"));
-
-                if (pElement->Attribute("b"))
-                        b = stof(pElement->Attribute("b"));
-        */
         string s {pElement->Attribute("file")};
         ifstream infile(s);
 
@@ -166,6 +153,39 @@ Model *parseFile(const XMLElement *pElement) {
                 }
         }
 
+        Material m = Material();
+
+        if (pElement->Attribute("type")) {
+                float r {0};
+                float g {0};
+                float b {0};
+
+                if (pElement->Attribute("r"))
+                        r = stof(pElement->Attribute("r"));
+
+                if (pElement->Attribute("g"))
+                        g = stof(pElement->Attribute("g"));
+
+                if (pElement->Attribute("b"))
+                        b = stof(pElement->Attribute("b"));
+
+                m.addColor(r, g, b);
+                string type = pElement->Attribute("type");
+
+                if (type.compare("diffuse") == 0)
+                        m.addType(DIFFUSE);
+
+                if (type.compare("specular") == 0)
+                        m.addType(SPECULAR);
+
+                if (type.compare("emissive") == 0)
+                        m.addType(EMISSIVE);
+
+                if (type.compare("ambiente") == 0)
+                        m.addType(AMBIENTE);
+        }
+
+        model->addMaterial(m);
         return model;
 }
 
