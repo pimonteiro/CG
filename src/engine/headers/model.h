@@ -8,20 +8,24 @@
 #include <GL/glut.h>
 #endif
 
+#include "../../lib/headers/point.h"
+#include <vector>
 
 class Model {
     private:
-        float r, g, b;
-        int size; /* number of dots */
-        int index;
-        float *pointArray;
+        int nPoints;
+        std::vector<Point *> vertPoints;
+        std::vector<Point *> normPoints;
+        std::vector<Point *> textPoints;
     public:
-        GLuint buffer[1];
+        GLuint buffer[2];
         Model(int);
         ~Model();
-        void addElement(float);
+        void addVertexPoint(Point *);
+        void addNormPoint(Point *);
+        void addTextPoint(Point *);
         void draw();
-        void addColour(float, float, float);
+        void prepare();
 };
 
 #endif
