@@ -8,7 +8,7 @@ float lengthVector(float *a) {
     return l;
 }
 
-void computeNormal(Point target, Point adj1, Point adj2, std::vector<float> *normalVec) {
+void computeNormal(Point target, Point adj1, Point adj2, std::vector<Point> *normalVec) {
     Point p1 = target.subtract(adj1);
     Point p2 = target.subtract(adj2);
 
@@ -22,11 +22,13 @@ void computeNormal(Point target, Point adj1, Point adj2, std::vector<float> *nor
 	normalize(crossed);
 	float l = length(crossed);
 
-    for(int p = 0; p < 3; p++)
-        normalVec->push_back(crossed[p] / l);
+    Point f {
+        crossed[0]/l, crossed[1]/l, crossed[2]/l
+    };
+    normalVec->push_back(f);
 }
 
-void calculateNormals(std::vector<Point> points, std::vector<float> *vec){
+void calculateNormals(std::vector<Point> points, std::vector<Point> *vec){
     for(std::vector<Point>::iterator it = points.begin(); it < points.end();){
         Point p1 = *it; it++;
         Point p2 = *it; it++;
