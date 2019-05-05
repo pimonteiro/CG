@@ -110,19 +110,20 @@ void parseDoc(Group *group, XMLNode *pN) {
 }
 
 Model *parseFile(const XMLElement *pElement) {
-        float r {randomF()};
-        float g {randomF()};
-        float b {randomF()};
+        /*
+                float r {randomF()};
+                float g {randomF()};
+                float b {randomF()};
 
-        if (pElement->Attribute("r"))
-                r = stof(pElement->Attribute("r"));
+                if (pElement->Attribute("r"))
+                        r = stof(pElement->Attribute("r"));
 
-        if (pElement->Attribute("g"))
-                g = stof(pElement->Attribute("g"));
+                if (pElement->Attribute("g"))
+                        g = stof(pElement->Attribute("g"));
 
-        if (pElement->Attribute("b"))
-                b = stof(pElement->Attribute("b"));
-
+                if (pElement->Attribute("b"))
+                        b = stof(pElement->Attribute("b"));
+        */
         string s {pElement->Attribute("file")};
         ifstream infile(s);
 
@@ -136,9 +137,9 @@ Model *parseFile(const XMLElement *pElement) {
         int nPoints {stoi(line)};
         Model *model {new Model(nPoints)};
         //model->addColour(r, g, b);
-
         int tt { 0 };
         int mode { 0 };
+
         while (getline(infile, line)) {
                 vector<string> v;
                 istringstream buf(line);
@@ -148,12 +149,21 @@ Model *parseFile(const XMLElement *pElement) {
 
                 float point[3];
                 int j { 0 };
+
                 for (auto i {v.begin()}; i != v.end(); ++i, j++)
                         point[j] = stof(*i);
-                if(mode == 0) model->addVertexPoint(new Point(point[0], point[1], point[2]));
-                else if(mode == 1) model->addNormPoint(new Point(point[0], point[1], point[2]));
+
+                if (mode == 0)
+                        model->addVertexPoint(new Point(point[0], point[1], point[2]));
+                else if (mode == 1)
+                        model->addNormPoint(new Point(point[0], point[1], point[2]));
+
                 tt++;
-                if(tt == nPoints){ mode++; tt = 0;}
+
+                if (tt == nPoints) {
+                        mode++;
+                        tt = 0;
+                }
         }
 
         return model;

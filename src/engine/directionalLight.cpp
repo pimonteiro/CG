@@ -11,13 +11,12 @@
 
 DirectionalLight::DirectionalLight(): Light() {}
 
-void DirectionalLight::draw(){
-    Point p = this->POS();
-    float pos[4] {
-        p.X(), p.Y(), p.Z(), 0.0f
-    };
-
-    glLightfv(GL_LIGHT0 + this->INDEX(), GL_POSITION, pos);
-    glLightfv(GL_LIGHT0 + this->INDEX(), GL_AMBIENT, this->AMB());
-    glLightfv(GL_LIGHT0 + this->INDEX(), GL_DIFFUSE, this->COLOR());
+void DirectionalLight::draw() {
+        Point p = this->POS();
+        float pos[4] {
+                p.X(), p.Y(), p.Z(), 0.0f
+        };
+        glLightfv(GL_LIGHT0 + this->INDEX(), GL_POSITION, pos);
+        glLightfv(GL_LIGHT0 + this->INDEX(), GL_AMBIENT, this->AMB());
+        glLightfv(GL_LIGHT0 + this->INDEX(), GL_DIFFUSE, this->COLOR());
 }

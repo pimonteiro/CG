@@ -10,42 +10,43 @@
 
 
 Light::Light() {
-    this->i = -1;
-    float defPos[4] {0,0,1,0};
-    float defColor[4] {1,1,1,1};
-    float defAmb[4] {0,0,0,1};
-    for(int i = 0; i < 4; i++){
-        this->color[i] = defColor[i];
-        this->amb[i] = defAmb[i];
-    }
-    this->pos = Point(defPos[0],defPos[1],defPos[2]);
+        this->i = -1;
+        float defPos[4] {0, 0, 1, 0};
+        float defColor[4] {1, 1, 1, 1};
+        float defAmb[4] {0, 0, 0, 1};
+
+        for (int i = 0; i < 4; i++) {
+                this->color[i] = defColor[i];
+                this->amb[i] = defAmb[i];
+        }
+
+        this->pos = Point(defPos[0], defPos[1], defPos[2]);
 }
 
-Light::~Light(){}
+Light::~Light() {}
 
-void Light::setColor(float c[4]){
-    for(int i = 0; i < 4; i++)
-        this->color[i] = c[i];
+void Light::setColor(float c[4]) {
+        for (int i = 0; i < 4; i++)
+                this->color[i] = c[i];
 }
 
-void Light::setAmb(float c[4]){
-    for(int i = 0; i < 4; i++){
-        this->amb[i] = c[i];
-    }
+void Light::setAmb(float c[4]) {
+        for (int i = 0; i < 4; i++)
+                this->amb[i] = c[i];
 }
 
-void Light::setPos(float c[3]){
-    this->pos = Point(c[0],c[1],c[2]);
+void Light::setPos(float c[3]) {
+        this->pos = Point(c[0], c[1], c[2]);
 }
 
-void Light::setIndex(int i){
-    this->i = i;
+void Light::setIndex(int i) {
+        this->i = i;
 }
 
-void Light::turnOn(){
-    glEnable(GL_LIGHT0 + this->i);
+void Light::turnOn() {
+        glEnable(GL_LIGHT0 + this->i);
 }
 
-void Light::turnOff(){
-    glDisable(GL_LIGHT0 + this->i);
+void Light::turnOff() {
+        glDisable(GL_LIGHT0 + this->i);
 }

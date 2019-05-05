@@ -41,31 +41,31 @@ void Group::addGroup(Group *g) {
         subGroupV.push_back(g);
 }
 
-void Group::addLight(Light *l){
+void Group::addLight(Light *l) {
         int i = this->lights.size();
         l->setIndex(i++);
         this->lights.push_back(l);
 }
 
-void Group::prepare(){
-    for(auto &l : this->lights){
-            glEnable(GL_LIGHTING);
-            l->turnOn();
-    }
+void Group::prepare() {
+        for (auto &l : this->lights) {
+                glEnable(GL_LIGHTING);
+                l->turnOn();
+        }
 
-    for (auto &m : this->modelV)
-            m->prepare();
+        for (auto &m : this->modelV)
+                m->prepare();
 
-    for (auto &g : this->subGroupV)
-            g->prepare();
+        for (auto &g : this->subGroupV)
+                g->prepare();
 }
 
 
 
 void Group::draw() {
-        for(auto &l : this->lights) {
+        for (auto &l : this->lights)
                 l->draw();
-        }
+
         for (auto &t : this->transformV)
                 t->transform();
 
