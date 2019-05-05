@@ -6,6 +6,6 @@
 #include "../../lib/headers/point.h"
 
 std::string box(float, float, int);
-void boxCoords(float, float, int, std::vector<Point> *);
+void boxCoords(float, float, int, std::vector<Point *> *);
 
 #endif

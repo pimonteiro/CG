@@ -5,7 +5,7 @@
 #include "../lib/headers/point.h"
 #include "headers/normal.h"
 
-void planeCoords(float xO, float yO, float zO, float xP, float zP, int type, int place, std::vector<Point> *points) {
+void planeCoords(float xO, float yO, float zO, float xP, float zP, int type, int place, std::vector<Point *> *points) {
         float x, y, z;
         x = xP / 2;
         y = 0;
@@ -23,20 +23,20 @@ void planeCoords(float xO, float yO, float zO, float xP, float zP, int type, int
 
         if (place == 1) {
                 // frente
-                points->push_back(Point(-x + xO, y + yO, z + zO)); // 1
-                points->push_back(Point(x + xO, flag * y + yO, z + zO)); // 2
-                points->push_back(Point(x + xO, -y + yO, -z + zO)); // 3
-                points->push_back(Point(-x + xO, y + yO, z + zO)); // 1
-                points->push_back(Point(x + xO, -y + yO, -z + zO)); // 3
-                points->push_back(Point(-x + xO, -flag * y + yO, -z + zO)); // 4
+                points->push_back(new Point(-x + xO, y + yO, z + zO)); // 1
+                points->push_back(new Point(x + xO, flag * y + yO, z + zO)); // 2
+                points->push_back(new Point(x + xO, -y + yO, -z + zO)); // 3
+                points->push_back(new Point(-x + xO, y + yO, z + zO)); // 1
+                points->push_back(new Point(x + xO, -y + yO, -z + zO)); // 3
+                points->push_back(new Point(-x + xO, -flag * y + yO, -z + zO)); // 4
         } else if (place == 0) {
                 // trás
-                points->push_back(Point(x + xO, -y + yO, -z + zO)); // 3
-                points->push_back(Point(x + xO, flag * y + yO, z + zO)); // 2
-                points->push_back(Point(-x + xO, y + yO, z + zO)); // 1
-                points->push_back(Point(-x + xO, -flag * y + yO, -z + zO)); // 4
-                points->push_back(Point(x + xO, -y + yO, -z + zO)); // 3
-                points->push_back(Point(-x + xO, y + yO, z + zO)); // 1
+                points->push_back(new Point(x + xO, -y + yO, -z + zO)); // 3
+                points->push_back(new Point(x + xO, flag * y + yO, z + zO)); // 2
+                points->push_back(new Point(-x + xO, y + yO, z + zO)); // 1
+                points->push_back(new Point(-x + xO, -flag * y + yO, -z + zO)); // 4
+                points->push_back(new Point(x + xO, -y + yO, -z + zO)); // 3
+                points->push_back(new Point(-x + xO, y + yO, z + zO)); // 1
         }
 }
 
@@ -44,12 +44,11 @@ void planeCoords(float xO, float yO, float zO, float xP, float zP, int type, int
 std::string plane(float xO, float yO, float zO, float xP, float zP, int type, int place) {
         std::ostringstream os;
         os << "6\n";
-        std::vector<Point> points;
+        std::vector<Point *> points, normPoints;
         planeCoords(xO, yO, zO, xP, zP, type, place, &points);
-        std::vector<Point> pp;
-        calculateNormals(points, &pp);
+        calculateNormals(points, &normPoints);
         // Missing textures!
         os << writeVector(points);
-        os << writeVector(pp);
+        os << writeVector(normPoints);
         return os.str();
 }

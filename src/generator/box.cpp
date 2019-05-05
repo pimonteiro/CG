@@ -11,7 +11,7 @@
 std::string sumNPoints(const std::string &);
 
 
-void boxCoords(float xP, float zP, int div, std::vector<Point> *points) {
+void boxCoords(float xP, float zP, int div, std::vector<Point *> *points) {
         double dz  {zP / (2 * div)};
         double zO  {-zP / 2 + dz};
         double dx  {xP / (2 * div)};
@@ -39,7 +39,7 @@ void boxCoords(float xP, float zP, int div, std::vector<Point> *points) {
 
 std::string box(float xP, float zP, int div) {
         std::ostringstream os, r;
-        std::vector<Point> points, pNormals;
+        std::vector<Point *> points, pNormals;
         boxCoords(xP, zP, div, &points);
         calculateNormals(points, &pNormals);
         os << points.size() << std::endl;

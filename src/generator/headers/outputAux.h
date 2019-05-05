@@ -7,6 +7,6 @@
 
 std::string writePoint(float, float, float);
 void dumpFile(const std::ostringstream &, const std::string &);
-std::string writeVector(std::vector<Point>);
+std::string writeVector(std::vector<Point *>);
 
 #endif

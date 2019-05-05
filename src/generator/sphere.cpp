@@ -8,9 +8,9 @@
 #include <vector>
 
 
-Point trans(float, float, float);
+Point *trans(float, float, float);
 
-void sphereCoords(float radius, int slices, int stacks, std::vector<Point> *points) {
+void sphereCoords(float radius, int slices, int stacks, std::vector<Point *> *points) {
         if (radius <= 0.0f || slices <= 0 || stacks <= 0)
                 fputs("All parameters must be positive numbers\n", stderr);
 
@@ -43,7 +43,7 @@ void sphereCoords(float radius, int slices, int stacks, std::vector<Point> *poin
 
 std::string sphere(float radius, int slices, int stacks) {
         std::ostringstream os;
-        std::vector<Point> points, pNormals;
+        std::vector<Point *> points, pNormals;
         sphereCoords(radius, slices, stacks, &points);
         calculateNormals(points, &pNormals);
         os << points.size() << std::endl;
@@ -51,6 +51,6 @@ std::string sphere(float radius, int slices, int stacks) {
         return os.str();
 }
 
-Point trans(float a, float b, float c) {
-        return Point(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
+Point *trans(float a, float b, float c) {
+        return new Point(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
 }

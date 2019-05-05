@@ -9,11 +9,11 @@ std::string writePoint(float a, float b, float c) {
         return os.str();
 }
 
-std::string writeVector(std::vector<Point> points) {
+std::string writeVector(std::vector<Point *> points) {
         std::ostringstream os;
 
         for (auto &p : points)
-                os << writePoint(p.X(), p.Y(), p.Z());
+                os << writePoint(p->X(), p->Y(), p->Z());
 
         return os.str();
 }

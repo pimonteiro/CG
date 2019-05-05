@@ -6,6 +6,6 @@
 #include "../../lib/headers/point.h"
 
 std::string cone(float, float, int, int);
-void coneCoords(float, float, int, int, std::vector<Point> *);
+void coneCoords(float, float, int, int, std::vector<Point *> *);
 
 #endif

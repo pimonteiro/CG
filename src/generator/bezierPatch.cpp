@@ -56,7 +56,7 @@ void getBezierPoint(float u, float v, float *pos, float p[16][3]) {
 
 std::string getBezierTriangles(int div, int n, int index[][16], float points[][3]) {
         std::ostringstream os;
-        std::vector<Point> coords, pNormals;
+        std::vector<Point *> coords, pNormals;
         float inc { 1.0f / div };
 
         for (int i {0}; i < n; i++) {
@@ -80,12 +80,12 @@ std::string getBezierTriangles(int div, int n, int index[][16], float points[][3
                                 getBezierPoint(pu + inc, pv, pos1, pI);
                                 getBezierPoint(pu, pv + inc, pos2, pI);
                                 getBezierPoint(pu + inc, pv + inc, pos3, pI);
-                                coords.push_back(Point(pos0[0], pos0[1], pos0[2]));
-                                coords.push_back(Point(pos1[0], pos1[1], pos1[2]));
-                                coords.push_back(Point(pos2[0], pos2[1], pos2[2]));
-                                coords.push_back(Point(pos2[0], pos2[1], pos2[2]));
-                                coords.push_back(Point(pos1[0], pos1[1], pos1[2]));
-                                coords.push_back(Point(pos3[0], pos3[1], pos3[2]));
+                                coords.push_back(new Point(pos0[0], pos0[1], pos0[2]));
+                                coords.push_back(new Point(pos1[0], pos1[1], pos1[2]));
+                                coords.push_back(new Point(pos2[0], pos2[1], pos2[2]));
+                                coords.push_back(new Point(pos2[0], pos2[1], pos2[2]));
+                                coords.push_back(new Point(pos1[0], pos1[1], pos1[2]));
+                                coords.push_back(new Point(pos3[0], pos3[1], pos3[2]));
                         }
                 }
         }

@@ -7,7 +7,7 @@
 #include <cmath>
 #include <vector>
 
-void frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int isFirst, std::vector<Point> *points) {
+void frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int isFirst, std::vector<Point *> *points) {
         for (int i {0}; i < slices; i++) {
                 double x1b {radiusBottom * sin(i * alpha)};
                 double z1b {radiusBottom * cos(i * alpha)};
@@ -19,24 +19,24 @@ void frustum(float radiusBottom, float radiusTop, float slices, float alpha, flo
                 double z2t {radiusTop * cos((i + 1)*alpha)};
                 double yT {yB + dHeight};
                 // left triangle
-                points->push_back(Point(x1b, yB, z1b)); // 1
-                points->push_back(Point(x2t, yT, z2t)); // 2
-                points->push_back(Point(x1t, yT, z1t)); // 3
+                points->push_back(new  Point(x1b, yB, z1b)); // 1
+                points->push_back(new  Point(x2t, yT, z2t)); // 2
+                points->push_back(new  Point(x1t, yT, z1t)); // 3
                 // right triangle
-                points->push_back(Point(x1b, yB, z1b)); // 1
-                points->push_back(Point(x2b, yB, z2b)); // 4
-                points->push_back(Point(x2t, yT, z2t)); // 2
+                points->push_back(new  Point(x1b, yB, z1b)); // 1
+                points->push_back(new  Point(x2b, yB, z2b)); // 4
+                points->push_back(new  Point(x2t, yT, z2t)); // 2
 
                 if (isFirst) {
-                        points->push_back(Point(0, 0, 0)); // bottom center
-                        points->push_back(Point(x2b, 0, z2b)); // 4
-                        points->push_back(Point(x1b, 0, z1b)); // 1
+                        points->push_back(new  Point(0, 0, 0)); // bottom center
+                        points->push_back(new  Point(x2b, 0, z2b)); // 4
+                        points->push_back(new  Point(x1b, 0, z1b)); // 1
                 }
         }
 }
 
 
-void coneCoords(float radius, float height, int slices, int stacks, std::vector<Point> *points) {
+void coneCoords(float radius, float height, int slices, int stacks, std::vector<Point *> *points) {
         if (radius <= 0.0f || slices <= 0 || stacks <= 0)
                 std::cerr << "All parameters must be positive numbers\n";
 
@@ -60,7 +60,7 @@ void coneCoords(float radius, float height, int slices, int stacks, std::vector<
 
 std::string cone(float radius, float height, int slices, int stacks) {
         std::ostringstream os;
-        std::vector<Point> points, pNormals;
+        std::vector<Point *> points, pNormals;
         coneCoords(radius, height, slices, stacks, &points);
         calculateNormals(points, &pNormals);
         os << points.size() << std::endl;

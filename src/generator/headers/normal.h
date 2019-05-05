@@ -4,7 +4,7 @@
 #include "../../lib/headers/point.h"
 #include <vector>
 
-void computeNormal(Point, Point, Point, std::vector<Point> *);
-void calculateNormals(std::vector<Point>, std::vector<Point> *);
+void computeNormal(Point, Point, Point, std::vector<Point *> *);
+void calculateNormals(std::vector<Point *>, std::vector<Point *> *);
 
 #endif

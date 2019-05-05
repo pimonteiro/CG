@@ -6,6 +6,6 @@
 #include "../../lib/headers/point.h"
 
 std::string annulus(float, float, float, int);
-void annulusCoords(float, float, float, int, std::vector<Point> *);
+void annulusCoords(float, float, float, int, std::vector<Point *> *);
 
 #endif
