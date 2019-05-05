@@ -1,12 +1,13 @@
 #include "headers/cone.h"
 #include "headers/outputAux.h"
+#include "../lib/headers/point.h"
+#include "headers/normal.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <vector>
 
-std::string frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int *nPoints, int isFirst) {
-        std::ostringstream os;
-
+void frustum(float radiusBottom, float radiusTop, float slices, float alpha, float dHeight, float yB, int isFirst, std::vector<Point> *points) {
         for (int i {0}; i < slices; i++) {
                 double x1b {radiusBottom * sin(i * alpha)};
                 double z1b {radiusBottom * cos(i * alpha)};
@@ -18,50 +19,51 @@ std::string frustum(float radiusBottom, float radiusTop, float slices, float alp
                 double z2t {radiusTop * cos((i + 1)*alpha)};
                 double yT {yB + dHeight};
                 // left triangle
-                os << writePoint(x1b, yB, z1b); // 1
-                os << writePoint(x2t, yT, z2t); // 2
-                os << writePoint(x1t, yT, z1t); // 3
+                points->push_back(Point(x1b, yB, z1b)); // 1
+                points->push_back(Point(x2t, yT, z2t)); // 2
+                points->push_back(Point(x1t, yT, z1t)); // 3
                 // right triangle
-                os << writePoint(x1b, yB, z1b); // 1
-                os << writePoint(x2b, yB, z2b); // 4
-                os << writePoint(x2t, yT, z2t); // 2
-                *nPoints += 6;
+                points->push_back(Point(x1b, yB, z1b)); // 1
+                points->push_back(Point(x2b, yB, z2b)); // 4
+                points->push_back(Point(x2t, yT, z2t)); // 2
 
                 if (isFirst) {
-                        os << writePoint(0, 0, 0); // bottom center
-                        os << writePoint(x2b, 0, z2b); // 4
-                        os << writePoint(x1b, 0, z1b); // 1
-                        *nPoints += 3;
+                        points->push_back(Point(0, 0, 0)); // bottom center
+                        points->push_back(Point(x2b, 0, z2b)); // 4
+                        points->push_back(Point(x1b, 0, z1b)); // 1
                 }
         }
-
-        return os.str();
 }
 
-std::string cone(float radius, float height, int slices, int stacks) {
+
+void coneCoords(float radius, float height, int slices, int stacks, std::vector<Point> *points) {
         if (radius <= 0.0f || slices <= 0 || stacks <= 0)
                 std::cerr << "All parameters must be positive numbers\n";
 
-        std::ostringstream os;
         double alpha {2 * M_PI / slices};
         double dHeight {height / stacks};
         double yB {0};
         double yT {height / stacks};
         double radiusBottom {radius};
-        int nPoints {0};
         float radiusTop;
         int isFirst;
 
         for (int j {stacks}; j > 0; j--) {
                 radiusTop = (j - 1) * radius / stacks;
                 isFirst = !(stacks - j);
-                os << frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, &nPoints, isFirst);
+                frustum(radiusBottom, radiusTop, slices, alpha, dHeight, yB, isFirst, points);
                 radiusBottom = radiusTop;
                 yB = yT;
                 yT += dHeight;
         }
+}
 
-        std::ostringstream r;
-        r << nPoints << '\n' << os.str();
-        return r.str();
+std::string cone(float radius, float height, int slices, int stacks) {
+        std::ostringstream os;
+        std::vector<Point> points, pNormals;
+        coneCoords(radius, height, slices, stacks, &points);
+        calculateNormals(points, &pNormals);
+        os << points.size() << std::endl;
+        os << writeVector(points) << writeVector(pNormals);
+        return os.str();
 }
