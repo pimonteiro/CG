@@ -13,6 +13,9 @@
 #include <vector>
 #include "headers/parser.h"
 #include "headers/group.h"
+//TEMP
+#include "headers/light.h"
+#include "headers/directionalLight.h"
 
 using namespace std;
 
@@ -153,6 +156,26 @@ void processKeys(unsigned char key, int x, int y) {
                 }
 
                 fullscreen = !fullscreen;
+        }
+
+        // Light Management
+        if (isdigit(key)) {
+            char num = key;
+            int n = atoi(&num);
+            Light *l = group->getLight(n);
+            if(l != nullptr){
+                if(l->getState()) // Turned on
+                    l->turnOff();
+                else
+                    l->turnOn();
+            } else {
+                cout << "Light " << n << " specified not set." << endl;
+            }
+        }
+
+        if (key == 'b'){
+            DirectionalLight *l = new DirectionalLight(); //IMPROVE
+            group->addLight(l);
         }
 }
 
