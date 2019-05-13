@@ -40,14 +40,40 @@ void sphereCoords(float radius, int slices, int stacks, std::vector<Point *> *po
         }
 }
 
+void sphereTexture(int slices, int stacks, std::vector<Point *> *pTexture){
+    float deltaS = 1.0f / slices;
+    float deltaT = 1.0f / stacks;
+
+    for (int i = 0; i < stacks; ++i) {
+        float t = (stacks - i) * deltaT;
+
+        for (int j = 0; j < slices; ++j) {
+            float s = j * deltaS;
+
+            if (i < stacks - 1) {
+                pTexture->push_back(new Point(s,t,0));
+                pTexture->push_back(new Point(s,t - deltaT,0));
+                pTexture->push_back(new Point(s + deltaS,t - deltaT,0));
+            }
+            if (i > 0) {
+                pTexture->push_back(new Point(s,t,0));
+                pTexture->push_back(new Point(s + deltaS,t - deltaT, 0));
+                pTexture->push_back(new Point(s + deltaS,t, 0));
+            }
+        }
+    }
+}
+
 
 std::string sphere(float radius, int slices, int stacks) {
         std::ostringstream os;
-        std::vector<Point *> points, pNormals;
+        std::vector<Point *> points, pNormals, pTexture;
         sphereCoords(radius, slices, stacks, &points);
         calculateNormals(points, &pNormals);
+        sphereTexture(slices, stacks, &pTexture);
+
         os << points.size() << std::endl;
-        os << writeVector(points) << writeVector(pNormals);
+        os << writeVector(points) << writeVector(pNormals) << writeTextVector(pTexture);
         return os.str();
 }
 

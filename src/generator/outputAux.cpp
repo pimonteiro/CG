@@ -18,6 +18,15 @@ std::string writeVector(std::vector<Point *> points) {
         return os.str();
 }
 
+std::string writeTextVector(std::vector<Point *> points) {
+        std::ostringstream os;
+
+        for (auto &p : points)
+                os << p->X() << " " << p->Y() << '\n';
+
+        return os.str();
+}
+
 void dumpFile(const std::ostringstream &os, const std::string &file) {
         std::ofstream outfile;
         outfile.open(file);
