@@ -9,8 +9,7 @@
 
 Model::Model(int n) {
         this->nPoints = n;
-        this->texture = Texture();
-        this->material = Material();
+        this->texture = new Texture();
 }
 
 Model::~Model() {}
@@ -27,15 +26,13 @@ void Model::addTextPoint(Point *p) {
        this->textPoints.push_back(p);
 }
 
-void Model::addTexture(Texture t){
+void Model::addTexture(Texture *t){
         this->texture = t;
 }
 
-void Model::addMaterial(Material m){
-        this->material = m;
-}
-
 void Model::prepare(){
+        glGenTextures(1, &this->texture->textBuffer);        //TODO MUDAR DE SITIO?
+        this->texture->loadImage();
         glGenBuffers(3, this->buffer);
 
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
@@ -60,7 +57,6 @@ void Model::prepare(){
         }
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * n, v, GL_STATIC_DRAW);
 
-        this->texture.prepare();
 
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[2]);
         v = new float[n];
@@ -68,28 +64,28 @@ void Model::prepare(){
         for(auto &p : this->textPoints){
             v[i++] = p->X();
             v[i++] = p->Y();
-            v[i++] = p->Z();
         }
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * n, v, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * this->textPoints.size() * 2, v, GL_STATIC_DRAW);
 }
 
 void Model::draw() {
+        this->texture->setup();
 
-        this->material.setup();
+        glBindTexture(GL_TEXTURE_2D, this->texture->textBuffer);
 
         // Vertex Buffer
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
         glVertexPointer(3,GL_FLOAT,0,0);
 
-        // Texture Buffer TODO verificar se dá erro quando não há imagem E se nao tem de ter cor na mesma ???
-        glBindTexture(GL_TEXTURE_2D, this->textBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, buff);
-        glTexCoordPointer(2, GL_FLOAT, 0, 0);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
         // Normal Buffer
-        glBindBuffer(GL_ARRAY_BUFFER, this->buffer[2]);
+        glBindBuffer(GL_ARRAY_BUFFER, this->buffer[1]);
         glNormalPointer(GL_FLOAT, 0, 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, this->points.size() * 3);
+        // Texture Buffer TODO verificar se dá erro quando não há imagem E se nao tem de ter cor na mesma ???
+        glBindBuffer(GL_ARRAY_BUFFER, this->buffer[2]);
+        glTexCoordPointer(2, GL_FLOAT, 0, 0);
+
+        glDrawArrays(GL_TRIANGLES, 0, this->vertPoints.size() * 3);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
 }

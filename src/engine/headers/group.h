@@ -17,10 +17,11 @@ class Group {
     public:
         Group();
         ~Group();
-        void addTransformation(Transformation *t);
-        void addModel(Model *m);
-        void addGroup(Group *g);
+        void addTransformation(Transformation *);
+        void addModel(Model *);
+        void addGroup(Group *);
         void addLight(Light *);
+        Light* getLight(int);
         void draw();
 };
 #endif

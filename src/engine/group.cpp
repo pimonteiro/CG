@@ -42,12 +42,21 @@ void Group::addGroup(Group *g) {
 }
 
 void Group::addLight(Light *l){
-        int i = this->lights.size();
+        int i {static_cast<int>(this->lights.size())};
         l->setIndex(i++);
         l->turnOn();
         this->lights.push_back(l);
 }
 
+Light* Group::getLight(int n){
+    int i {0};
+    for(auto &l : this->lights) {
+            if (i == n)
+                return l;
+            i++;
+    }
+    return nullptr;
+}
 
 void Group::draw() {
         for(auto &l : this->lights) {

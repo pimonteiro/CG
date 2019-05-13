@@ -9,9 +9,9 @@
 
 Material::Material(){
     this->type = NOSURFACE;
-    this->r = 1;
-    this->g = 1;
-    this->b = 1;
+    this->r = 0.5;
+    this->g = 0.5;
+    this->b = 0.5;
 }
 
 Material::~Material(){}
