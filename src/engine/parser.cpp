@@ -30,13 +30,9 @@ Model *parseFile(const XMLElement *);
 Translation *parseTranslate(XMLElement *);
 Scale *parseScale(const XMLElement *);
 Rotation *parseRotate(const XMLElement *);
-<<<<<<< HEAD
 Catmull *parseCatmul(XMLElement *pElement);
 Light *parseLight(XMLElement *);
-=======
-Catmull *parseCatmul(XMLElement *);
-std::vector<Light *> parseLights(XMLElement *);
->>>>>>> 3e58457... add light support and parse
+
 
 
 float randomF() {
@@ -83,11 +79,12 @@ void parseDoc(Group *group, XMLNode *pN) {
         for (; pNode; pNode = pNode->NextSibling()) {
                 XMLElement *pElement {pNode->ToElement()};
 
-                if (!strcmp(pElement->Name(), "lights")) {
-                        vector<Light *> ls {parseLights(pElement)};
-                        group->addLights(ls);
+                /*
+                if (!strcmp(pElement->Name(), "light")) {
+                        Light* l {parseLight(pElement)};
+                        group->addLight(l);
                 }
-
+                */
                 if (!strcmp(pElement->Name(), "model")) {
                         if (pElement->Attribute("file")) {
                                 Model *m {parseFile(pElement)};
@@ -124,6 +121,11 @@ void parseDoc(Group *group, XMLNode *pN) {
 
                 if (!strcmp(pElement->Name(), "models"))
                         parseDoc(group, pNode);
+
+                /*
+                if (!strcmp(pElement->Name(), "lights"))
+                        parseDoc(group, pNode);
+                */
         }
 }
 
@@ -281,7 +283,13 @@ Model *parseFile(const XMLElement *pElement) {
         int tt { 0 };
         int mode { 0 };
 
+        int mode = 0; // 3 modes (vertex, normal, texture points)
+        int w = 0;
         while (getline(infile, line)) {
+                if(w == nPoints){
+                    w = 0;
+                    mode++;
+                }
                 vector<string> v;
                 istringstream buf(line);
 
@@ -339,14 +347,14 @@ Model *parseFile(const XMLElement *pElement) {
                         m.addType(AMBIENTE);
         }
 
-        Material m = Material();
-        Texture t = Texture();
+        Material *m = new Material();
+        Texture *t = new Texture();
 
         if(pElement->Attribute("texture")){
                 string filename = pElement->Attribute("texture");
-                t.addFile(filename);
+                t->addFile(filename);
         }
-        else if (pElement->Attribute("type")){
+        if (pElement->Attribute("type")){
                 float r {0};
                 float g {0};
                 float b {0};
@@ -358,20 +366,20 @@ Model *parseFile(const XMLElement *pElement) {
 
                 if (pElement->Attribute("b"))
                         b = stof(pElement->Attribute("b"));
-                m.addColor(r,g,b);
+                m->addColor(r,g,b);
 
                 string type = pElement->Attribute("type");
                 if(type.compare("diffuse") == 0)
-                        m.addType(DIFFUSE);
+                        m->addType(DIFFUSE);
                 if(type.compare("specular") == 0)
-                        m.addType(SPECULAR);
+                        m->addType(SPECULAR);
                 if(type.compare("emissive") == 0)
-                        m.addType(EMISSIVE);
+                        m->addType(EMISSIVE);
                 if(type.compare("ambiente") == 0)
-                        m.addType(AMBIENTE);
+                        m->addType(AMBIENTE);
         }
+        t->addMaterial(m);
         model->addTexture(t);
-        model->addMaterial(m);
 
         model->addMaterial(m);
         return model;
