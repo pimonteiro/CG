@@ -19,14 +19,12 @@ class Model {
         std::vector<Point *> vertPoints;
         std::vector<Point *> normPoints;
         std::vector<Point *> textPoints;
-        Texture texture;
-        Material material;
+        Texture *texture;
     public:
         GLuint buffer[3];
         Model(int);
         ~Model();
-        void addTexture(Texture);
-        void addMaterial(Material);
+        void addTexture(Texture *);
         void addVertexPoint(Point *);
         void addNormPoint(Point *);
         void addTextPoint(Point *);
