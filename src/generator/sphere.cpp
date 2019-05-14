@@ -53,7 +53,7 @@ void sphereTexture(int slices, int stacks, std::vector<Point *> *pTexture) {
                         if (i < stacks - 1) {
                                 pTexture->push_back(new Point(u, v, 0));
                                 pTexture->push_back(new Point(u, v - deltaBeta, 0));
-                                pTexture->push_back(new Point(u + deltaAlpha, t - deltaBeta, 0));
+                                pTexture->push_back(new Point(u + deltaAlpha, v - deltaBeta, 0));
                         }
 
                         if (i > 0) {
