@@ -44,6 +44,10 @@ void Group::addGroup(Group *g) {
 void Group::addLight(Light *l) {
         int i {static_cast<int>(this->lights.size())};
         l->setIndex(i++);
+<<<<<<< HEAD
+=======
+        l->turnOn();
+>>>>>>> 7336ffe9d1a776ad907f6c8054253a0b3ca324f2
         this->lights.push_back(l);
 }
 

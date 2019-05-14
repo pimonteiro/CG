@@ -7,7 +7,7 @@
 #include "headers/rotation.h"
 #include "headers/translation.h"
 #include "headers/catmull.h"
-#include "headers/textre.h"
+#include "headers/texture.h"
 #include "headers/light.h"
 #include "headers/directionalLight.h"
 #include "headers/pointLight.h"
@@ -30,9 +30,8 @@ Model *parseFile(const XMLElement *);
 Translation *parseTranslate(XMLElement *);
 Scale *parseScale(const XMLElement *);
 Rotation *parseRotate(const XMLElement *);
-Catmull *parseCatmul(XMLElement *pElement);
+Catmull *parseCatmul(XMLElement *);
 Light *parseLight(XMLElement *);
-
 
 
 float randomF() {
@@ -261,7 +260,6 @@ Light *parseLight(XMLElement *pElement1) {
 
         return nullptr;
 }
-
 
 Model *parseFile(const XMLElement *pElement) {
         string s {pElement->Attribute("file")};

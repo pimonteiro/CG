@@ -6,10 +6,10 @@
 #endif
 
 #include "headers/model.h"
-#include "headers/material.h"
 
 Model::Model(int n) {
         this->nPoints = n;
+        this->texture = new Texture();
 }
 
 Model::~Model() {}

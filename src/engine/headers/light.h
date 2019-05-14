@@ -21,7 +21,6 @@ class Light {
         int getState();
         void turnOn();
         void turnOff();
-        int getState();
         Point POS() {
                 return pos;
         }
