@@ -26,14 +26,15 @@ Light::Light() {
 
 Light::~Light() {}
 
-void Light::setColor(float c[4]) {
-        for (int i = 0; i < 4; i++)
-                this->color[i] = c[i];
+void Light::setColor(float c[4]){
+    for(int i {0}; i < 4; i++)
+        this->color[i] = c[i];
 }
 
-void Light::setAmb(float c[4]) {
-        for (int i = 0; i < 4; i++)
-                this->amb[i] = c[i];
+void Light::setAmb(float c[4]){
+    for(int i {0}; i < 4; i++){
+        this->amb[i] = c[i];
+    }
 }
 
 void Light::setPos(float c[3]) {

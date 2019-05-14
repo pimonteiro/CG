@@ -279,9 +279,9 @@ Model *parseFile(const XMLElement *pElement) {
         int tt { 0 };
         int mode { 0 };
 
-        int mode = 0; // 3 modes (vertex, normal, texture points)
-        int w = 0;
-        while (getline(infile, line)) {
+        int mode {0}; // 3 modes (vertex, normal, texture points)
+        int w {0};
+        while (getline(infile, line)){
                 if(w == nPoints){
                     w = 0;
                     mode++;
@@ -293,8 +293,7 @@ Model *parseFile(const XMLElement *pElement) {
                         v.push_back(word);
 
                 float point[3];
-                int j { 0 };
-
+                int j {0};
                 for (auto i {v.begin()}; i != v.end(); ++i, j++)
                         point[j] = stof(*i);
 
@@ -343,28 +342,35 @@ Model *parseFile(const XMLElement *pElement) {
                         m.addType(AMBIENTE);
         }
 
-        Material *m = new Material();
-        Texture *t = new Texture();
+        Material *m {new Material()};
+        Texture *t {new Texture()};
 
         if(pElement->Attribute("texture")){
-                string filename = pElement->Attribute("texture");
+                string filename { pElement->Attribute("texture")};
                 t->addFile(filename);
         }
         if (pElement->Attribute("type")){
                 float r {0};
                 float g {0};
                 float b {0};
-                if (pElement->Attribute("r"))
+
+                int flC {0};
+                if (pElement->Attribute("r")){
                         r = stof(pElement->Attribute("r"));
-
-                if (pElement->Attribute("g"))
+                        flC = 1;
+                }
+                if (pElement->Attribute("g")){
                         g = stof(pElement->Attribute("g"));
-
-                if (pElement->Attribute("b"))
+                        flC = 1;
+                }
+                if (pElement->Attribute("b")){
                         b = stof(pElement->Attribute("b"));
-                m->addColor(r,g,b);
+                        flC = 1;
+                }
 
-                string type = pElement->Attribute("type");
+                if(flC) m->addColor(r,g,b);
+
+                string type { pElement->Attribute("type")};
                 if(type.compare("diffuse") == 0)
                         m->addType(DIFFUSE);
                 if(type.compare("specular") == 0)
