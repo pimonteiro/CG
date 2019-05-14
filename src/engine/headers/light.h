@@ -6,7 +6,6 @@
 class Light {
     private:
         Point pos;
-        int state;
         int i;
         float color[4];
         float amb[4];

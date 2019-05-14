@@ -16,9 +16,9 @@ class Group {
     public:
         Group();
         ~Group();
-        void addTransformation(Transformation *);
-        void addModel(Model *);
-        void addGroup(Group *);
+        void addTransformation(Transformation *t);
+        void addModel(Model *m);
+        void addGroup(Group *g);
         void addLight(Light *);
         Light *getLight(int);
         void draw();

@@ -2,7 +2,6 @@
 #include "headers/model.h"
 #include "headers/group.h"
 #include "headers/tinyxml2.h"
-#include "headers/material.h"
 #include "headers/scale.h"
 #include "headers/rotation.h"
 #include "headers/translation.h"
@@ -124,6 +123,7 @@ void parseDoc(Group *group, XMLNode *pN) {
                         parseDoc(group, pNode);
         }
 }
+
 
 Light *parseLight(XMLElement *pElement1) {
         float pos[3];
@@ -257,8 +257,6 @@ Light *parseLight(XMLElement *pElement1) {
                         }
                 }
         }
-
-        return nullptr;
 }
 
 Model *parseFile(const XMLElement *pElement) {
@@ -304,7 +302,7 @@ Model *parseFile(const XMLElement *pElement) {
 
                 w++;
         }
-
+        
         Material *m {new Material()};
         Texture *t {new Texture()};
 

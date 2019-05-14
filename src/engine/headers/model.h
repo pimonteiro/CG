@@ -19,7 +19,6 @@ class Model {
         std::vector<Point *> vertPoints;
         std::vector<Point *> normPoints;
         std::vector<Point *> textPoints;
-
         Texture *texture;
     public:
         GLuint buffer[3];
