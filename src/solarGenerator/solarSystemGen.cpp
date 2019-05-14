@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#niclude <string>
+#include <string>
 #include "../generator/headers/sphere.h"
 #include "../generator/headers/outputAux.h"
 #include "../generator/headers/annulus.h"
@@ -24,6 +24,7 @@
 using namespace std;
 
 //"mercury", "venus", "earth", "mars", "pluto", "jupiter", "saturn", "uranus", "neptune", "moon", "titan", "io", "europa", "callisto"
+string plNames[14] {"mercury", "venus", "earth", "mars", "pluto", "jupiter", "saturn", "uranus", "neptune", "moon", "titan", "io", "europa", "callisto"};
 double plProp[14] {1.38, 1.95, 2.3, 1.53, 1.18, 11.60, 10.40, 5.04, 4.88, 0.7, 1.45, 0.95, 0.6, 1.38};
 double plD[14] {DMERCURY, 1.7 * DMERCURY, 2.4 * DMERCURY, 3 * DMERCURY, 8.8 * DMERCURY, 4.2 * DMERCURY, 5.9 * DMERCURY, 7 * DMERCURY, 8 * DMERCURY, DSATTELITE, 3.5 * DSATTELITE, 3.5 * DSATTELITE, 4.5 * DSATTELITE, 5.4 * DSATTELITE};
 Point colors[14] {Point(0.36, 0.36, 0.36), Point(0.8, 0.5, 0.2), Point(0.31, 0.65, 0.76), Point(0.55, 0.15, 0), Point(0.93, 0.85, 0.68), Point(0.93, 0.8, 0.38), Point(0.93, 0.86, 0.51),
@@ -35,6 +36,10 @@ string textures[14] {"","","earth.png",""};
 float angle {40};
 float angleMoons {60};
 
+
+void genLights(ostringstream *solar){
+
+}
 
 
 void planetOrbitalPoints(float r, ostringstream *solar, float prop) {
@@ -68,7 +73,7 @@ void genSmallSizePlanets(ostringstream *solar) {
                 *solar << "         <rotate time=\"" << plTime[i] << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
-                *solar << "             <model file=\"" << pF << "\" type=\"diffuse\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
+                *solar << "             <model file=\"" << pF << "\" texture=\"" << plNames[i] << "\" type=\"diffuse\" />" << endl;
                 *solar << "         </models>" << endl;
 
                 if (i == 2) {
@@ -80,7 +85,8 @@ void genSmallSizePlanets(ostringstream *solar) {
                         *solar << "                 <rotate time=\"" << plTime[9] << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                         *solar << "                 <scale x=\"" << prp *plProp[9] << "\" y=\"" << prp *plProp[9] << "\" z=\"" << prp *plProp[9] << "\" />" << endl;
                         *solar << "                 <models>" << endl;
-                        *solar << "                     <model file=\"" << pF << "\" r=\"" << colors[9].X() << "\" g=\"" << colors[9].Y() << "\" b=\"" << colors[9].Z() << "\" />" << endl;
+                        *solar << "                     <model file=\"" << pF << "\" texture=\"" << plNames[9] << "\" type=\"diffuse\" />" << endl;
+                        //*solar << "                     <model file=\"" << pF << "\" r=\"" << colors[9].X() << "\" g=\"" << colors[9].Y() << "\" b=\"" << colors[9].Z() << "\" />" << endl;
                         *solar << "                 </models>" << endl;
                         *solar << "             </group>" << endl;
                 }
@@ -98,7 +104,7 @@ void genStars(ostringstream *solar) {
         *solar << "     <group>" << endl;
         *solar << "         <scale x=\"" << s1Prop << "\" y=\"" << s1Prop << "\" z=\"" << s1Prop << "\" />" << endl;
         *solar << "         <models>" << endl;
-        *solar << "             <model file=\"" << s1 << "\" texture=\"sun.png\" />" << endl;
+        *solar << "             <model file=\"" << s1 <<  "\" texture=\"sun.jpg\" type=\"emissive\" />" << endl;
         *solar << "         </models>" << endl;
         *solar << "     </group>" << endl;
 }
@@ -117,7 +123,8 @@ void genBigSizePlanets(ostringstream *solar) {
                 *solar << "         <rotate time=\"" << plTime[i] << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                 *solar << "         <scale x=\"" << plProp[i] << "\" y=\"" << plProp[i] << "\" z=\"" << plProp[i] << "\" />" << endl;
                 *solar << "         <models>" << endl;
-                *solar << "             <model file=\"" << pF << "\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
+                *solar << "             <model file=\"" << pF << "\" texture=\"" << plNames[i] << "\" type=\"diffuse\" />" << endl;
+                //*solar << "             <model file=\"" << pF << "\" r=\"" << colors[i].X() << "\" g=\"" << colors[i].Y() << "\" b=\"" << colors[i].Z() << "\" />" << endl;
                 *solar << "         </models>" << endl;
 
                 switch (i) {
@@ -131,7 +138,8 @@ void genBigSizePlanets(ostringstream *solar) {
                                 *solar << "             <rotate time=\"" << plTime[11 + j] << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                                 *solar << "             <scale x=\"" << prp *plProp[11 + j] << "\" y=\"" << prp *plProp[11 + j] << "\" z=\"" << prp *plProp[11 + j] << "\" />" << endl;
                                 *solar << "             <models>" << endl;
-                                *solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[11 + j].X() << "\" g=\"" << colors[11 + j].Y() << "\" b=\"" << colors[11 + j].Z() << "\" />" << endl;
+                                *solar << "                 <model file=\"smallPlanets.3d\" texture=\"" << plNames[11 + j] << "\" type=\"diffuse\" />" << endl;
+                                //*solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[11 + j].X() << "\" g=\"" << colors[11 + j].Y() << "\" b=\"" << colors[11 + j].Z() << "\" />" << endl;
                                 *solar << "             </models>" << endl;
                                 *solar << "         </group>" << endl;
                                 angleMoons += angleMoons;
@@ -165,7 +173,8 @@ void genBigSizePlanets(ostringstream *solar) {
                         *solar << "             <rotate time=\"" << plTime[10] << "\" axisX=\"0\" axisY=\"1\" axisZ=\"0\" />" << endl;
                         *solar << "             <scale x=\"" << prp *plProp[10] << "\" y=\"" << prp *plProp[10] << "\" z=\"" << prp *plProp[10] << "\" />" << endl;
                         *solar << "             <models>" << endl;
-                        *solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[10].X() << "\" g=\"" << colors[10].Y() << "\" b=\"" << colors[10].Z() << "\" />" << endl;
+                        *solar << "                 <model file=\"smallPlanets.3d\" texture=\"" << plNames[10] << "\" type=\"diffuse\" />" << endl;
+                        //*solar << "                 <model file=\"smallPlanets.3d\" r=\"" << colors[10].X() << "\" g=\"" << colors[10].Y() << "\" b=\"" << colors[10].Z() << "\" />" << endl;
                         *solar << "             </models>" << endl;
                         *solar << "         </group>" << endl;
                         angleMoons += angleMoons;
@@ -236,6 +245,7 @@ int main(int argc, char *argv[]) {
         ostringstream solar;
         solar << "<scene>" << endl;
         solar << "  <group>" << endl;
+        genLights(&solar);
         genSolarSystem(&solar);
         solar << "  </group>" << endl;
         solar << "</scene>" << endl;
