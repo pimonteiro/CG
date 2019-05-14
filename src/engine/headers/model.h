@@ -9,6 +9,8 @@
 #endif
 
 #include "../../lib/headers/point.h"
+#include "material.h"
+#include "texture.h"
 #include <vector>
 
 class Model {
@@ -17,10 +19,12 @@ class Model {
         std::vector<Point *> vertPoints;
         std::vector<Point *> normPoints;
         std::vector<Point *> textPoints;
+        Texture *texture;
     public:
-        GLuint buffer[2];
+        GLuint buffer[3];
         Model(int);
         ~Model();
+        void addTexture(Texture *);
         void addVertexPoint(Point *);
         void addNormPoint(Point *);
         void addTextPoint(Point *);

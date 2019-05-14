@@ -32,7 +32,7 @@ link_libraries(${IL_LIBRARIES} )
 include_directories(${IL_INCLUDE_DIR})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../bin")
-add_executable(engine engine.cpp model.cpp tinyxml2.cpp parser.cpp ../lib/point.cpp group.cpp transformation.cpp translation.cpp scale.cpp rotation.cpp ../lib/matrix.cpp catmull.cpp light.cpp spotLight.cpp pointLight.cpp directionalLight.cpp)
+add_executable(engine engine.cpp model.cpp tinyxml2.cpp parser.cpp ../lib/point.cpp group.cpp transformation.cpp translation.cpp scale.cpp rotation.cpp ../lib/matrix.cpp catmull.cpp material.cpp texture.cpp light.cpp spotLight.cpp pointLight.cpp directionalLight.cpp)
 set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
 target_link_libraries(engine ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${IL_LIBRARIES})
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -O2")

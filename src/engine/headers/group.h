@@ -20,7 +20,7 @@ class Group {
         void addModel(Model *m);
         void addGroup(Group *g);
         void addLight(Light *);
-        void prepare();
+        Light *getLight(int);
         void draw();
 };
 #endif

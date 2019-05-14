@@ -13,6 +13,9 @@
 #include <vector>
 #include "headers/parser.h"
 #include "headers/group.h"
+//TEMP
+#include "headers/light.h"
+#include "headers/directionalLight.h"
 
 using namespace std;
 
@@ -142,8 +145,6 @@ void processKeys(unsigned char key, int x, int y) {
         if (key == 'l' || key == 'L')
                 distCam += 5.0f;
 
-        glutPostRedisplay();
-
         if (key == 'f' || key == 'F') {
                 if (!fullscreen)
                         glutFullScreen();
@@ -154,6 +155,28 @@ void processKeys(unsigned char key, int x, int y) {
 
                 fullscreen = !fullscreen;
         }
+
+        // Light Management
+        if (isdigit(key)) {
+                char num {static_cast<char>(key)};
+                int n {atoi(&num)};
+                Light *l { group->getLight(n)};
+
+                if (l != nullptr) {
+                        if (l->getState()) // Turned on
+                                l->turnOff();
+                        else
+                                l->turnOn();
+                } else
+                        cout << "Light " << n << " specified not set." << endl;
+        }
+
+        if (key == 'b') {
+                DirectionalLight *l {new DirectionalLight()}; //IMPROVE
+                group->addLight(l);
+        }
+
+        glutPostRedisplay();
 }
 
 void initInitialGL(int argc, char **argv) {
@@ -178,11 +201,14 @@ void initCostumGL() {
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_LIGHTING);
+        glEnable(GL_LIGHT0); // TODO VAI SER ELIMINADO
         glPolygonMode(GL_FRONT, GL_LINE);
         // Setup Buffers
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
-        group->prepare();
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void startMessage() {
@@ -194,6 +220,7 @@ void startMessage() {
         cout << "\tA -> turn on/off the XYZ axis" << endl;
         cout << "\tR -> turn on/off model's random colours" << endl;
         cout << "\tF -> enter or exit fullScreen mode" << endl;
+        cout << "\t0..8 -> enable/disable light of number n" << endl;
 }
 
 int main(int argc, char **argv) {
