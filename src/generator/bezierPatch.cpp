@@ -89,8 +89,8 @@ std::string getBezierTriangles(int div, int n, int index[][16], float points[][3
                         }
                 }
         }
-        calculateNormals(coords, &pNormals);
 
+        calculateNormals(coords, &pNormals);
         os << coords.size() << std::endl;
         os << writeVector(coords) << writeVector(pNormals);
         return os.str();

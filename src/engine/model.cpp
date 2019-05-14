@@ -72,19 +72,14 @@ void Model::prepare() {
 void Model::draw() {
         this->texture->setup();
         glBindTexture(GL_TEXTURE_2D, this->texture->textBuffer);
-
         // Vertex Buffer
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
         glVertexPointer(3, GL_FLOAT, 0, 0);
-
         // Normal Buffer
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[1]);
         glNormalPointer(GL_FLOAT, 0, 0);
-
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[2]);
-	    glTexCoordPointer(2, GL_FLOAT, 0, 0);
-        
+        glTexCoordPointer(2, GL_FLOAT, 0, 0);
         glDrawArrays(GL_TRIANGLES, 0, this->nPoints * 3);
-
         glBindTexture(GL_TEXTURE_2D, 0);
 }
