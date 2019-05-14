@@ -77,12 +77,10 @@ void parseDoc(Group *group, XMLNode *pN) {
         for (; pNode; pNode = pNode->NextSibling()) {
                 XMLElement *pElement {pNode->ToElement()};
 
-                /*
                 if (!strcmp(pElement->Name(), "light")) {
                         Light* l {parseLight(pElement)};
                         group->addLight(l);
                 }
-                */
                 if (!strcmp(pElement->Name(), "model")) {
                         if (pElement->Attribute("file")) {
                                 Model *m {parseFile(pElement)};
@@ -120,10 +118,8 @@ void parseDoc(Group *group, XMLNode *pN) {
                 if (!strcmp(pElement->Name(), "models"))
                         parseDoc(group, pNode);
 
-                /*
                 if (!strcmp(pElement->Name(), "lights"))
                         parseDoc(group, pNode);
-                */
         }
 }
 

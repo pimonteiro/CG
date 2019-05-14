@@ -49,8 +49,10 @@ int Light::getState(){
 
 void Light::turnOn(){
     glEnable(GL_LIGHT0 + this->i);
+    this->state = 1;
 }
 
 void Light::turnOff(){
     glDisable(GL_LIGHT0 + this->i);
+    this->state = 0;
 }
