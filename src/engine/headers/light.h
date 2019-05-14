@@ -14,24 +14,24 @@ class Light {
         Light();
         ~Light();
         virtual void draw() = 0;
-        void setColor(float*);
-        void setAmb(float*);
+        void setColor(float *);
+        void setAmb(float *);
         void setIndex(int);
-        void setPos(float*);
+        void setPos(float *);
         int getState();
         void turnOn();
         void turnOff();
         Point POS() {
-            return pos;
+                return pos;
         }
-        float* COLOR(){
-            return color;
+        float *COLOR() {
+                return color;
         }
-        int INDEX(){
-            return i;
+        int INDEX() {
+                return i;
         }
-        float* AMB(){
-            return amb;
+        float *AMB() {
+                return amb;
         }
 };
 

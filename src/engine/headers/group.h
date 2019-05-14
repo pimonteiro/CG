@@ -21,7 +21,7 @@ class Group {
         void addModel(Model *);
         void addGroup(Group *);
         void addLight(Light *);
-        Light* getLight(int);
+        Light *getLight(int);
         void draw();
 };
 #endif

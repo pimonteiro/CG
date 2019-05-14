@@ -41,27 +41,30 @@ void Group::addGroup(Group *g) {
         subGroupV.push_back(g);
 }
 
-void Group::addLight(Light *l){
+void Group::addLight(Light *l) {
         int i {static_cast<int>(this->lights.size())};
         l->setIndex(i++);
         l->turnOn();
         this->lights.push_back(l);
 }
 
-Light* Group::getLight(int n){
-    int i {0};
-    for(auto &l : this->lights) {
-            if (i == n)
-                return l;
-            i++;
-    }
-    return nullptr;
+Light *Group::getLight(int n) {
+        int i {0};
+
+        for (auto &l : this->lights) {
+                if (i == n)
+                        return l;
+
+                i++;
+        }
+
+        return nullptr;
 }
 
 void Group::draw() {
-        for(auto &l : this->lights) {
+        for (auto &l : this->lights)
                 l->draw();
-        }
+
         for (auto &t : this->transformV)
                 t->transform();
 

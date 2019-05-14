@@ -11,7 +11,7 @@ class Point {
         ~Point();
         Point(float, float, float);
         Point subtract(Point);
-        void toFloat(float*);
+        void toFloat(float *);
         float X() {
                 return x;
         }
