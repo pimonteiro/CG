@@ -60,7 +60,18 @@ void Group::prepare() {
                 g->prepare();
 }
 
+Light *Group::getLight(int n) {
+        int i {0};
 
+        for (auto &l : this->lights) {
+                if (i == n)
+                        return l;
+
+                i++;
+        }
+
+        return nullptr;
+}
 
 void Group::draw() {
         for (auto &l : this->lights)

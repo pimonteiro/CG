@@ -6,6 +6,7 @@
 class Light {
     private:
         Point pos;
+        int state;
         int i;
         float color[4];
         float amb[4];
@@ -19,6 +20,7 @@ class Light {
         void setPos(float *);
         void turnOn();
         void turnOff();
+        int getState();
         Point POS() {
                 return pos;
         }

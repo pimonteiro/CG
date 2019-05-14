@@ -154,6 +154,20 @@ void processKeys(unsigned char key, int x, int y) {
 
                 fullscreen = !fullscreen;
         }
+
+        // Light Management
+        if (isdigit(key)) {
+                int n {atoi(reinterpret_cast<const char *>(key))};
+                Light *l = group->getLight(n);
+
+                if (l != nullptr) {
+                        if (l->getState()) // Turned on
+                                l->turnOff();
+                        else
+                                l->turnOn();
+                } else
+                        cout << "Light specified not set.";
+        }
 }
 
 void initInitialGL(int argc, char **argv) {
@@ -194,6 +208,7 @@ void startMessage() {
         cout << "\tA -> turn on/off the XYZ axis" << endl;
         cout << "\tR -> turn on/off model's random colours" << endl;
         cout << "\tF -> enter or exit fullScreen mode" << endl;
+        cout <<"\t0..8 -> enable/disable light of number n" << endl;
 }
 
 int main(int argc, char **argv) {
