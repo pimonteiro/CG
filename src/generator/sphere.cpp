@@ -41,14 +41,14 @@ void sphereCoords(float radius, int slices, int stacks, std::vector<Point *> *po
 }
 
 void sphereTexture(int slices, int stacks, std::vector<Point *> *pTexture) {
-        float deltaAlpha = 1.0f / slices;
-        float deltaBeta = 1.0f / stacks;
+        float deltaAlpha {1.0f / slices};
+        float deltaBeta {1.0f / stacks};
 
-        for (int i = 0; i < stacks; ++i) {
-                float v = (stacks - i) * deltaBeta;
+        for (int i {0}; i < stacks; ++i) {
+                float v {(stacks - i) *deltaBeta};
 
                 for (int j = 0; j < slices; ++j) {
-                        float u = j * deltaAlpha;
+                        float u {j * deltaAlpha};
 
                         if (i < stacks - 1) {
                                 pTexture->push_back(new Point(u, v, 0));
