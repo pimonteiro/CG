@@ -158,22 +158,22 @@ void processKeys(unsigned char key, int x, int y) {
 
         // Light Management
         if (isdigit(key)) {
-            char num {static_cast<char>(key)};
-            int n {atoi(&num)};
-            Light *l { group->getLight(n)};
-            if(l != nullptr){
-                if(l->getState()) // Turned on
-                    l->turnOff();
-                else
-                    l->turnOn();
-            } else {
-                cout << "Light " << n << " specified not set." << endl;
-            }
+                char num {static_cast<char>(key)};
+                int n {atoi(&num)};
+                Light *l { group->getLight(n)};
+
+                if (l != nullptr) {
+                        if (l->getState()) // Turned on
+                                l->turnOff();
+                        else
+                                l->turnOn();
+                } else
+                        cout << "Light " << n << " specified not set." << endl;
         }
 
-        if (key == 'b'){
-            DirectionalLight *l {new DirectionalLight()}; //IMPROVE
-            group->addLight(l);
+        if (key == 'b') {
+                DirectionalLight *l {new DirectionalLight()}; //IMPROVE
+                group->addLight(l);
         }
 
         glutPostRedisplay();
@@ -193,7 +193,7 @@ void initInitialGL(int argc, char **argv) {
         glutKeyboardFunc(processKeys);
         glewInit();
 #ifndef __APPLE__
-    glewInit();
+        glewInit();
 #endif
 }
 
@@ -201,15 +201,14 @@ void initCostumGL() {
         // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0); // TODO VAI SER ELIMINADO
         glPolygonMode(GL_FRONT, GL_LINE);
         // Setup Buffers
-	    glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
-	    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void startMessage() {

@@ -18,6 +18,7 @@ class Light {
         void setAmb(float *);
         void setIndex(int);
         void setPos(float *);
+        int getState();
         void turnOn();
         void turnOff();
         int getState();

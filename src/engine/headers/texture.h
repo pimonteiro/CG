@@ -8,7 +8,7 @@
 
 class Texture {
     private:
-        char* filename;
+        char *filename;
         unsigned int imageWidth;
         unsigned int imageHeight;
         Material *material;

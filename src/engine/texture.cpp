@@ -11,52 +11,48 @@
 #include <string>
 #include <string.h>
 
-Texture::Texture(){
-    this->filename = NULL;
-	this->imageHeight = -1;
-	this->imageWidth = -1;
-    this->material = new Material();
+Texture::Texture() {
+        this->filename = NULL;
+        this->imageHeight = -1;
+        this->imageWidth = -1;
+        this->material = new Material();
 }
 
-Texture::~Texture(){}
+Texture::~Texture() {}
 
-void Texture::addMaterial(Material *m){
-    this->material = m;
+void Texture::addMaterial(Material *m) {
+        this->material = m;
 }
 
-void Texture::addFile(std::string file){
-	this->filename = new char[file.length() + 1];
-	strcpy(this->filename, file.c_str());
+void Texture::addFile(std::string file) {
+        this->filename = new char[file.length() + 1];
+        strcpy(this->filename, file.c_str());
 }
 
-void Texture::setup(){
+void Texture::setup() {
         this->material->setup();
 }
 
-void Texture::loadImage(){
-	if(this->filename != NULL){
-		unsigned int t, tw, th;
-		unsigned char *texData;
-
-		ilInit();
-		ilGenImages(1, &t);
-		ilBindImage(t);
-		ilLoadImage((ILstring)this->filename);
-		tw = ilGetInteger(IL_IMAGE_WIDTH);
-		this->imageWidth = tw;
-		th = ilGetInteger(IL_IMAGE_HEIGHT);
-		this->imageHeight = th;
-		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-		texData = ilGetData();
-
-		glBindTexture(GL_TEXTURE_2D, this->textBuffer);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
+void Texture::loadImage() {
+        if (this->filename != NULL) {
+                unsigned int t, tw, th;
+                unsigned char *texData;
+                ilInit();
+                ilGenImages(1, &t);
+                ilBindImage(t);
+                ilLoadImage((ILstring)this->filename);
+                tw = ilGetInteger(IL_IMAGE_WIDTH);
+                this->imageWidth = tw;
+                th = ilGetInteger(IL_IMAGE_HEIGHT);
+                this->imageHeight = th;
+                ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+                texData = ilGetData();
+                glBindTexture(GL_TEXTURE_2D, this->textBuffer);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+                glGenerateMipmap(GL_TEXTURE_2D);
+        }
 }

@@ -42,22 +42,9 @@ void Group::addGroup(Group *g) {
 }
 
 void Group::addLight(Light *l) {
-        int i = this->lights.size();
+        int i {static_cast<int>(this->lights.size())};
         l->setIndex(i++);
         this->lights.push_back(l);
-}
-
-void Group::prepare() {
-        for (auto &l : this->lights) {
-                glEnable(GL_LIGHTING);
-                l->turnOn();
-        }
-
-        for (auto &m : this->modelV)
-                m->prepare();
-
-        for (auto &g : this->subGroupV)
-                g->prepare();
 }
 
 Light *Group::getLight(int n) {
