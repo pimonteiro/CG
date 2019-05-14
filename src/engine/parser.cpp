@@ -195,21 +195,21 @@ Light *parseLight(XMLElement *pElement1){
             if (pElement1->Attribute("type")){
                     string tt = pElement1->Attribute("type");
                     if(tt.compare("POINT") == 0){
-                        PointLight *l = new PointLight();
+                        PointLight *l { new PointLight() };
                         if(flaA) l->setAmb(amb);
                         if(flaC) l->setColor(color);
                         if(flaP) l->setPos(pos);
                         return l;
                     }
                     else if(tt.compare("DIRECTIONAL") == 0){
-                        DirectionalLight *l = new DirectionalLight();
+                        DirectionalLight *l { new DirectionalLight()};
                         if(flaA) l->setAmb(amb);
                         if(flaC) l->setColor(color);
                         if(flaP) l->setPos(pos);
                         return l;
                     }
                     else if(tt.compare("SPOT") == 0){
-                        SpotLight *l = new SpotLight();
+                        SpotLight *l { new SpotLight()};
                         if(flaA) l->setAmb(amb);
                         if(flaC) l->setColor(color);
                         if(flaSD) l->setSpotDir(spotDir);
@@ -243,9 +243,9 @@ Model *parseFile(const XMLElement *pElement) {
         int nPoints {stoi(line)};
         Model *model {new Model(nPoints)};
 
-        int mode = 0; // 3 modes (vertex, normal, texture points)
-        int w = 0;
-        while (getline(infile, line)) {
+        int mode {0}; // 3 modes (vertex, normal, texture points)
+        int w {0};
+        while (getline(infile, line)){
                 if(w == nPoints){
                     w = 0;
                     mode++;
@@ -257,7 +257,7 @@ Model *parseFile(const XMLElement *pElement) {
                         v.push_back(word);
 
                 float point[3];
-                int j = 0;
+                int j {0};
                 for (auto i {v.begin()}; i != v.end(); ++i, j++)
                         point[j] = stof(*i);
                 if(mode == 0)
@@ -269,28 +269,35 @@ Model *parseFile(const XMLElement *pElement) {
                 w++;
         }
 
-        Material *m = new Material();
-        Texture *t = new Texture();
+        Material *m {new Material()};
+        Texture *t {new Texture()};
 
         if(pElement->Attribute("texture")){
-                string filename = pElement->Attribute("texture");
+                string filename { pElement->Attribute("texture")};
                 t->addFile(filename);
         }
         if (pElement->Attribute("type")){
                 float r {0};
                 float g {0};
                 float b {0};
-                if (pElement->Attribute("r"))
+
+                int flC {0};
+                if (pElement->Attribute("r")){
                         r = stof(pElement->Attribute("r"));
-
-                if (pElement->Attribute("g"))
+                        flC = 1;
+                }
+                if (pElement->Attribute("g")){
                         g = stof(pElement->Attribute("g"));
-
-                if (pElement->Attribute("b"))
+                        flC = 1;
+                }
+                if (pElement->Attribute("b")){
                         b = stof(pElement->Attribute("b"));
-                m->addColor(r,g,b);
+                        flC = 1;
+                }
 
-                string type = pElement->Attribute("type");
+                if(flC) m->addColor(r,g,b);
+
+                string type { pElement->Attribute("type")};
                 if(type.compare("diffuse") == 0)
                         m->addType(DIFFUSE);
                 if(type.compare("specular") == 0)

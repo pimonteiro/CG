@@ -12,7 +12,7 @@
 PointLight::PointLight(): Light() {}
 
 void PointLight::draw(){
-    Point p = this->POS();
+    Point p {this->POS()};
     float pos[4] {
         p.X(), p.Y(), p.Z(), 1.0f
     };

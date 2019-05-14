@@ -145,8 +145,6 @@ void processKeys(unsigned char key, int x, int y) {
         if (key == 'l' || key == 'L')
                 distCam += 5.0f;
 
-        glutPostRedisplay();
-
         if (key == 'f' || key == 'F') {
                 if (!fullscreen)
                         glutFullScreen();
@@ -160,9 +158,9 @@ void processKeys(unsigned char key, int x, int y) {
 
         // Light Management
         if (isdigit(key)) {
-            char num = key;
-            int n = atoi(&num);
-            Light *l = group->getLight(n);
+            char num {static_cast<char>(key)};
+            int n {atoi(&num)};
+            Light *l { group->getLight(n)};
             if(l != nullptr){
                 if(l->getState()) // Turned on
                     l->turnOff();
@@ -174,9 +172,11 @@ void processKeys(unsigned char key, int x, int y) {
         }
 
         if (key == 'b'){
-            DirectionalLight *l = new DirectionalLight(); //IMPROVE
+            DirectionalLight *l {new DirectionalLight()}; //IMPROVE
             group->addLight(l);
         }
+
+        glutPostRedisplay();
 }
 
 void initInitialGL(int argc, char **argv) {

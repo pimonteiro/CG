@@ -9,7 +9,7 @@
 
 SpotLight::SpotLight(): Light() {
     float defSpotDir[3] {0, 0, -1};
-    for(int i = 0; i < 3; i++){
+    for(int i {0}; i < 3; i++){
         this->spotDir[i] = defSpotDir[i];
     }
     this->cutOff = 180; // Default Values
@@ -19,7 +19,7 @@ SpotLight::SpotLight(): Light() {
 SpotLight::~SpotLight(){}
 
 void SpotLight::setSpotDir(float d[3]){
-    for(int i = 0; i < 3; i++){
+    for(int i {0}; i < 3; i++){
         this->spotDir[i] = d[i];
     }
 }
@@ -33,7 +33,7 @@ void SpotLight::setExp(float ex){
 }
 
 void SpotLight::draw(){
-    Point p = this->POS();
+    Point p {this->POS()};
     float pos[4] {
         p.X(), p.Y(), p.Z(), 1.0f
     };
