@@ -9,6 +9,24 @@ std::string writePoint(float a, float b, float c) {
         return os.str();
 }
 
+std::string writeVector(std::vector<Point *> points) {
+        std::ostringstream os;
+
+        for (auto &p : points)
+                os << writePoint(p->X(), p->Y(), p->Z());
+
+        return os.str();
+}
+
+std::string writeTextVector(std::vector<Point *> points) {
+        std::ostringstream os;
+
+        for (auto &p : points)
+                os << p->X() << " " << p->Y() << '\n';
+
+        return os.str();
+}
+
 void dumpFile(const std::ostringstream &os, const std::string &file) {
         std::ofstream outfile;
         outfile.open(file);

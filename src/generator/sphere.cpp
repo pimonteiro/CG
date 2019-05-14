@@ -1,18 +1,19 @@
 #include "headers/sphere.h"
 #include "headers/outputAux.h"
+#include "headers/normal.h"
+#include "../lib/headers/point.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <vector>
 
 
-std::string trans(float, float, float);
+Point *trans(float, float, float);
 
-std::string sphere(float radius, int slices, int stacks) {
+void sphereCoords(float radius, int slices, int stacks, std::vector<Point *> *points) {
         if (radius <= 0.0f || slices <= 0 || stacks <= 0)
                 fputs("All parameters must be positive numbers\n", stderr);
 
-        std::ostringstream os;
-        int nPoints {0};
         float deltaAlpha { static_cast<float>(2.0f * M_PI / slices) };
         float deltaBeta { static_cast<float>(M_PI / stacks) };
 
@@ -25,26 +26,57 @@ std::string sphere(float radius, int slices, int stacks) {
                         float nextAlpha {alpha + deltaAlpha};
 
                         if (i < stacks - 1) {
-                                os << trans(beta, alpha, radius);
-                                os << trans(nextBeta, alpha, radius);
-                                os << trans(nextBeta, nextAlpha, radius);
-                                nPoints += 3;
+                                points->push_back(trans(beta, alpha, radius));
+                                points->push_back(trans(nextBeta, alpha, radius));
+                                points->push_back(trans(nextBeta, nextAlpha, radius));
                         }
 
                         if (i > 0) {
-                                os << trans(beta, alpha, radius);
-                                os << trans(nextBeta, nextAlpha, radius);
-                                os << trans(beta, nextAlpha, radius);
-                                nPoints += 3;
+                                points->push_back(trans(beta, alpha, radius));
+                                points->push_back(trans(nextBeta, nextAlpha, radius));
+                                points->push_back(trans(beta, nextAlpha, radius));
                         }
                 }
         }
-
-        std::ostringstream r;
-        r << nPoints << '\n' << os.str();
-        return r.str();
 }
 
-std::string trans(float a, float b, float c) {
-        return writePoint(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
+void sphereTexture(int slices, int stacks, std::vector<Point *> *pTexture) {
+        float deltaAlpha {1.0f / slices};
+        float deltaBeta {1.0f / stacks};
+
+        for (int i {0}; i < stacks; ++i) {
+                float v {(stacks - i) *deltaBeta};
+
+                for (int j = 0; j < slices; ++j) {
+                        float u {j * deltaAlpha};
+
+                        if (i < stacks - 1) {
+                                pTexture->push_back(new Point(u, v, 0));
+                                pTexture->push_back(new Point(u, v - deltaBeta, 0));
+                                pTexture->push_back(new Point(u + deltaAlpha, v - deltaBeta, 0));
+                        }
+
+                        if (i > 0) {
+                                pTexture->push_back(new Point(u, v, 0));
+                                pTexture->push_back(new Point(u + deltaAlpha, v - deltaBeta, 0));
+                                pTexture->push_back(new Point(u + deltaAlpha, v, 0));
+                        }
+                }
+        }
+}
+
+
+std::string sphere(float radius, int slices, int stacks) {
+        std::ostringstream os;
+        std::vector<Point *> points, pNormals, pTexture;
+        sphereCoords(radius, slices, stacks, &points);
+        calculateNormals(points, &pNormals);
+        sphereTexture(slices, stacks, &pTexture);
+        os << points.size() << std::endl;
+        os << writeVector(points) << writeVector(pNormals) << writeTextVector(pTexture);
+        return os.str();
+}
+
+Point *trans(float a, float b, float c) {
+        return new Point(c * sinf(a) * sinf(b), c * cosf(a), c * sinf(a) * cosf(b));
 }
