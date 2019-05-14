@@ -9,6 +9,7 @@ class Light {
         int i;
         float color[4];
         float amb[4];
+        int state;
     public:
         Light();
         ~Light();

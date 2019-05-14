@@ -257,6 +257,7 @@ Light *parseLight(XMLElement *pElement1) {
                         }
                 }
         }
+        return nullptr;
 }
 
 Model *parseFile(const XMLElement *pElement) {
@@ -302,7 +303,7 @@ Model *parseFile(const XMLElement *pElement) {
 
                 w++;
         }
-        
+
         Material *m {new Material()};
         Texture *t {new Texture()};
 

@@ -11,6 +11,7 @@
 
 Light::Light() {
         this->i = -1;
+        this->state = 0;
         float defPos[4] {0, 0, 1, 0};
         float defColor[4] {1, 1, 1, 1};
         float defAmb[4] {0, 0, 0, 1};
@@ -41,6 +42,10 @@ void Light::setPos(float c[3]) {
 
 void Light::setIndex(int i) {
         this->i = i;
+}
+
+int Light::getState(){
+        return this->state;
 }
 
 void Light::turnOn() {
