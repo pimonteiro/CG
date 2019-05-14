@@ -7,10 +7,6 @@
 #include "../lib/headers/point.h"
 #include <regex>
 
-
-std::string sumNPoints(const std::string &);
-
-
 void boxCoords(float xP, float zP, int div, std::vector<Point *> *points) {
         double dz  {zP / (2 * div)};
         double zO  {-zP / 2 + dz};
@@ -36,31 +32,29 @@ void boxCoords(float xP, float zP, int div, std::vector<Point *> *points) {
         }
 }
 
+void boxTexture(int div, std::vector<Point *> *pTexture) {
+        for (int r {0}; r < 3; r++) {
+                for (int ori {0}; ori < 2; ori++) {
+                        for (int i {0}; i < div; i++) {
+                                float u {static_cast<float>(i / div)};
+
+                                for (int j {0}; j < div; j++) {
+                                        float v {static_cast<float>(j / div)};
+                                        planeTexture(u, v, div, !ori, pTexture);
+                                }
+                        }
+                }
+        }
+}
+
 
 std::string box(float xP, float zP, int div) {
         std::ostringstream os, r;
-        std::vector<Point *> points, pNormals;
+        std::vector<Point *> points, pNormals, pTexture;
         boxCoords(xP, zP, div, &points);
         calculateNormals(points, &pNormals);
+        boxTexture(div, &pTexture);
         os << points.size() << std::endl;
-        os << writeVector(points) << writeVector(pNormals);
+        os << writeVector(points) << writeVector(pNormals) << writeTextVector(pTexture);
         return os.str();
-}
-
-std::string sumNPoints(const std::string &s) {
-        std::istringstream s0(s);
-        std::ostringstream os, r;
-        int counter{0};
-        std::string oneLine;
-        std::regex p("[0-9]+(\\r\\n|\\r|\\n)?");
-
-        while (getline(s0, oneLine)) {
-                if (regex_match(oneLine, p))
-                        counter += stoi(oneLine);
-                else
-                        os << oneLine << '\n';
-        }
-
-        r << counter << '\n' << os.str();
-        return r.str();
 }

@@ -13,8 +13,7 @@ void computeNormal(Point *target, Point *adj1, Point *adj2, std::vector<Point *>
         float crossed[3];
         cross(v1, v2, crossed);
         normalize(crossed);
-        float l {length(crossed)};
-        Point *f { new Point(crossed[0] / l, crossed[1] / l, crossed[2] / l)};
+        Point *f { new Point(crossed[0], crossed[1], crossed[2])};
         normalVec->push_back(f);
 }
 

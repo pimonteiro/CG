@@ -7,5 +7,6 @@
 
 std::string box(float, float, int);
 void boxCoords(float, float, int, std::vector<Point *> *);
+void boxTexture(int, std::vector<Point *> *);
 
 #endif
