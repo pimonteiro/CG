@@ -12,7 +12,16 @@ void planeCoords(float xO, float yO, float zO, float xP, float zP, int type, int
         z = zP / 2;
         float flag {1};
 
-    if (place == 1) {
+        if (type == 1) {
+                y = -z;
+                z = 0;
+        } else if (type == 2) {
+                y = x;
+                x = 0;
+                flag = -1;
+        }
+
+        if (place == 1) {
                 // frente
                 points->push_back(new Point(-x + xO, y + yO, z + zO)); // 1
                 points->push_back(new Point(x + xO, flag * y + yO, z + zO)); // 2
