@@ -172,7 +172,7 @@ void processKeys(unsigned char key, int x, int y) {
         }
 
         if (key == 'b') {
-                PointLight *l {new PointLight()}; //IMPROVE
+                PointLight *l {new PointLight()};
                 float pos [3] {0,0,0};
                 l->setPos(pos);
                 group->addLight(l);
@@ -205,7 +205,6 @@ void initCostumGL() {
         glEnable(GL_CULL_FACE);
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0); // TODO VAI SER ELIMINADO
         glPolygonMode(GL_FRONT, GL_LINE);
         // Setup Buffers
         glEnableClientState(GL_VERTEX_ARRAY);

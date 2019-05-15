@@ -159,9 +159,9 @@ void genBigSizePlanets(ostringstream *solar) {
                         *solar << "         <group>" << endl;
                         *solar << "             <rotate angle=\"15\" axisX=\"1\" axisY=\"0\" axisZ=\"0\" />" << endl;
                         *solar << "             <models>" << endl;
-                        *solar << "                 <model file=\"saturnRing1.3d\" r=\"0\" g=\"0\" b=\"0.8\" />" << endl;
-                        *solar << "                 <model file=\"saturnRing2.3d\" r=\"0.8\" g=\"0.4\" b=\"0\" />" << endl;
-                        *solar << "                 <model file=\"saturnRing3.3d\" r=\"0.96\" g=\"0.87\" b=\"0.7\" />" << endl;
+                        *solar << "                 <model file=\"saturnRing1.3d\" texture=\"saturn_ring.png\" type=\"diffuse\" />" << endl;
+                        *solar << "                 <model file=\"saturnRing2.3d\" texture=\"saturn_ring.png\" type=\"diffuse\" />" << endl;
+                        *solar << "                 <model file=\"saturnRing3.3d\" texture=\"saturn_ring.png\" type=\"diffuse\" />" << endl;
                         *solar << "             </models>" << endl;
                         *solar << "         </group>" << endl;
                         *solar << "         <group>" << endl;
