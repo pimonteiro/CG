@@ -13,7 +13,7 @@ SpotLight::SpotLight(): Light() {
         for (int i {0}; i < 3; i++)
                 this->spotDir[i] = defSpotDir[i];
 
-        this->cutOff = 180; // Default Values
+        this->cutOff = 45; // Default Values
 
         this->exp = 0;      // Default Values
 }

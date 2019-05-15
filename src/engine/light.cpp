@@ -14,7 +14,7 @@ Light::Light() {
         this->state = 0;
         float defPos[4] {0, 0, 1, 0};
         float defColor[4] {1, 1, 1, 1};
-        float defAmb[4] {0, 0, 0, 1};
+        float defAmb[4] {0.2, 0.2, 0.2, 1};
 
         for (int i = 0; i < 4; i++) {
                 this->color[i] = defColor[i];
@@ -44,7 +44,7 @@ void Light::setIndex(int i) {
         this->i = i;
 }
 
-int Light::getState(){
+int Light::getState() {
         return this->state;
 }
 

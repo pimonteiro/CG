@@ -1,0 +1,14 @@
+<scene>
+    <group>
+        <lights>
+            <light type="DIRECTIONAL" diffR="1" diffG="1" diffB="1" x="1" y="0" z="0" />
+        </lights>
+        <group>
+            <scale x="5" y="5" z="5" />
+            <translate x="5" y="0" z="0" />
+            <models>
+                <model file="sphere.3d" type="diffuse" r="0.3" g="0.3" b="1.0"/>
+            </models>
+        </group>
+    </group>
+</scene>

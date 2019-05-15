@@ -1,0 +1,39 @@
+<scene>
+    <group>
+        <lights>
+            <light type="SPOT" diffR="1" diffG="1" diffB="1" x="0" y="0" z="0" spotDirx="-1" spotDiry="0" spotDirz="0" />
+            <light type="POINT" diffR="1" diffG="1" diffB="1" x="0" y="0" z="0" />
+            <light type="DIRECTIONAL" diffR="1" diffG="1" diffB="1" x="1" y="0" z="0" />
+        </lights>
+        <group>
+            <group>
+                <scale x="5" y="5" z="5" />
+                <translate x="100" y="0" z="0" />
+                <models>
+                    <model file="sphere.3d" type="diffuse" r="1" g="0" b="0"/>
+                </models>
+            </group>
+        </group>
+        <group>
+            <group>
+                <rotate angle="90" axisX="0" axisY="1" axisZ="0" />
+                <scale x="5" y="5" z="5" />
+                <translate x="100" y="0" z="0" />
+                <models>
+                    <model file="sphere.3d" type="diffuse" r="1" g="0" b="0"/>
+                </models>
+            </group>
+        </group>
+        <group>
+            <group>
+                <rotate angle="180" axisX="0" axisY="1" axisZ="0" />
+                <scale x="5" y="5" z="5" />
+                <translate x="100" y="0" z="0" />
+                <models>
+                    <model file="sphere.3d" type="diffuse" r="1" g="0" b="0"/>
+                </models>
+            </group>
+        </group>
+
+    </group>
+</scene>

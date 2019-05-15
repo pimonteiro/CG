@@ -1,0 +1,16 @@
+<scene>
+    <group>
+        <lights>
+            <light type="DIRECTIONAL" diffR="1" diffG="1" diffB="1" x="1" y="0" z="0" />
+        </lights>
+        <group>
+            <group>
+                <scale x="5" y="5" z="5" />
+                <translate x="10" y="0" z="0" />
+                <models>
+                    <model file="box.3d" texture="wall.jpg" type="diffuse" />
+                </models>
+            </group>
+        </group>
+    </group>
+</scene>

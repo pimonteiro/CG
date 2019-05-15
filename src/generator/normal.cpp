@@ -26,7 +26,7 @@ void calculateNormals(std::vector<Point *> points, std::vector<Point *> *vec) {
                 Point *p3 {*it};
                 it++;
                 computeNormal(p1, p2, p3, vec);
-                computeNormal(p2, p1, p3, vec);
+                computeNormal(p2, p3, p1, vec);
                 computeNormal(p3, p1, p2, vec);
         }
 }

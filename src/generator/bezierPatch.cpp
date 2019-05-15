@@ -54,9 +54,27 @@ void getBezierPoint(float u, float v, float *pos, float p[16][3]) {
                 pos[i] = U[0] * MTVPM[i][0] + U[1] * MTVPM[i][1] + U[2] * MTVPM[i][2] + U[3] * MTVPM[i][3];
 }
 
+
+void bezierTexture(int div, int n, std::vector<Point *> *pTextures) {
+        float sec {1.0f / div};
+
+        for (int i {0}; i < n; i++) {
+                for (int u {0}; u < div; u++) {
+                        for (int v {0}; v < div; v++) {
+                                pTextures->push_back(new Point(u * sec, v * sec, 0));
+                                pTextures->push_back(new Point((u + 1) * sec, v * sec, 0));
+                                pTextures->push_back(new Point(u * sec, (v + 1) * sec, 0));
+                                pTextures->push_back(new Point(u * sec, (v + 1) * sec, 0));
+                                pTextures->push_back(new Point((u + 1) * sec, v * sec, 0));
+                                pTextures->push_back(new Point(u * sec, v * sec, 0));
+                        }
+                }
+        }
+}
+
 std::string getBezierTriangles(int div, int n, int index[][16], float points[][3]) {
         std::ostringstream os;
-        std::vector<Point *> coords, pNormals;
+        std::vector<Point *> coords, pNormals, pTextures;
         float inc { 1.0f / div };
 
         for (int i {0}; i < n; i++) {
@@ -91,11 +109,11 @@ std::string getBezierTriangles(int div, int n, int index[][16], float points[][3
         }
 
         calculateNormals(coords, &pNormals);
+        bezierTexture(div, n, &pTextures);
         os << coords.size() << std::endl;
-        os << writeVector(coords) << writeVector(pNormals);
+        os << writeVector(coords) << writeVector(pNormals) << writeTextVector(pTextures);
         return os.str();
 }
-
 
 
 std::string bezierPatch(std::string filename, int div) {

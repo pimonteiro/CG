@@ -1,0 +1,276 @@
+<scene>
+  <group>
+ <lights>
+     <light type="POINT" x="0" y="0" z="0" />
+ </lights>
+     <group>
+         <scale x="24" y="24" z="24" />
+         <models>
+             <model file="sun.3d" texture="sun.jpg" type="emissive" />
+         </models>
+     </group>
+     <group>
+         <scale x="3" y="3" z="3" />
+         <translate time="18000" selfRotate="1" >
+             <point x="202" y="50" z="0" />
+             <point x="150" y="50" z="150" />
+             <point x="75" y="25" z="0" />
+             <point x="0" y="-50" z="-150" />
+             <point x="-75" y="-50" z="0" />
+             <point x="0" y="-50" z="150" />
+             <point x="75" y="-25" z="0" />
+             <point x="150" y="50" z="-150" />
+         </translate>
+         <rotate angle="-90" axisX="1" axisY="0" axisZ="0" />
+         <models>
+             <model file="comet.3d" texture="comet.jpg" type="diffuse" />
+         </models>
+     </group>
+     <group>
+         <translate time="1200" selfRotate="0" >
+         <point x="150" y="0" z="0" />
+         <point x="106.066" y="0" z="106.066" />
+         <point x="-6.55671e-06" y="0" z="150" />
+         <point x="-106.066" y="0" z="106.066" />
+         <point x="-150" y="0" z="-1.31134e-05" />
+         <point x="-106.066" y="0" z="-106.066" />
+         <point x="1.78873e-06" y="0" z="-150" />
+         <point x="106.066" y="0" z="-106.066" />
+         </translate>
+         <rotate time="1200" axisX="0" axisY="1" axisZ="0" />
+         <scale x="1.38" y="1.38" z="1.38" />
+         <models>
+             <model file="smallPlanets.3d" texture="mercury.jpg" type="diffuse" />
+         </models>
+     </group>
+     <group>
+         <translate time="3600" selfRotate="0" >
+         <point x="255" y="0" z="0" />
+         <point x="180.312" y="0" z="180.312" />
+         <point x="-1.11464e-05" y="0" z="255" />
+         <point x="-180.312" y="0" z="180.312" />
+         <point x="-255" y="0" z="-2.22928e-05" />
+         <point x="-180.312" y="0" z="-180.312" />
+         <point x="3.04084e-06" y="0" z="-255" />
+         <point x="180.312" y="0" z="-180.312" />
+         </translate>
+         <rotate time="3600" axisX="0" axisY="1" axisZ="0" />
+         <scale x="1.95" y="1.95" z="1.95" />
+         <models>
+             <model file="smallPlanets.3d" texture="venus.jpg" type="diffuse" />
+         </models>
+     </group>
+     <group>
+         <translate time="6000" selfRotate="0" >
+         <point x="360" y="0" z="0" />
+         <point x="254.558" y="0" z="254.558" />
+         <point x="-1.57361e-05" y="0" z="360" />
+         <point x="-254.558" y="0" z="254.558" />
+         <point x="-360" y="0" z="-3.14722e-05" />
+         <point x="-254.558" y="0" z="-254.558" />
+         <point x="4.29296e-06" y="0" z="-360" />
+         <point x="254.559" y="0" z="-254.558" />
+         </translate>
+         <rotate time="6000" axisX="0" axisY="1" axisZ="0" />
+         <scale x="2.3" y="2.3" z="2.3" />
+         <models>
+             <model file="smallPlanets.3d" texture="earth.jpg" type="diffuse" />
+         </models>
+             <group>
+                 <translate time="6000" selfRotate="0" >
+         <point x="8.69565" y="0" z="0" />
+         <point x="6.14875" y="0" z="6.14875" />
+         <point x="-3.80099e-07" y="0" z="8.69565" />
+         <point x="-6.14875" y="0" z="6.14875" />
+         <point x="-8.69565" y="0" z="-7.60198e-07" />
+         <point x="-6.14875" y="0" z="-6.14876" />
+         <point x="1.03695e-07" y="0" z="-8.69565" />
+         <point x="6.14876" y="0" z="-6.14875" />
+                 </translate>
+                 <rotate time="6000" axisX="0" axisY="1" axisZ="0" />
+                 <scale x="0.304348" y="0.304348" z="0.304348" />
+                 <models>
+                     <model file="smallPlanets.3d" texture="moon.jpg" type="diffuse" />
+                 </models>
+             </group>
+     </group>
+     <group>
+         <translate time="11400" selfRotate="0" >
+         <point x="450" y="0" z="0" />
+         <point x="318.198" y="0" z="318.198" />
+         <point x="-1.96701e-05" y="0" z="450" />
+         <point x="-318.198" y="0" z="318.198" />
+         <point x="-450" y="0" z="-3.93402e-05" />
+         <point x="-318.198" y="0" z="-318.198" />
+         <point x="5.3662e-06" y="0" z="-450" />
+         <point x="318.198" y="0" z="-318.198" />
+         </translate>
+         <rotate time="11400" axisX="0" axisY="1" axisZ="0" />
+         <scale x="1.53" y="1.53" z="1.53" />
+         <models>
+             <model file="smallPlanets.3d" texture="mars.jpg" type="diffuse" />
+         </models>
+     </group>
+     <group>
+         <translate time="1.488e+06" selfRotate="0" >
+         <point x="1320" y="0" z="0" />
+         <point x="933.381" y="0" z="933.381" />
+         <point x="-5.7699e-05" y="0" z="1320" />
+         <point x="-933.381" y="0" z="933.381" />
+         <point x="-1320" y="0" z="-0.000115398" />
+         <point x="-933.381" y="0" z="-933.381" />
+         <point x="1.57408e-05" y="0" z="-1320" />
+         <point x="933.381" y="0" z="-933.381" />
+         </translate>
+         <rotate time="1.488e+06" axisX="0" axisY="1" axisZ="0" />
+         <scale x="1.18" y="1.18" z="1.18" />
+         <models>
+             <model file="smallPlanets.3d" texture="pluto.jpg" type="diffuse" />
+         </models>
+     </group>
+     <group>
+         <translate time="71400" selfRotate="0" >
+         <point x="630" y="0" z="0" />
+         <point x="445.477" y="0" z="445.477" />
+         <point x="-2.75382e-05" y="0" z="630" />
+         <point x="-445.477" y="0" z="445.477" />
+         <point x="-630" y="0" z="-5.50764e-05" />
+         <point x="-445.477" y="0" z="-445.477" />
+         <point x="7.51267e-06" y="0" z="-630" />
+         <point x="445.477" y="0" z="-445.477" />
+         </translate>
+         <rotate time="71400" axisX="0" axisY="1" axisZ="0" />
+         <scale x="11.6" y="11.6" z="11.6" />
+         <models>
+             <model file="bigPlanets.3d" texture="jupiter.jpg" type="diffuse" />
+         </models>
+         <group>
+             <translate time="36000" selfRotate="0" >
+         <point x="6.03448" y="0" z="0" />
+         <point x="4.26702" y="0" z="4.26702" />
+         <point x="-2.63776e-07" y="0" z="6.03448" />
+         <point x="-4.26702" y="0" z="4.26702" />
+         <point x="-6.03448" y="0" z="-5.27551e-07" />
+         <point x="-4.26702" y="0" z="-4.26702" />
+         <point x="7.19605e-08" y="0" z="-6.03448" />
+         <point x="4.26702" y="0" z="-4.26702" />
+             </translate>
+             <rotate time="36000" axisX="0" axisY="1" axisZ="0" />
+             <scale x="0.0818966" y="0.0818966" z="0.0818966" />
+             <models>
+                 <model file="smallPlanets.3d" texture="io.jpg" type="diffuse" />
+             </models>
+         </group>
+         <group>
+             <translate time="24000" selfRotate="0" >
+         <point x="7.75862" y="0" z="0" />
+         <point x="5.48617" y="0" z="5.48617" />
+         <point x="-3.3914e-07" y="0" z="7.75862" />
+         <point x="-5.48617" y="0" z="5.48617" />
+         <point x="-7.75862" y="0" z="-6.7828e-07" />
+         <point x="-5.48617" y="0" z="-5.48617" />
+         <point x="9.25206e-08" y="0" z="-7.75862" />
+         <point x="5.48618" y="0" z="-5.48617" />
+             </translate>
+             <rotate time="24000" axisX="0" axisY="1" axisZ="0" />
+             <scale x="0.0517241" y="0.0517241" z="0.0517241" />
+             <models>
+                 <model file="smallPlanets.3d" texture="europa.jpg" type="diffuse" />
+             </models>
+         </group>
+         <group>
+             <translate time="19200" selfRotate="0" >
+         <point x="9.31034" y="0" z="0" />
+         <point x="6.58341" y="0" z="6.58341" />
+         <point x="-4.06968e-07" y="0" z="9.31034" />
+         <point x="-6.58341" y="0" z="6.58341" />
+         <point x="-9.31034" y="0" z="-8.13936e-07" />
+         <point x="-6.58341" y="0" z="-6.58341" />
+         <point x="1.11025e-07" y="0" z="-9.31034" />
+         <point x="6.58341" y="0" z="-6.58341" />
+             </translate>
+             <rotate time="19200" axisX="0" axisY="1" axisZ="0" />
+             <scale x="0.118966" y="0.118966" z="0.118966" />
+             <models>
+                 <model file="smallPlanets.3d" texture="callisto.jpg" type="diffuse" />
+             </models>
+         </group>
+     </group>
+     <group>
+         <translate time="177000" selfRotate="0" >
+         <point x="885" y="0" z="0" />
+         <point x="625.789" y="0" z="625.789" />
+         <point x="-3.86846e-05" y="0" z="885" />
+         <point x="-625.789" y="0" z="625.789" />
+         <point x="-885" y="0" z="-7.73692e-05" />
+         <point x="-625.789" y="0" z="-625.79" />
+         <point x="1.05535e-05" y="0" z="-885" />
+         <point x="625.79" y="0" z="-625.789" />
+         </translate>
+         <rotate time="177000" axisX="0" axisY="1" axisZ="0" />
+         <scale x="10.4" y="10.4" z="10.4" />
+         <models>
+             <model file="bigPlanets.3d" texture="saturn.jpg" type="diffuse" />
+         </models>
+         <group>
+             <rotate angle="15" axisX="1" axisY="0" axisZ="0" />
+             <models>
+                 <model file="saturnRing1.3d" texture="saturn_ring.png" type="diffuse" />
+                 <model file="saturnRing2.3d" texture="saturn_ring.png" type="diffuse" />
+                 <model file="saturnRing3.3d" texture="saturn_ring.png" type="diffuse" />
+             </models>
+         </group>
+         <group>
+             <translate time="18000" selfRotate="0" >
+         <point x="6.73077" y="0" z="0" />
+         <point x="4.75937" y="0" z="4.75937" />
+         <point x="-2.94211e-07" y="0" z="6.73077" />
+         <point x="-4.75937" y="0" z="4.75937" />
+         <point x="-6.73077" y="0" z="-5.88423e-07" />
+         <point x="-4.75937" y="0" z="-4.75937" />
+         <point x="8.02636e-08" y="0" z="-6.73077" />
+         <point x="4.75937" y="0" z="-4.75937" />
+             </translate>
+             <rotate time="18000" axisX="0" axisY="1" axisZ="0" />
+             <scale x="0.139423" y="0.139423" z="0.139423" />
+             <models>
+                 <model file="smallPlanets.3d" texture="titan.jpg" type="diffuse" />
+             </models>
+         </group>
+     </group>
+     <group>
+         <translate time="504000" selfRotate="0" >
+         <point x="1050" y="0" z="0" />
+         <point x="742.462" y="0" z="742.462" />
+         <point x="-4.5897e-05" y="0" z="1050" />
+         <point x="-742.462" y="0" z="742.462" />
+         <point x="-1050" y="0" z="-9.17939e-05" />
+         <point x="-742.462" y="0" z="-742.462" />
+         <point x="1.25211e-05" y="0" z="-1050" />
+         <point x="742.462" y="0" z="-742.462" />
+         </translate>
+         <rotate time="504000" axisX="0" axisY="1" axisZ="0" />
+         <scale x="5.04" y="5.04" z="5.04" />
+         <models>
+             <model file="bigPlanets.3d" texture="uranus.jpg" type="diffuse" />
+         </models>
+     </group>
+     <group>
+         <translate time="988800" selfRotate="0" >
+         <point x="1200" y="0" z="0" />
+         <point x="848.528" y="0" z="848.528" />
+         <point x="-5.24537e-05" y="0" z="1200" />
+         <point x="-848.528" y="0" z="848.528" />
+         <point x="-1200" y="0" z="-0.000104907" />
+         <point x="-848.528" y="0" z="-848.528" />
+         <point x="1.43099e-05" y="0" z="-1200" />
+         <point x="848.528" y="0" z="-848.528" />
+         </translate>
+         <rotate time="988800" axisX="0" axisY="1" axisZ="0" />
+         <scale x="4.88" y="4.88" z="4.88" />
+         <models>
+             <model file="bigPlanets.3d" texture="neptune.jpg" type="diffuse" />
+         </models>
+     </group>
+  </group>
+</scene>

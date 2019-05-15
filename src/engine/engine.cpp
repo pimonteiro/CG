@@ -15,7 +15,7 @@
 #include "headers/group.h"
 //TEMP
 #include "headers/light.h"
-#include "headers/directionalLight.h"
+#include "headers/pointLight.h"
 
 using namespace std;
 
@@ -172,7 +172,9 @@ void processKeys(unsigned char key, int x, int y) {
         }
 
         if (key == 'b') {
-                DirectionalLight *l {new DirectionalLight()}; //IMPROVE
+                PointLight *l {new PointLight()};
+                float pos [3] {0, 0, 0};
+                l->setPos(pos);
                 group->addLight(l);
         }
 
@@ -203,7 +205,6 @@ void initCostumGL() {
         glEnable(GL_CULL_FACE);
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0); // TODO VAI SER ELIMINADO
         glPolygonMode(GL_FRONT, GL_LINE);
         // Setup Buffers
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -220,7 +221,7 @@ void startMessage() {
         cout << "\tA -> turn on/off the XYZ axis" << endl;
         cout << "\tR -> turn on/off model's random colours" << endl;
         cout << "\tF -> enter or exit fullScreen mode" << endl;
-        cout << "\t0..8 -> enable/disable light of number n" << endl;
+        cout << "\t0..8 -> enable/disable x light" << endl;
 }
 
 int main(int argc, char **argv) {
