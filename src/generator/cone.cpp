@@ -64,7 +64,8 @@ std::string cone(float radius, float height, int slices, int stacks) {
         coneCoords(radius, height, slices, stacks, &points);
         calculateNormals(points, &pNormals);
 
-        for (int i = 0; i < points.size(); i++)
+        int nn {static_cast<int>(points.size())};
+        for (int i {0}; i < nn; i++)
                 pTextures.push_back(new Point(0, 0, 0));
 
         os << points.size() << std::endl;
