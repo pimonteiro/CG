@@ -6,9 +6,17 @@
         <group>
             <group>
                 <scale x="5" y="5" z="5" />
-                <translate x="10" y="0" z="0" />
+                <translate x="50" y="0" z="0" />
                 <models>
-                    <model file="cube.3d" type="diffuse" r="0" g="1" b="0"/>
+                    <model file="box.3d" type="diffuse" r="0" g="1" b="0"/>
+                </models>
+            </group>
+            <group>
+                <rotate angle="45" axisX="0" axisY="1" axisZ="0" />
+                <scale x="5" y="5" z="5" />
+                <translate x="50" y="0" z="0" />
+                <models>
+                    <model file="box.3d" type="diffuse" r="0.7" g="0.6" b="0"/>
                 </models>
             </group>
         </group>
