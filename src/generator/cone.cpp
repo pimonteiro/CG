@@ -60,10 +60,14 @@ void coneCoords(float radius, float height, int slices, int stacks, std::vector<
 
 std::string cone(float radius, float height, int slices, int stacks) {
         std::ostringstream os;
-        std::vector<Point *> points, pNormals;
+        std::vector<Point *> points, pNormals, pTextures;
         coneCoords(radius, height, slices, stacks, &points);
         calculateNormals(points, &pNormals);
+        for(int i = 0; i < points.size(); i++){
+            pTextures.push_back(new Point(0,0,0));
+        }
+
         os << points.size() << std::endl;
-        os << writeVector(points) << writeVector(pNormals);
+        os << writeVector(points) << writeVector(pNormals) << writeTextVector(pTextures);
         return os.str();
 }

@@ -42,10 +42,14 @@ void annulusCoords(float innerRadius, float outerRadius, float height, int div, 
 
 std::string annulus(float innerRadius, float outerRadius, float height, int div) {
         std::ostringstream os;
-        std::vector<Point *> points, pNormals;
+        std::vector<Point *> points, pNormals, pTextures;
         annulusCoords(innerRadius, outerRadius, height, div, &points);
         calculateNormals(points, &pNormals);
+        for(int i = 0; i < points.size(); i++){
+            pTextures.push_back(new Point(0,0,0));
+        }
+
         os << points.size() << std::endl;
-        os << writeVector(points) << writeVector(pNormals);
+        os << writeVector(points) << writeVector(pNormals) << writeTextVector(pTextures);
         return os.str();
 }

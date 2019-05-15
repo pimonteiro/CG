@@ -56,7 +56,7 @@ void getBezierPoint(float u, float v, float *pos, float p[16][3]) {
 
 std::string getBezierTriangles(int div, int n, int index[][16], float points[][3]) {
         std::ostringstream os;
-        std::vector<Point *> coords, pNormals;
+        std::vector<Point *> coords, pNormals, pTextures;
         float inc { 1.0f / div };
 
         for (int i {0}; i < n; i++) {
@@ -91,8 +91,12 @@ std::string getBezierTriangles(int div, int n, int index[][16], float points[][3
         }
 
         calculateNormals(coords, &pNormals);
+        for(int i = 0; i < coords.size(); i++){
+            pTextures.push_back(new Point(0,0,0));
+        }
+
         os << coords.size() << std::endl;
-        os << writeVector(coords) << writeVector(pNormals);
+        os << writeVector(coords) << writeVector(pNormals) << writeTextVector(pTextures);
         return os.str();
 }
 
