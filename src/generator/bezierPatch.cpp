@@ -56,19 +56,20 @@ void getBezierPoint(float u, float v, float *pos, float p[16][3]) {
 
 
 void bezierTexture(int div, int n, std::vector<Point *> *pTextures) {
-    float sec {1.0f / div};
-    for (int i {0}; i < n; i++) {
-        for (int u {0}; u < div; u++) {
-            for (int v {0}; v < div; v++) {
-                pTextures->push_back(new Point(u * sec,v * sec,0));
-                pTextures->push_back(new Point((u+1) * sec,v * sec,0));
-                pTextures->push_back(new Point(u * sec,(v+1) * sec,0));
-                pTextures->push_back(new Point(u * sec,(v+1) * sec,0));
-                pTextures->push_back(new Point((u+1) * sec,v * sec,0));
-                pTextures->push_back(new Point(u * sec,v * sec,0));
-            }
+        float sec {1.0f / div};
+
+        for (int i {0}; i < n; i++) {
+                for (int u {0}; u < div; u++) {
+                        for (int v {0}; v < div; v++) {
+                                pTextures->push_back(new Point(u * sec, v * sec, 0));
+                                pTextures->push_back(new Point((u + 1) * sec, v * sec, 0));
+                                pTextures->push_back(new Point(u * sec, (v + 1) * sec, 0));
+                                pTextures->push_back(new Point(u * sec, (v + 1) * sec, 0));
+                                pTextures->push_back(new Point((u + 1) * sec, v * sec, 0));
+                                pTextures->push_back(new Point(u * sec, v * sec, 0));
+                        }
+                }
         }
-    }
 }
 
 std::string getBezierTriangles(int div, int n, int index[][16], float points[][3]) {
@@ -109,7 +110,6 @@ std::string getBezierTriangles(int div, int n, int index[][16], float points[][3
 
         calculateNormals(coords, &pNormals);
         bezierTexture(div, n, &pTextures);
-
         os << coords.size() << std::endl;
         os << writeVector(coords) << writeVector(pNormals) << writeTextVector(pTextures);
         return os.str();

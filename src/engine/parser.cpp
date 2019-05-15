@@ -257,6 +257,7 @@ Light *parseLight(XMLElement *pElement1) {
                         }
                 }
         }
+
         return nullptr;
 }
 

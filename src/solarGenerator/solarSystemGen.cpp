@@ -36,7 +36,7 @@ float angle {40};
 float angleMoons {60};
 
 
-void genLights(ostringstream *solar){
+void genLights(ostringstream *solar) {
         *solar << " <lights>" << endl;
         *solar << "     <light type=\"POINT\" x=\"0\" y=\"0\" z=\"0\" />" << endl;
         *solar << " </lights>" << endl;
@@ -61,7 +61,6 @@ void genSmallSizePlanets(ostringstream *solar) {
 
         for (int i { 0 }; i < 5; i++) {
                 *solar << "     <group>" << endl;
-
                 *solar << "         <translate time=\"" << plTime[i] << "\" selfRotate=\"0\" >" << endl;
                 planetOrbitalPoints(plD[i], solar, 1);
                 *solar << "         </translate>" << endl;

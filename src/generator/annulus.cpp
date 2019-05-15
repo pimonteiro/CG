@@ -41,44 +41,34 @@ void annulusCoords(float innerRadius, float outerRadius, float height, int div, 
 }
 
 void annulusTexture(int div, std::vector<Point *> *pTexture) {
-    float deltaAlpha {1.0f / div};
+        float deltaAlpha {1.0f / div};
 
-    for (int i {0}; i < div; i++) {
-            pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 0, 0));
-            pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
-
-            pTexture->push_back(new Point(i * deltaAlpha,1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 0, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 1, 0));
-
-            pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
-            pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 0, 0));
-
-            pTexture->push_back(new Point(i * deltaAlpha,1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 0, 0));
-
-
-
-
-            pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
-            pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 0, 0));
-
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 0, 0));
-            pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha, 1, 0));
-
-            pTexture->push_back(new Point(i * deltaAlpha,0, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha,0, 0));
-            pTexture->push_back(new Point(i * deltaAlpha,1, 0));
-
-            pTexture->push_back(new Point((i+1) * deltaAlpha,1, 0));
-            pTexture->push_back(new Point(i * deltaAlpha,1, 0));
-            pTexture->push_back(new Point((i+1) * deltaAlpha,0, 0));
-    }
+        for (int i {0}; i < div; i++) {
+                pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point(i * deltaAlpha, 1, 0));
+                pTexture->push_back(new Point((i + 1) * deltaAlpha, 0, 0));
+        }
 }
 
 std::string annulus(float innerRadius, float outerRadius, float height, int div) {
@@ -87,8 +77,6 @@ std::string annulus(float innerRadius, float outerRadius, float height, int div)
         annulusCoords(innerRadius, outerRadius, height, div, &points);
         calculateNormals(points, &pNormals);
         annulusTexture(div, &pTextures);
-
-
         os << points.size() << std::endl;
         os << writeVector(points) << writeVector(pNormals) << writeTextVector(pTextures);
         return os.str();

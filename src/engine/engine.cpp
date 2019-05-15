@@ -173,7 +173,7 @@ void processKeys(unsigned char key, int x, int y) {
 
         if (key == 'b') {
                 PointLight *l {new PointLight()};
-                float pos [3] {0,0,0};
+                float pos [3] {0, 0, 0};
                 l->setPos(pos);
                 group->addLight(l);
         }

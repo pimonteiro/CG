@@ -6,5 +6,5 @@
 #include "../../lib/headers/point.h"
 
 std::string bezierPatch(std::string, int);
-void bezierTexture(int , int , std::vector<Point *> *);
+void bezierTexture(int, int, std::vector<Point *> *);
 #endif

@@ -44,7 +44,7 @@ void Light::setIndex(int i) {
         this->i = i;
 }
 
-int Light::getState(){
+int Light::getState() {
         return this->state;
 }
 
