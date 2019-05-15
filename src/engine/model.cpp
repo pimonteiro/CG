@@ -31,7 +31,7 @@ void Model::addTexture(Texture *t) {
 }
 
 void Model::prepare() {
-        glGenTextures(1, &this->texture->textBuffer);        //TODO MUDAR DE SITIO?
+        glGenTextures(1, &this->texture->textBuffer);
         this->texture->loadImage();
         glGenBuffers(3, this->buffer);
         glBindBuffer(GL_ARRAY_BUFFER, this->buffer[0]);
